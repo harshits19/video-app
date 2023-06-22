@@ -1,0 +1,319 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+:root {
+  --primary-color: #000000ab;
+  --secondary-color: #ffffff;
+  --dark-black: #0f0f0f;
+  --primary-font: "Roboto", sans-serif;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+  font-family: var(--primary-font);
+  width: 100%;
+  margin: auto;
+  overflow-x: hidden;
+}
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+.textNone {
+  text-decoration: none;
+}
+
+/* ------------Header Section---------------- */
+.header {
+  display: grid;
+  grid-template-columns: 28% 44% 28%;
+  padding: 0 25px;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  background: var(--secondary-color);
+  z-index: 100;
+  /* box-shadow: 0px -3px 5px #000; */
+}
+.menuLogoSection {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+.menuSection {
+  height: 37px;
+  width: 37px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5px;
+}
+.menuSection:hover {
+  background: #0000002e;
+}
+.hamIcon {
+  cursor: pointer;
+}
+.logo {
+  height: 24px;
+  width: 97px;
+  cursor: pointer;
+}
+.searchSection {
+  padding: 8px 0;
+}
+.searchBar {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #0000002e;
+  border-radius: 25px;
+  padding: 10px 15px;
+  position: relative;
+  box-shadow: 0px 0px 2px inset #0000002e;
+}
+.searchInput {
+  height: 100%;
+  width: calc(100% - 65px);
+  border: 0;
+  outline: 0;
+  padding: 0;
+}
+.searchBtn {
+  height: 100%;
+  width: 65px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 8px 0 0 22px;
+  background: #e9e7e7a8;
+  border-radius: 0px 20px 20px 0px;
+  border-left: 1px solid #0000002e;
+  cursor: pointer;
+}
+.searchBtn img {
+  height: 20px;
+  width: 20px;
+}
+.userSection {
+  position: relative;
+}
+.userLogin {
+  margin-top: 13px;
+  position: absolute;
+  right: 0;
+  border: 1px solid #0000002e;
+  border-radius: 20px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.userLogin:hover {
+  background-color: #0000002e;
+}
+.userLogin > span {
+  margin-right: 5px;
+  font-weight: 500;
+}
+.userLight {
+  height: 23px;
+  width: 23px;
+  margin: 0 5px;
+}
+/* -----------SideNav Section--------------- */
+.side-drawer {
+  transition: width 0.5s;
+  display: block;
+  height: 100%;
+  background: var(--secondary-color);
+  width: 0px;
+  position: fixed;
+  top: 56px;
+  left: 0;
+  overflow-x: hidden;
+  z-index: 100;
+}
+.side-drawer.open {
+  width: 240px;
+  transition: width 0.5s;
+}
+.drawerOpen {
+  overflow: hidden;
+  position: relative;
+}
+.sideNavbar {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+}
+.side-drawer::-webkit-scrollbar {
+  display: none;
+}
+.categorySection {
+  height: 100%;
+  border-bottom: 1px solid #0000001a;
+  padding: 10px 0px;
+}
+.categoryHeading {
+  font-size: 0.98rem;
+  padding: 10px 0 10px 15px;
+}
+.navItems {
+  width: 100%;
+  border-radius: 10px;
+  align-items: center;
+  padding: 7px 0 7px 10px;
+  display: flex;
+  cursor: pointer;
+}
+.navItems:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.navItemIcon {
+  padding-right: 20px;
+}
+.navItemName {
+  font-size: 0.91rem;
+  font-weight: 400;
+}
+#mainBody {
+  transition: margin-left 0.5s;
+  margin-left: 210px;
+}
+
+/* ----------- Video Filters---------------- */
+.filtersContainer {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  padding: 0 50px;
+  overflow-x: auto;
+  position: sticky;
+  top: 56px;
+  z-index: 99;
+  background-color: var(--secondary-color);
+}
+.filtersContainer::-webkit-scrollbar {
+  display: none;
+}
+input[type="radio"] {
+  display: none;
+}
+.btnLabel {
+  text-transform: capitalize;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 400;
+  height: 32px;
+  padding: 0px 10px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--dark-black);
+  font-size: 0.91rem;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.btnLabel:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+input[type="radio"]:checked + .btnLabel {
+  color: var(--secondary-color);
+  background-color: var(--dark-black);
+}
+
+/* -----------Video Cards Homepage--------- */
+.videoCardContainer {
+  /* width: 1280px; */
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  padding-top: 20px;
+}
+.videoCardInnerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  /* margin: 0 auto;  */
+  /* width: 1120px; */
+  width: 100%;
+  gap: 20px;
+  justify-content: center;
+}
+.videoCard {
+  height: 300px;
+  width: 360px;
+}
+.videoBanner img {
+  /* width: 360px; */
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+}
+.videoDesc {
+  font-size: 14px;
+  color: var(--primary-color);
+  display: flex;
+  margin-top: 8px;
+}
+.videoTitle {
+  font-size: 16px;
+  font-weight: 500;
+  word-break: break-word;
+  color: var(--dark-black);
+  overflow: hidden;
+  display: block;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.channelName {
+  margin-top: 2px;
+  line-height: 1.2rem;
+}
+.channelIcon {
+  margin-right: 10px;
+}
+.channelIcon img {
+  height: 36px;
+  width: 36px;
+  border-radius: 20px;
+}
+
+/* -----------Responsive Section------------ */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .menuLogoSection {
+    column-gap: 0;
+  }
+  .menuSection {
+    display: none;
+  }
+  .userLogin {
+    margin-top: 0;
+    border: none;
+  }
+  .userLogin:hover {
+    background-color: #fff;
+  }
+  .userLogin > span {
+    display: none;
+  }
+  .searchSection {
+    display: none;
+  }
+}
