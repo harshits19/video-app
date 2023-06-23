@@ -235,7 +235,6 @@ input[type="radio"]:checked + .btnLabel {
 
 /* -----------Video Cards Homepage--------- */
 .videoCardContainer {
-  /* width: 1280px; */
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -244,8 +243,6 @@ input[type="radio"]:checked + .btnLabel {
 .videoCardInnerContainer {
   display: flex;
   flex-wrap: wrap;
-  /* margin: 0 auto;  */
-  /* width: 1120px; */
   width: 100%;
   gap: 20px;
   justify-content: center;
@@ -255,10 +252,24 @@ input[type="radio"]:checked + .btnLabel {
   width: 360px;
 }
 .videoBanner img {
-  /* width: 360px; */
   width: 100%;
   height: 200px;
   border-radius: 10px;
+}
+.videoBanner {
+  position: relative;
+}
+.videoCardDuration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: var(--secondary-color);
+  margin: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: var(--dark-black);
+  padding: 2px 4px;
+  border-radius: 3px;
 }
 .videoDesc {
   font-size: 14px;
@@ -282,6 +293,7 @@ input[type="radio"]:checked + .btnLabel {
 .channelName {
   margin-top: 2px;
   line-height: 1.2rem;
+  color: #606060;
 }
 .channelIcon {
   margin-right: 10px;
@@ -290,6 +302,9 @@ input[type="radio"]:checked + .btnLabel {
   height: 36px;
   width: 36px;
   border-radius: 20px;
+}
+.videoViews {
+  color: #606060;
 }
 /* -----------Video Page------------------- */
 .videoPageContainer {
@@ -364,9 +379,6 @@ input[type="radio"]:checked + .btnLabel {
   width: 40px;
   border-radius: 20px;
   margin-right: 15px;
-}
-.recommendedSection {
-  margin-top: 20px;
 }
 .videoDescriptionBox {
   background-color: rgba(0, 0, 0, 0.05);
@@ -473,6 +485,47 @@ input[type="radio"]:checked + .btnLabel {
 .replyBtn:hover {
   background-color: rgba(0, 0, 0, 0.1);
   border-color: transparent;
+}
+/* -----------Sidebar Cards----------------- */
+.recommendedSection {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+.sideBarCards {
+  padding: 5px 0;
+  display: flex;
+}
+.sidebarImg {
+  margin-right: 8px;
+  height: 94px;
+  width: 168px;
+  border-radius: 8px;
+}
+.sidebarDesc {
+  width: calc(400px - 156px);
+}
+.sidebarTitle {
+  font-size: 14px;
+  color: var(--dark-black);
+  margin: 3px 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  font-weight: 500;
+  -webkit-line-clamp: 2;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.sidebarChannel {
+  font-size: 12px;
+  color: var(--primary-color);
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+.sidebarInfo {
+  display: flex;
 }
 /* -----------Responsive Section------------ */
 @media (max-width: 768px) {

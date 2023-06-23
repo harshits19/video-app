@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { closeNav } from "../utilities/navSlice";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { calcTime, calcViews, formatNumber } from "../utilities/useMath";
 import CommentCard from "./CommentCard";
+import { YT_HOMEPAGE } from "../utilities/config";
+import SideBarCards from "./SideBarCards";
 
 const ReadMore = ({ children }) => {
   const text = children;
@@ -24,14 +26,17 @@ const VideoPage = () => {
   const [videoData, setVideoData] = useState(null);
   const [channelData, setChannelData] = useState(null);
   const [commentData, setCommentData] = useState(null);
+  const [reccVideoData, setReccVideoData] = useState(null);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchVideoData();
     dispatch(closeNav());
   }, []);
   const [videoURL] = useSearchParams();
   const videoID = videoURL.get("v");
-
+  useEffect(() => {
+    fetchVideoData();
+  }, [videoURL]);
   const apiKey = process.env.REACT_APP_API_KEY;
 
   const fetchVideoData = async () => {
@@ -51,6 +56,11 @@ const VideoPage = () => {
     `);
     const commentData = await dataComment.json();
     setCommentData(commentData?.items);
+
+    const recommendVideo = await fetch(YT_HOMEPAGE);
+    const reccVideoData = await recommendVideo.json();
+    setReccVideoData(reccVideoData?.items);
+    // console.log(reccVideoData?.items);
   };
 
   return (
@@ -157,7 +167,18 @@ const VideoPage = () => {
             </div>
           </div>
         </div>
-        <div className="recommendedSection">RECC</div>
+        <div className="recommendedSection">
+          {reccVideoData?.map((reccVideoData) => {
+            return (
+              <Link
+                to={"?v=" + reccVideoData?.id}
+                key={reccVideoData?.id}
+                className="textNone">
+                <SideBarCards {...reccVideoData} />
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </>
   );

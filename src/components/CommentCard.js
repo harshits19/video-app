@@ -1,6 +1,6 @@
-import { calcViews } from "../utilities/useMath";
+import { calcViews, calcTime } from "../utilities/useMath";
 const CommentCard = (data) => {
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <div className="commentBox">
@@ -15,7 +15,7 @@ const CommentCard = (data) => {
               {"@" + data?.snippet?.topLevelComment?.snippet?.authorDisplayName}
             </span>
             <span className="commentTime">
-              {data?.snippet?.topLevelComment?.snippet?.publishedAt}
+              {calcTime(data?.snippet?.topLevelComment?.snippet?.publishedAt)}
             </span>
           </div>
           <div>{data?.snippet?.topLevelComment?.snippet?.textDisplay}</div>
