@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import HomePage from "./HomePage";
 import { YT_CATEGORIES } from "../utilities/config";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { openNav } from "../utilities/navSlice";
 
 const FilterBtns = (data) => {
   return (
@@ -24,8 +25,10 @@ const FilterBtns = (data) => {
 
 const Body = () => {
   const [filterBtnData, setFilterBtnData] = useState(null);
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchCategories();
+    dispatch(openNav());
   }, []);
   const fetchCategories = async () => {
     const data = await fetch(YT_CATEGORIES);

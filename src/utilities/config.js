@@ -5,5 +5,9 @@ export const YT_HOMEPAGE =
   myKey;
 
 export const YT_CATEGORIES =
-  "https://youtube.googleapis.com/youtube/v3/videoCategories?regionCode=IN&key=" +
+  "https://youtube.googleapis.com/youtube/v3/videoCategories?hl=en&regionCode=IN&key=" +
   myKey;
+
+/* export const YT_CHANNEL =
+  "https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=UCZSNzBgFub_WWil6TOTYwAg&key=" +
+  myKey; */
