@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
 import VideoCards from "./VideoCards";
-import { YT_HOMEPAGE } from "../utilities/config";
+import useFetch from "../utilities/useFetch";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [videoData, setVideoData] = useState(null);
   useEffect(() => {
-    fetchVideos();
+    useFetch(
+      `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=30&regionCode=IN`
+    ).then((data) => {
+      setVideoData(data?.items);
+    });
   }, []);
-  const fetchVideos = async () => {
-    const data = await fetch(YT_HOMEPAGE);
-    const json = await data.json();
-    setVideoData(json.items);
-    // console.log(json);
-  };
   return (
     <>
       <div className="videoCardContainer">

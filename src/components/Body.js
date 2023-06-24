@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import HomePage from "./HomePage";
-import { YT_CATEGORIES } from "../utilities/config";
 import { useSelector, useDispatch } from "react-redux";
 import { openNav } from "../utilities/navSlice";
+import useFetch from "../utilities/useFetch";
 
 const FilterBtns = (data) => {
   return (
@@ -27,14 +27,12 @@ const Body = () => {
   const [filterBtnData, setFilterBtnData] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
-    fetchCategories();
+    useFetch(`videoCategories?hl=en&regionCode=IN`).then((data) => {
+      setFilterBtnData(data?.items);
+    });
     dispatch(openNav());
   }, []);
-  const fetchCategories = async () => {
-    const data = await fetch(YT_CATEGORIES);
-    const json = await data.json();
-    setFilterBtnData(json.items);
-  };
+
   const isNavOpen = useSelector((store) => store.navState.isOpen);
   useEffect(() => {
     const mainBody = document.getElementById("mainBody");

@@ -32,7 +32,7 @@ const calcTime = (text) => {
       : days > 30
       ? Math.round(days / 30) + " month ago"
       : Math.round(days > 7)
-      ? days / 7 + " week ago"
+      ? Math.round(days / 7) + " week ago"
       : days > 1
       ? days + " days ago"
       : days + " day ago";
