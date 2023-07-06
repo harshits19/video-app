@@ -1,12 +1,19 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 const SideDrawer = () => {
   const isNavOpen = useSelector((store) => store.navState.isOpen);
   let drawerClasses = "side-drawer";
+  let backdrop;
   if (isNavOpen) {
     drawerClasses = "side-drawer open";
+    /* backdrop = (
+      <div
+        className="backdrop" onClick={() => handleOverlayState()}
+      ></div>
+    ); */
   }
+
   return (
     <>
       <div className={drawerClasses}>
@@ -158,7 +165,7 @@ const SideDrawer = () => {
           </div>
         </div>
       </div>
-      <div className="overlay"></div>
+      {backdrop}
     </>
   );
 };

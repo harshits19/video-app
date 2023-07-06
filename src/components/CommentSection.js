@@ -8,7 +8,7 @@ const CommentSection = ({ videoID, views }) => {
 
   useEffect(() => {
     useFetch(
-      `commentThreads?part=snippet&maxResults=50&order=relevance&textFormat=html&videoId=${videoID}`
+      `commentThreads?part=snippet&maxResults=50&order=relevance&textFormat=plainText&videoId=${videoID}`
     ).then((data) => {
       setCommentData(data?.items);
     });

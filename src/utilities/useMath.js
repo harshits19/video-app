@@ -8,35 +8,46 @@ const calcViews = (a) => {
   return totalViews;
 };
 const calcTime = (text) => {
-  const date2 = new Date();
-  const date1 = new Date(text);
+  const currentTime = new Date();
 
-  var DiffInTime = date2.getTime() - date1.getTime();
-  var DiffInDays = DiffInTime / (1000 * 3600 * 24);
+  const publishedTime = new Date(text);
 
-  var days = DiffInDays;
-  if (days < 1) {
-    var DiffInHours = Math.abs(DiffInTime) / 1000;
-    const time1 =
-      Math.round(DiffInHours / 60) > 60
-        ? Math.round(DiffInHours / 60 / 60) > 1
-          ? Math.round(DiffInHours / 60 / 60) + " hours ago"
-          : Math.round(DiffInHours / 60 / 60) + " hour ago"
-        : Math.round(DiffInHours / 60) + " minutes ago";
-    return time1;
+  const timeDiff = Math.floor((currentTime - publishedTime) / 1000);
+
+  const years = Math.floor(timeDiff / (365 * 24 * 60 * 60));
+  const months = Math.floor(timeDiff / (30 * 24 * 60 * 60));
+  const weeks = Math.floor(timeDiff / (7 * 24 * 60 * 60));
+  const days = Math.floor(timeDiff / (24 * 60 * 60));
+  const hours = Math.floor(timeDiff / (60 * 60));
+  const minutes = Math.floor(timeDiff / 60);
+  const seconds = timeDiff;
+
+  let timeUnit = "";
+  let timeValue = 0;
+
+  if (years > 0) {
+    timeUnit = "year";
+    timeValue = years;
+  } else if (months > 0) {
+    timeUnit = "month";
+    timeValue = months;
+  } else if (weeks > 0) {
+    timeUnit = "week";
+    timeValue = weeks;
+  } else if (days > 0) {
+    timeUnit = "day";
+    timeValue = days;
+  } else if (hours > 0) {
+    timeUnit = "hour";
+    timeValue = hours;
+  } else if (minutes > 0) {
+    timeUnit = "minute";
+    timeValue = minutes;
+  } else {
+    timeUnit = "second";
+    timeValue = seconds;
   }
-  days = Math.round(DiffInDays);
-  const time =
-    days > 365
-      ? Math.round(days / 365) + " year ago"
-      : days > 30
-      ? Math.round(days / 30) + " month ago"
-      : Math.round(days > 7)
-      ? Math.round(days / 7) + " week ago"
-      : days > 1
-      ? days + " days ago"
-      : days + " day ago";
-  return time;
+  return `${timeValue} ${timeUnit}${timeValue !== 1 ? "s" : ""} ago`;
 };
 const formatNumber = (x) => {
   return x > 1
@@ -107,20 +118,37 @@ const convertDuration = (t) => {
 };
 
 export { calcTime, calcViews, formatNumber, convertDuration };
-/* const calcTime = (text) => {
-  var date2 = new Date();
-  var b = text?.slice(0, 10);
-  var date1 = new Date(b);
+
+/* 
+const calcTime = (text) => {
+  const date2 = new Date();
+  const date1 = new Date(text);
+
   var DiffInTime = date2.getTime() - date1.getTime();
   var DiffInDays = DiffInTime / (1000 * 3600 * 24);
-  const days = Math.round(DiffInDays);
+
+  var days = DiffInDays;
+  if (days < 1) {
+    var DiffInHours = Math.abs(DiffInTime) / 1000;
+    const time1 =
+      Math.round(DiffInHours / 60) > 60
+        ? Math.round(DiffInHours / 60 / 60) > 1
+          ? Math.round(DiffInHours / 60 / 60) + " hours ago"
+          : Math.round(DiffInHours / 60 / 60) + " hour ago"
+        : Math.round(DiffInHours / 60) + " minutes ago";
+    return time1;
+  }
+  days = Math.round(DiffInDays);
   const time =
     days > 365
       ? Math.round(days / 365) + " year ago"
       : days > 30
       ? Math.round(days / 30) + " month ago"
       : Math.round(days > 7)
-      ? days / 7 + " week ago"
+      ? Math.round(days / 7) + " week ago"
+      : days > 1
+      ? days + " days ago"
       : days + " day ago";
   return time;
-}; */
+}
+   */

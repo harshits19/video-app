@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeNav } from "../utilities/navSlice";
 import { useSearchParams } from "react-router-dom";
 import { calcTime, calcViews } from "../utilities/useMath";
@@ -12,6 +12,7 @@ import {
   MenuSVG,
   ShareSVG,
 } from "../utilities/SVG";
+import { openBackdrop } from "../utilities/backdropSlice";
 
 const ReadMore = ({ children }) => {
   const text = children;
@@ -34,10 +35,14 @@ const VideoPage = () => {
   const [channelData, setChannelData] = useState(null);
   const apiKey = process.env.REACT_APP_API_KEY;
 
+  const isNavOpen = useSelector((store) => store.navState.isOpen);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeNav());
   }, []);
+  if (isNavOpen == "true") {
+    dispatch(openBackdrop());
+  }
 
   const [videoURL] = useSearchParams();
   const videoID = videoURL.get("v");

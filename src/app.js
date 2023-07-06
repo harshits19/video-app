@@ -9,6 +9,7 @@ import store from "./utilities/store";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import VideoPage from "./components/VideoPage";
 import { Outlet } from "react-router-dom";
+import SearchPage from "./components/SearchPage";
 
 const AppLayout = () => {
   return (
@@ -35,6 +36,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/watch",
         element: <VideoPage />,
+      },
+      {
+        path: "/results",
+        element: <SearchPage />,
       },
     ],
   },
