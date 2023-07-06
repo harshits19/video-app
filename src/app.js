@@ -10,6 +10,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import VideoPage from "./components/VideoPage";
 import { Outlet } from "react-router-dom";
 import SearchPage from "./components/SearchPage";
+import GoToTop from "./utilities/gotoTop";
 
 const AppLayout = () => {
   return (
@@ -19,6 +20,7 @@ const AppLayout = () => {
         <SideDrawer />
         <Outlet />
       </Provider>
+      <GoToTop />
       <Footer />
     </>
   );

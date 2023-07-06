@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { openNav } from "../utilities/navSlice";
 import useFetch from "../utilities/useFetch";
 
-const FilterBtns = (data) => {
+const FilterBtns = ({ data, setVideoData }) => {
   return (
     <>
       <input
@@ -16,7 +16,13 @@ const FilterBtns = (data) => {
       <label
         htmlFor={data?.snippet?.title}
         className="btnLabel"
-        onClick={() => {}}>
+        onClick={() => {
+          useFetch(
+            `search?part=snippet&type=video&maxResults=30&q=${data?.snippet?.title}`
+          ).then((data) => {
+            setVideoData(data?.items);
+          });
+        }}>
         {data?.snippet?.title}
       </label>
     </>
@@ -25,33 +31,67 @@ const FilterBtns = (data) => {
 
 const Body = () => {
   const [filterBtnData, setFilterBtnData] = useState(null);
+  const [videoData, setVideoData] = useState(null);
+
   const dispatch = useDispatch();
   useEffect(() => {
     useFetch(`videoCategories?hl=en&regionCode=IN`).then((data) => {
       setFilterBtnData(data?.items);
     });
     dispatch(openNav());
+    useFetch(
+      `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=30&regionCode=IN`
+    ).then((data) => {
+      setVideoData(data?.items);
+    });
   }, []);
 
   const isNavOpen = useSelector((store) => store.navState.isOpen);
+  const mediaQuery = window.matchMedia("(min-width: 1200px)");
   useEffect(() => {
-    const mainBody = document.getElementById("mainBody");
-    mainBody.style.marginLeft = isNavOpen ? "240px" : "0px";
-    const abc = document.querySelectorAll(".videoCard");
-    abc.forEach((element) => {
-      element.style.width = isNavOpen ? "360px" : "337px";
-    });
+    if (mediaQuery.matches) {
+      const mainBody = document.getElementById("mainBody");
+      mainBody.style.marginLeft = isNavOpen ? "240px" : "0px";
+      const abc = document.querySelectorAll(".videoCard");
+      abc.forEach((element) => {
+        element.style.width = isNavOpen ? "360px" : "337px";
+      });
+    }
   });
-
   return (
     <>
       <div id="mainBody">
         <div className="filtersContainer">
+          <input
+            type="radio"
+            id="all"
+            name="select"
+            value="all"
+            defaultChecked
+          />
+          <label
+            htmlFor="all"
+            className="btnLabel"
+            onClick={() => {
+              useFetch(
+                `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=30&regionCode=IN`
+              ).then((data) => {
+                setVideoData(data?.items);
+              });
+            }}>
+            All
+          </label>
           {filterBtnData?.map((data) => {
-            return <FilterBtns {...data} key={data.id} />;
+            return (
+              <FilterBtns
+                data={data}
+                setVideoData={setVideoData}
+                key={data.id}
+              />
+            );
           })}
         </div>
-        <HomePage />
+        <HomePage videoData={videoData} />
       </div>
     </>
   );

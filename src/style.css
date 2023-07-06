@@ -89,6 +89,7 @@ body {
   font-size: 16px;
   font-weight: 400;
   font-family: "Roboto";
+  z-index: 101;
 }
 .searchBtn {
   height: 100%;
@@ -101,6 +102,7 @@ body {
   border-radius: 0px 20px 20px 0px;
   border-left: 1px solid #0000002e;
   cursor: pointer;
+  z-index: 101;
 }
 .searchBtn img {
   height: 20px;
@@ -110,6 +112,13 @@ body {
   height: 20px;
   width: 20px;
   margin: 0 10px 0 15px;
+}
+.clearBtn {
+  position: absolute;
+  top: 06px;
+  right: 71px;
+  cursor: pointer;
+  z-index: 101;
 }
 .searchResultContainer {
   background: var(--secondary-color);
@@ -373,6 +382,10 @@ input[type="radio"]:checked + .btnLabel {
   display: flex;
   flex-direction: column;
 }
+.videoFrame {
+  height: 498px;
+  width: 885px;
+}
 .videoDescTitle {
   margin: 15px 0 12px;
   font-size: 1.1rem;
@@ -384,6 +397,15 @@ input[type="radio"]:checked + .btnLabel {
 }
 .videoDescSection {
   display: flex;
+  justify-content: space-between;
+}
+.videoInnerDesc {
+  display: flex;
+  column-gap: 30px;
+}
+.videoDescBtns {
+  display: flex;
+  column-gap: 10px;
 }
 .btn {
   color: var(--dark-black);
@@ -453,6 +475,7 @@ input[type="radio"]:checked + .btnLabel {
 .videoFullDesc {
   font-family: var(--primary-font);
   white-space: pre-wrap;
+  word-break: break-word;
 }
 .videoCmntSection {
   margin-top: 20px;
@@ -481,6 +504,7 @@ input[type="radio"]:checked + .btnLabel {
   display: flex;
   column-gap: 10px;
   margin: 15px 0;
+  word-break: break-word;
 }
 .commentTitle {
   font-size: 13px;
@@ -636,8 +660,113 @@ input[type="radio"]:checked + .btnLabel {
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+/* -----------Footer------------------------ */
+.footer {
+  height: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 0;
+  margin-top: 30px;
+}
+/* -----------Homepage Shimmer-------------- */
+.shimmerCard {
+  height: 300px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+}
+.shimmerCardImg {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+}
+.shimmerCardDesc {
+  display: flex;
+  flex-direction: column;
+}
+.shimmerLines {
+  height: 10px;
+  width: 100%;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+.shine {
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 400px;
+  display: inline-block;
+  position: relative;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeholderShimmer;
+  -webkit-animation-timing-function: linear;
+}
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+/* -----------Scroll Bar ------------------- */
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  border: 4px solid var(--secondary-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* -----------Responsive Bottom Menu------- */
+.bottomMenu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: none;
+  padding: 5px 0;
+  align-items: center;
+  width: 100%;
+  z-index: 101;
+  background: var(--secondary-color);
+  justify-content: space-evenly;
+}
+.bottomMenuItems {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* -----------Responsive Section------------ */
-@media (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .header {
     padding: 10px;
     grid-template-columns: 1fr 1fr;
@@ -661,4 +790,86 @@ input[type="radio"]:checked + .btnLabel {
   .searchSection {
     display: none;
   }
+  .side-drawer {
+    display: none;
+  }
+  .bottomMenu {
+    display: flex;
+  }
+  .navItemName {
+    font-size: 10px;
+  }
+  #mainBody {
+    margin-left: 0;
+  }
+  .filtersContainer {
+    padding: 0 10px;
+  }
+  .videoCard {
+    width: 100%;
+    height: 100%;
+  }
+  .videoBanner img {
+    width: 100%;
+    height: 100%;
+  }
+  .videoCardContainer {
+    padding: 20px 10px;
+  }
+  .videoFrame {
+    height: 100%;
+    width: 100%;
+  }
+  .videoPageContainer {
+    width: 100%;
+    flex-direction: column;
+    padding: 0 5px;
+  }
+  .videoInnerContainer {
+    width: 100%;
+  }
+  .videoDescSection {
+    flex-direction: column;
+  }
+  .videoInnerDesc {
+    column-gap: 10px;
+  }
+  .videoDescBtns {
+    overflow-y: auto;
+  }
+  .videoDescBtns::-webkit-scrollbar {
+    display: none;
+  }
+
+  .btn {
+    height: 30px;
+    padding: 0px 12px;
+    font-size: 12px;
+    line-height: 30px;
+  }
+  .videoFullDesc {
+    font-size: 12px;
+  }
+  .videoCmntSection {
+    display: none;
+  }
+  .recommendedSection {
+    width: 100%;
+  }
+  .sidebarImg {
+    width: 100%;
+    height: 100%;
+  }
+  .sidebarDesc {
+    width: 100%;
+  }
+  .videoCardDuration {
+    bottom: 8px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199.98px) {
 }

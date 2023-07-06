@@ -72,15 +72,14 @@ const VideoPage = () => {
           <iframe
             id="ytplayer"
             type="text/html"
-            width="885"
-            height="498"
+            className="videoFrame"
             src={`https://www.youtube.com/embed/${videoID}?rel=0&modestbranding=1&showinfo=0&autoplay=1`}
             frameBorder="0"
             allowFullScreen
             allow="autoplay"></iframe>
           <div className="videoDescTitle">{videoData?.snippet?.title}</div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", columnGap: "30px" }}>
+          <div className="videoDescSection">
+            <div className="videoInnerDesc">
               <div style={{ display: "flex" }}>
                 <div className="channelDefIcon">
                   <img src={channelData?.snippet?.thumbnails?.default?.url} />
@@ -97,7 +96,7 @@ const VideoPage = () => {
               </div>
               <div className="btn subs">Subscribe</div>
             </div>
-            <div style={{ display: "flex", columnGap: "10px" }}>
+            <div className="videoDescBtns">
               <div className="videoBtn btn">
                 <LikeSVG />
                 <span

@@ -1,31 +1,30 @@
-import { useState, useEffect } from "react";
 import VideoCards from "./VideoCards";
-import useFetch from "../utilities/useFetch";
 import { Link } from "react-router-dom";
+import HomePageShimmer from "./HomePageShimmer";
 
-const HomePage = () => {
-  const [videoData, setVideoData] = useState(null);
-  useEffect(() => {
-    useFetch(
-      `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=30&regionCode=IN`
-    ).then((data) => {
-      setVideoData(data?.items);
-    });
-  }, []);
+const HomePage = ({ videoData }) => {
   return (
     <>
       <div className="videoCardContainer">
         <div className="videoCardInnerContainer">
-          {videoData?.map((data) => {
-            return (
-              <Link
-                to={"/watch?v=" + data?.id}
-                key={data?.id}
-                className="textNone">
-                <VideoCards info={data} />
-              </Link>
-            );
-          })}
+          {videoData ? (
+            videoData?.map((data, idx) => {
+              return (
+                <Link
+                  to={
+                    data.id.videoId
+                      ? "/watch?v=" + data?.id?.videoId
+                      : "/watch?v=" + data?.id
+                  }
+                  key={idx}
+                  className="textNone">
+                  <VideoCards info={data} />
+                </Link>
+              );
+            })
+          ) : (
+            <HomePageShimmer />
+          )}
         </div>
       </div>
     </>

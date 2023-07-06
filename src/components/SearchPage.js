@@ -41,7 +41,9 @@ const SearchPage = () => {
   const [searchData, setSearchData] = useState(null);
   const keyword = text.get("search_query");
   useEffect(() => {
-    useFetch(`search?part=snippet&maxResults=25&q=${keyword}`).then((data) => {
+    useFetch(
+      `search?part=snippet&type=video&type=channel&maxResults=25&q=${keyword}`
+    ).then((data) => {
       //   console.log(data?.items);
       setSearchData(data?.items);
     });
@@ -56,10 +58,7 @@ const SearchPage = () => {
       <div className="searchContainer">
         {searchData?.map((data) => {
           return data?.id?.kind == "youtube#channel" ? (
-            <Link
-              to={"/@" + data?.id?.channelId}
-              className="textNone"
-              key={data?.id?.channelId}>
+            <Link className="textNone" key={data?.id?.channelId}>
               <ChannelBox info={data?.snippet} />
             </Link>
           ) : (

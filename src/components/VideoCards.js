@@ -7,7 +7,8 @@ const VideoCards = ({ info }) => {
         <div className="videoBanner">
           <img src={info?.snippet?.thumbnails?.medium?.url} />
           <span className="videoCardDuration">
-            {convertDuration(info?.contentDetails?.duration)}
+            {info?.contentDetails?.duration &&
+              convertDuration(info?.contentDetails?.duration)}
           </span>
         </div>
         <div className="videoDesc">
@@ -18,8 +19,9 @@ const VideoCards = ({ info }) => {
             <div className="videoTitle">{info?.snippet?.title}</div>
             <div className="channelName">{info?.snippet?.channelTitle}</div>
             <div className="videoViews">
-              {calcViews(info?.statistics?.viewCount) +
-                " views  •  " +
+              {info?.statistics?.viewCount &&
+                calcViews(info?.statistics?.viewCount) + " views  •  "}
+              {info?.snippet?.publishedAt &&
                 calcTime(info?.snippet?.publishedAt)}
             </div>
             <div className="videoTime"></div>

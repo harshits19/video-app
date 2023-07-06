@@ -5,10 +5,12 @@ const SideBarCards = (data) => {
     <>
       <div className="sideBarCards">
         <div style={{ position: "relative" }}>
-          <img
-            src={data?.snippet?.thumbnails?.medium?.url}
-            className="sidebarImg"
-          />
+          <div>
+            <img
+              src={data?.snippet?.thumbnails?.medium?.url}
+              className="sidebarImg"
+            />
+          </div>
           <span className="videoCardDuration" style={{ margin: "6px 12px" }}>
             {convertDuration(data?.contentDetails?.duration)}
           </span>

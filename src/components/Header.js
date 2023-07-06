@@ -73,6 +73,18 @@ const Header = () => {
               }}
               onFocus={() => setSearchState(true)}
             />
+            {searchQuery && (
+              <div
+                className="clearBtn"
+                onClick={() => {
+                  setSearchQuery("");
+                  setSearchState(false);
+                }}>
+                <svg height="24" width="24" viewBox="0 0 24 24">
+                  <path d="m12.71 12 8.15 8.15-.71.71L12 12.71l-8.15 8.15-.71-.71L11.29 12 3.15 3.85l.71-.71L12 11.29l8.15-8.15.71.71L12.71 12z"></path>
+                </svg>
+              </div>
+            )}
             {suggestions.length > 0 && searchState && (
               <>
                 <div className="searchResultContainer">
@@ -94,12 +106,16 @@ const Header = () => {
                 {backdrop}
               </>
             )}
-            <div className="searchBtn">
-              <Link
-                to={"/results?search_query=" + searchQuery}
-                className="textNone">
+            <div className="searchBtn" onClick={() => setSearchState(false)}>
+              {searchQuery ? (
+                <Link
+                  to={"/results?search_query=" + searchQuery}
+                  className="textNone">
+                  <SearchSVG />
+                </Link>
+              ) : (
                 <SearchSVG />
-              </Link>
+              )}
             </div>
           </div>
           <div className="menuSection">
