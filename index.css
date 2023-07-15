@@ -28,20 +28,22 @@ body {
 
 /* ------------Header Section---------------- */
 .header {
-  display: grid;
-  grid-template-columns: 28% 44% 28%;
-  padding: 0 25px;
   height: 56px;
-  position: sticky;
-  top: 0;
   background: var(--secondary-color);
   z-index: 100;
-  /* box-shadow: 0px -3px 5px #000; */
+  padding: 0 1rem;
+  display: flex;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 .menuLogoSection {
-  display: flex;
   align-items: center;
-  column-gap: 20px;
+  column-gap: 1rem;
+  display: flex;
+  width: 11rem;
 }
 .menuSection {
   height: 37px;
@@ -62,12 +64,11 @@ body {
   cursor: pointer;
 }
 .searchSection {
-  padding: 8px 0;
-  width: 100%;
-  display: flex;
+  width: 40rem;
   align-items: center;
   column-gap: 10px;
-  /* position: relative; */
+  display: flex;
+  height: 40px;
 }
 .searchBar {
   display: flex;
@@ -145,9 +146,10 @@ body {
 }
 .userSection {
   position: relative;
+  width: 7rem;
+  height: 40px;
 }
 .userLogin {
-  margin-top: 13px;
   position: absolute;
   right: 0;
   border: 1px solid #0000002e;
@@ -638,7 +640,7 @@ input[type="radio"]:checked + .btnLabel {
 .videoThumb {
   border-radius: 10px;
   height: 100%;
-  width: 100%;
+  width: 45vmin;
 }
 .videoBoxTitle {
   font-size: 18px;
@@ -764,25 +766,73 @@ input[type="radio"]:checked + .btnLabel {
   align-items: center;
   justify-content: center;
 }
-
+/* ------------Mobile Search Box--------------- */
+.mobileSearch {
+  display: none;
+}
+.mobileSearchInput {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 56px;
+  background-color: var(--secondary-color);
+  z-index: 111;
+  width: 100%;
+  padding: 10px;
+}
+.mobileSearchBox {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #0000002e;
+  border-radius: 25px;
+  padding: 5px 15px;
+  box-shadow: 0px 0px 2px inset #0000002e;
+  border: 0;
+  outline: 0;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Roboto";
+}
+.backBtn {
+  height: 35px;
+  width: 35px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 22px;
+  padding: 5px;
+  margin-right: 10px;
+}
+.resSearchContainer {
+  height: 100vh;
+}
 /* -----------Responsive Section------------ */
-@media only screen and (max-width: 767px) {
+@media (max-width: 479.98px) {
   .header {
     padding: 10px;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: start;
+  }
+  .mobileSearch {
+    display: block;
+    width: 10%;
   }
   .menuLogoSection {
     column-gap: 0;
+    width: 90%;
   }
   .menuSection {
     display: none;
+  }
+  .userSection {
+    width: 10%;
   }
   .userLogin {
     margin-top: 0;
     border: none;
   }
   .userLogin:hover {
-    background-color: #fff;
+    background-color: var(--secondary-color);
   }
   .userLogin > span {
     display: none;
@@ -810,14 +860,13 @@ input[type="radio"]:checked + .btnLabel {
     height: 100%;
   }
   .videoBanner img {
-    width: 100%;
-    height: 100%;
+    width: 95vw;
   }
   .videoCardContainer {
     padding: 20px 10px;
   }
   .videoFrame {
-    height: 100%;
+    height: 35vh;
     width: 100%;
   }
   .videoPageContainer {
@@ -840,7 +889,6 @@ input[type="radio"]:checked + .btnLabel {
   .videoDescBtns::-webkit-scrollbar {
     display: none;
   }
-
   .btn {
     height: 30px;
     padding: 0px 12px;
@@ -848,13 +896,17 @@ input[type="radio"]:checked + .btnLabel {
     line-height: 30px;
   }
   .videoFullDesc {
-    font-size: 12px;
+    font-size: 13px;
   }
   .videoCmntSection {
     display: none;
   }
   .recommendedSection {
     width: 100%;
+    padding: 10px 5px;
+  }
+  .sideBarCards {
+    column-gap: 10px;
   }
   .sidebarImg {
     width: 100%;
@@ -866,10 +918,164 @@ input[type="radio"]:checked + .btnLabel {
   .videoCardDuration {
     bottom: 8px;
   }
+  .searchContainer {
+    width: 100%;
+  }
+  .videoThumb {
+    width: 35vmin;
+  }
 }
-
-@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 480px) and (max-width: 767.98px) {
+  .header {
+    padding: 10px;
+    display: flex;
+    justify-content: start;
+  }
+  .mobileSearch {
+    display: block;
+    width: 10%;
+  }
+  .menuLogoSection {
+    column-gap: 0;
+    width: 100%;
+  }
+  .menuSection {
+    display: none;
+  }
+  .userSection {
+    width: 10%;
+  }
+  .userLogin {
+    margin-top: 0;
+    border: none;
+  }
+  .userLogin:hover {
+    background-color: var(--secondary-color);
+  }
+  .userLogin > span {
+    display: none;
+  }
+  .searchSection {
+    display: none;
+  }
+  .side-drawer {
+    display: none;
+  }
+  .bottomMenu {
+    display: flex;
+  }
+  .navItemName {
+    font-size: 10px;
+  }
+  #mainBody {
+    margin-left: 0;
+  }
+  .filtersContainer {
+    padding: 0 10px;
+  }
+  .videoCard {
+    height: 100%;
+    width: 95vw;
+    display: flex;
+  }
+  .videoBanner img {
+    width: 50vmin;
+    height: 100%;
+  }
+  .videoDesc {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: 10px;
+    justify-content: flex-end;
+  }
+  .videoCardContainer {
+    padding: 20px 10px;
+  }
+  .videoFrame {
+    height: 70vmin;
+    width: 100%;
+  }
+  .videoPageContainer {
+    width: 100%;
+    flex-direction: column;
+    padding: 0 5px;
+  }
+  .videoInnerContainer {
+    width: 100%;
+  }
+  .videoDescSection {
+    flex-direction: column;
+  }
+  .videoInnerDesc {
+    column-gap: 10px;
+  }
+  .videoDescBtns {
+    overflow-y: auto;
+  }
+  .videoDescBtns::-webkit-scrollbar {
+    display: none;
+  }
+  .shimmerCard {
+    height: fit-content;
+    width: 90%;
+    flex-direction: row;
+    display: flex;
+    gap: 0 10px;
+  }
+  .shimmerCardImg {
+    width: 100vmin;
+    height: 30vmin;
+  }
+  .shimmerCardDesc {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  .shimmerLines {
+    height: 18px;
+    width: 100%;
+    border-radius: 3px;
+    margin-top: 0;
+  }
+  .btn {
+    height: 30px;
+    padding: 0px 12px;
+    font-size: 12px;
+    line-height: 30px;
+  }
+  .videoFullDesc {
+    font-size: 13px;
+  }
+  .videoCmntSection {
+    display: none;
+  }
+  .recommendedSection {
+    width: 100%;
+    padding: 10px 5px;
+  }
+  .sideBarCards {
+    column-gap: 10px;
+  }
+  .sidebarImg {
+    width: 100%;
+    height: 100%;
+  }
+  .sidebarDesc {
+    width: 100%;
+  }
+  .videoCardDuration {
+    bottom: 8px;
+  }
+  .searchContainer {
+    width: 100%;
+  }
+  .videoThumb {
+    width: 35vmin;
+  }
 }
-
-@media only screen and (min-width: 992px) and (max-width: 1199.98px) {
+@media only screen and (min-width: 768px) and (max-width: 1199.98px) {
+  #mainBody {
+    margin-left: 0;
+  }
 }

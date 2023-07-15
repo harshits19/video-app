@@ -49,9 +49,12 @@ const SearchPage = () => {
     });
   }, [text]);
   const isNavOpen = useSelector((store) => store.navState.isOpen);
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
   useEffect(() => {
-    const mainBody = document.getElementById("searchBody");
-    mainBody.style.marginLeft = isNavOpen ? "240px" : "0px";
+    if (mediaQuery.matches) {
+      const mainBody = document.getElementById("searchBody");
+      mainBody.style.marginLeft = isNavOpen ? "240px" : "0px";
+    }
   });
   return (
     <div id="searchBody">

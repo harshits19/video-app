@@ -47,7 +47,7 @@ const Body = () => {
   }, []);
 
   const isNavOpen = useSelector((store) => store.navState.isOpen);
-  const mediaQuery = window.matchMedia("(min-width: 1200px)");
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
   useEffect(() => {
     if (mediaQuery.matches) {
       const mainBody = document.getElementById("mainBody");

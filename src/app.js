@@ -11,6 +11,7 @@ import VideoPage from "./components/VideoPage";
 import { Outlet } from "react-router-dom";
 import SearchPage from "./components/SearchPage";
 import GoToTop from "./utilities/gotoTop";
+import ResSearchPage from "./components/ResSearchPage";
 
 const AppLayout = () => {
   return (
@@ -42,6 +43,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/results",
         element: <SearchPage />,
+      },
+      {
+        path: "/resSearch",
+        element: <ResSearchPage />,
       },
     ],
   },
