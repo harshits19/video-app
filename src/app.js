@@ -102,6 +102,7 @@ body
         :sortby btn
         :add comment functionality
         :show comments
+        :replies
         
     -right side section
       ~recommended topics filter btns

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HomePage from "./HomePage";
 import { useSelector, useDispatch } from "react-redux";
-import { openNav } from "../utilities/navSlice";
+import { openNav, closePageState } from "../utilities/navSlice";
 import useFetch from "../utilities/useFetch";
 
 const FilterBtns = ({ data, setVideoData }) => {
@@ -35,10 +35,13 @@ const Body = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(openNav());
+    dispatch(closePageState());
+
     useFetch(`videoCategories?hl=en&regionCode=IN`).then((data) => {
       setFilterBtnData(data?.items);
     });
-    dispatch(openNav());
+
     useFetch(
       `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=30&regionCode=IN`
     ).then((data) => {
@@ -47,16 +50,33 @@ const Body = () => {
   }, []);
 
   const isNavOpen = useSelector((store) => store.navState.isOpen);
-  const mediaQuery = window.matchMedia("(min-width: 768px)");
+  const mediaQuery = window.matchMedia("(min-width: 1200px)");
+  const mediaQueryTwo = window.matchMedia("(min-width: 769px)");
+  const mediaQueryThree = window.matchMedia("(max-width: 769px)");
+
   useEffect(() => {
+    if (mediaQueryThree.matches) {
+      document.getElementById("bottomMenu").style.display = "flex";
+      document.getElementsByClassName("header")[0].style.position = "sticky";
+    }
+    if (mediaQueryTwo.matches)
+      document.getElementById("mainBody").style.marginLeft = "80px";
     if (mediaQuery.matches) {
-      const mainBody = document.getElementById("mainBody");
-      mainBody.style.marginLeft = isNavOpen ? "240px" : "0px";
-      const abc = document.querySelectorAll(".videoCard");
-      abc.forEach((element) => {
-        element.style.width = isNavOpen ? "360px" : "337px";
+      document.getElementById("mainBody").style.marginLeft = isNavOpen
+        ? "240px"
+        : "80px";
+      document.querySelectorAll(".videoBannerImg").forEach((element) => {
+        element.style.width = isNavOpen ? "400px" : "337px";
+        element.style.height = isNavOpen ? "225px" : "200px";
+      });
+      document.querySelectorAll(".videoCard").forEach((element) => {
+        element.style.width = isNavOpen ? "400px" : "337px";
+        element.style.height = isNavOpen ? "330px" : "300px";
       });
     }
+    const sidebar = document.querySelector(".compactSidebar");
+    if (sidebar.classList.contains("csSidebarClose"))
+      sidebar.classList.remove("csSidebarClose");
   });
   return (
     <>

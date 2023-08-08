@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeNav } from "../utilities/navSlice";
+import { closeNav, openPageState } from "../utilities/navSlice";
 import { useSearchParams } from "react-router-dom";
 import { calcTime, calcViews } from "../utilities/useMath";
 import RecVideoSection from "./RecVideoSection";
@@ -12,7 +12,6 @@ import {
   MenuSVG,
   ShareSVG,
 } from "../utilities/SVG";
-import { openBackdrop } from "../utilities/backdropSlice";
 
 const ReadMore = ({ children }) => {
   const text = children;
@@ -35,14 +34,20 @@ const VideoPage = () => {
   const [channelData, setChannelData] = useState(null);
   const apiKey = process.env.REACT_APP_API_KEY;
 
-  const isNavOpen = useSelector((store) => store.navState.isOpen);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeNav());
+    dispatch(openPageState());
+
+    const sidebar = document.querySelector(".compactSidebar");
+    sidebar.classList.add("csSidebarClose");
+
+    const mediaQuery = window.matchMedia("(max-width: 769px)");
+    if (mediaQuery.matches) {
+      document.getElementById("bottomMenu").style.display = "none";
+      document.getElementsByClassName("header")[0].style.position = "relative";
+    }
   }, []);
-  if (isNavOpen == "true") {
-    dispatch(openBackdrop());
-  }
 
   const [videoURL] = useSearchParams();
   const videoID = videoURL.get("v");
@@ -112,11 +117,14 @@ const VideoPage = () => {
                 <ShareSVG />
                 Share
               </div>
-              <div className="videoBtn btn">
+              <div className="videoBtn btn" id="downBtn">
                 <DownloadSVG />
                 Download
               </div>
-              <div className="videoBtn btn" style={{ padding: "0px 6px" }}>
+              <div
+                className="videoBtn btn"
+                style={{ padding: "0px 6px" }}
+                id="menuBtn">
                 <MenuSVG />
               </div>
             </div>
@@ -135,10 +143,10 @@ const VideoPage = () => {
           </div>
           <CommentSection
             videoID={videoID}
-            views={videoData?.statistics?.commentCount}
+            comments={videoData?.statistics?.commentCount}
           />
         </div>
-        <RecVideoSection />
+        <RecVideoSection videoID={videoID} />
       </div>
     </>
   );

@@ -1,23 +1,52 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { closeNav } from "../utilities/navSlice";
+import logo from "../assets/youtubeLogo.png";
+import { toggleNavState } from "../utilities/navSlice";
 
 const SideDrawer = () => {
   const isNavOpen = useSelector((store) => store.navState.isOpen);
+  const isVideoPage = useSelector((store) => store.navState.isVideoPage);
   let drawerClasses = "side-drawer";
   let backdrop;
+  const dispatch = useDispatch();
+  const toggleNavHandler = () => {
+    dispatch(toggleNavState());
+  };
   if (isNavOpen) {
     drawerClasses = "side-drawer open";
-    /* backdrop = (
-      <div
-        className="backdrop" onClick={() => handleOverlayState()}
-      ></div>
-    ); */
+    if (isVideoPage == true) {
+      backdrop = (
+        <div
+          className="backdrop"
+          onClick={() => {
+            dispatch(closeNav());
+          }}></div>
+      );
+    }
   }
-
   return (
     <>
       <div className={drawerClasses}>
         <div className="sideNavbar">
+          <div className="menuLogoSection">
+            <div className="menuSection">
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                className="hamIcon"
+                onClick={() => toggleNavHandler()}>
+                <path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path>
+              </svg>
+            </div>
+            <div className="logoSection">
+              <Link to="/" className="textNone">
+                <img src={logo} className="logo" />
+              </Link>
+            </div>
+          </div>
           <div className="categorySection">
             <div className="navItems">
               <span className="navItemIcon">
@@ -165,7 +194,7 @@ const SideDrawer = () => {
           </div>
         </div>
       </div>
-      <div className="bottomMenu">
+      <div className="bottomMenu" id="bottomMenu">
         <div className="bottomMenuItems">
           <span>
             <svg height="24" width="24" viewBox="0 0 24 24">
@@ -199,6 +228,59 @@ const SideDrawer = () => {
             </svg>
           </span>
           <span className="navItemName">Library</span>
+        </div>
+      </div>
+      <div className="compactSidebar">
+        <div className="csItems">
+          <span className="csItemIcon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M12,4.33l7,6.12V20H15V14H9v6H5V10.45l7-6.12M12,3,4,10V21h6V15h4v6h6V10L12,3Z"></path>
+            </svg>
+          </span>
+          <Link to="/" className="textNone">
+            <span className="csItemName">Home</span>
+          </Link>
+        </div>
+        <div className="csItems">
+          <span className="csItemIcon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M10 14.65v-5.3L15 12l-5 2.65zm7.77-4.33-1.2-.5L18 9.06c1.84-.96 2.53-3.23 1.56-5.06s-3.24-2.53-5.07-1.56L6 6.94c-1.29.68-2.07 2.04-2 3.49.07 1.42.93 2.67 2.22 3.25.03.01 1.2.5 1.2.5L6 14.93c-1.83.97-2.53 3.24-1.56 5.07.97 1.83 3.24 2.53 5.07 1.56l8.5-4.5c1.29-.68 2.06-2.04 1.99-3.49-.07-1.42-.94-2.68-2.23-3.25zm-.23 5.86-8.5 4.5c-1.34.71-3.01.2-3.72-1.14-.71-1.34-.2-3.01 1.14-3.72l2.04-1.08v-1.21l-.69-.28-1.11-.46c-.99-.41-1.65-1.35-1.7-2.41-.05-1.06.52-2.06 1.46-2.56l8.5-4.5c1.34-.71 3.01-.2 3.72 1.14.71 1.34.2 3.01-1.14 3.72L15.5 9.26v1.21l1.8.74c.99.41 1.65 1.35 1.7 2.41.05 1.06-.52 2.06-1.46 2.56z"></path>
+            </svg>
+          </span>
+          <span className="csItemName">Shorts</span>
+        </div>
+        <div className="csItems">
+          <span className="csItemIcon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M10 18v-6l5 3-5 3zm7-15H7v1h10V3zm3 3H4v1h16V6zm2 3H2v12h20V9zM3 10h18v10H3V10z"></path>
+            </svg>
+          </span>
+          <span className="csItemName">Subscriptions</span>
+        </div>
+        <div className="csItems">
+          <span className="csItemIcon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M10 9.35L15 12l-5 2.65zM12 7a5 5 0 105 5 5 5 0 00-5-5m0-1a6 6 0 11-6 6 6 6 0 016-6zm0-3a9 9 0 109 9 9 9 0 00-9-9m0-1A10 10 0 112 12 10 10 0 0112 2z"></path>
+            </svg>
+          </span>
+          <span className="csItemName">Youtube Music</span>
+        </div>
+
+        <div className="csItems">
+          <span className="csItemIcon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="m11 7 6 3.5-6 3.5V7zm7 13H4V6H3v15h15v-1zm3-2H6V3h15v15zM7 17h13V4H7v13z"></path>
+            </svg>
+          </span>
+          <span className="csItemName">Library</span>
+        </div>
+        <div className="csItems">
+          <span className="csItemIcon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M17 18V19H6V18H17ZM16.5 11.4L15.8 10.7L12 14.4V4H11V14.4L7.2 10.6L6.5 11.3L11.5 16.3L16.5 11.4Z"></path>
+            </svg>
+          </span>
+          <span className="csItemName">Downloads</span>
         </div>
       </div>
       {backdrop}

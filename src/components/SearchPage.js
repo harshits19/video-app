@@ -49,11 +49,16 @@ const SearchPage = () => {
     });
   }, [text]);
   const isNavOpen = useSelector((store) => store.navState.isOpen);
-  const mediaQuery = window.matchMedia("(min-width: 768px)");
+  const mediaQuery = window.matchMedia("(min-width: 1200px)");
+  const mediaQueryTwo = window.matchMedia("(min-width: 769px)");
   useEffect(() => {
+    if (mediaQueryTwo.matches) {
+      const abc = document.getElementById("searchBody");
+      abc.style.marginLeft = "80px";
+    }
     if (mediaQuery.matches) {
-      const mainBody = document.getElementById("searchBody");
-      mainBody.style.marginLeft = isNavOpen ? "240px" : "0px";
+      const abc = document.getElementById("searchBody");
+      abc.style.marginLeft = isNavOpen ? "240px" : "80px";
     }
   });
   return (

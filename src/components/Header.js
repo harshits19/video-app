@@ -1,5 +1,4 @@
 import logo from "../assets/youtubeLogo.png";
-import userIcon from "../assets/userLight.png";
 import { useDispatch } from "react-redux";
 import { toggleNavState } from "../utilities/navSlice";
 import { Link } from "react-router-dom";
@@ -126,20 +125,16 @@ const Header = () => {
         </div>
         <div className="mobileSearch">
           <Link to="/resSearch" className="textNone">
-            <svg
-              height="24"
-              width="24"
-              viewBox="0 0 22 22"
-              style={{ margin: "3px 0" }}>
+            <svg height="24" width="24" viewBox="0 -1 22 22">
               <path d="M20.87,20.17l-5.59-5.59C16.35,13.35,17,11.75,17,10c0-3.87-3.13-7-7-7s-7,3.13-7,7s3.13,7,7,7c1.75,0,3.35-0.65,4.58-1.71 l5.59,5.59L20.87,20.17z M10,16c-3.31,0-6-2.69-6-6s2.69-6,6-6s6,2.69,6,6S13.31,16,10,16z"></path>
             </svg>
           </Link>
         </div>
         <div className="userSection">
-          <div className="userLogin">
-            <img src={userIcon} className="userLight" />
-            <span>Sign In</span>
-          </div>
+          <svg height="22" width="22" viewBox="0 0 23 23">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1c4.96 0 9 4.04 9 9 0 1.42-.34 2.76-.93 3.96-1.53-1.72-3.98-2.89-7.38-3.03A3.996 3.996 0 0016 9c0-2.21-1.79-4-4-4S8 6.79 8 9c0 1.97 1.43 3.6 3.31 3.93-3.4.14-5.85 1.31-7.38 3.03C3.34 14.76 3 13.42 3 12c0-4.96 4.04-9 9-9zM9 9c0-1.65 1.35-3 3-3s3 1.35 3 3-1.35 3-3 3-3-1.35-3-3zm3 12c-3.16 0-5.94-1.64-7.55-4.12C6.01 14.93 8.61 13.9 12 13.9c3.39 0 5.99 1.03 7.55 2.98C17.94 19.36 15.16 21 12 21z"></path>
+          </svg>
+          <span>Sign In</span>
         </div>
       </div>
     </>
