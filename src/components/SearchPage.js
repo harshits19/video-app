@@ -1,36 +1,35 @@
-import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import useFetch from "../utilities/useFetch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { calcTime } from "../utilities/useMath";
+import SearchPageCards from "./SearchPageCards";
+import { calcViews } from "../utilities/useMath";
 
-const ChannelBox = ({ info }) => {
-  //   console.log(info);
+const ChannelBox = ({ chId }) => {
+  const [info, setInfo] = useState();
+  useEffect(() => {
+    useFetch(`channels?part=snippet%2Cstatistics&id=${chId}`).then((data) => {
+      console.log(data);
+      setInfo(data?.items[0]);
+    });
+  }, [chId]);
   return (
     <div className="channelBox">
       <div className="channelImg">
-        <img src={info?.thumbnails?.medium?.url} className="channelThumb" />
+        <img
+          src={info?.snippet?.thumbnails?.medium?.url}
+          className="channelThumb"
+        />
       </div>
       <div>
-        <div className="videoBoxTitle">{info?.title}</div>
-        <div className="videoBoxDesc">{info?.description}</div>
-      </div>
-    </div>
-  );
-};
-const VideoBox = ({ info }) => {
-  //   console.log(info);
-  return (
-    <div className="videoBox">
-      <div>
-        <img src={info?.thumbnails?.medium?.url} className="videoThumb" />
-      </div>
-      <div>
-        <div className="videoBoxTitle">{info?.title}</div>
-        <div className="videoBoxTime">{calcTime(info?.publishedAt)}</div>
-        <div className="videoBoxTime">{info?.channelTitle}</div>
-        <div className="videoBoxDesc">{info?.description}</div>
+        <div className="videoBoxTitle">{info?.snippet?.title}</div>
+        <div className="channelSubs">
+          {info?.snippet?.customUrl +
+            " • " +
+            calcViews(info?.statistics?.subscriberCount) +
+            " subscribers"}
+        </div>
+        <div className="videoBoxDesc">{info?.snippet?.description}</div>
       </div>
     </div>
   );
@@ -41,12 +40,12 @@ const SearchPage = () => {
   const [searchData, setSearchData] = useState(null);
   const keyword = text.get("search_query");
   useEffect(() => {
-    useFetch(
-      `search?part=snippet&type=video&type=channel&maxResults=25&q=${keyword}`
-    ).then((data) => {
-      //   console.log(data?.items);
-      setSearchData(data?.items);
-    });
+    useFetch(`search?type=video&type=channel&maxResults=25&q=${keyword}`).then(
+      (data) => {
+        console.log(data?.items);
+        setSearchData(data?.items);
+      }
+    );
   }, [text]);
   const isNavOpen = useSelector((store) => store.navState.isOpen);
   const mediaQuery = window.matchMedia("(min-width: 1200px)");
@@ -67,14 +66,14 @@ const SearchPage = () => {
         {searchData?.map((data) => {
           return data?.id?.kind == "youtube#channel" ? (
             <Link className="textNone" key={data?.id?.channelId}>
-              <ChannelBox info={data?.snippet} />
+              <ChannelBox chId={data?.id?.channelId} />
             </Link>
           ) : (
             <Link
               to={"/watch?v=" + data?.id?.videoId}
               className="textNone"
               key={data?.id?.videoId}>
-              <VideoBox info={data?.snippet} />
+              <SearchPageCards vdoId={data?.id?.videoId} />
             </Link>
           );
         })}
@@ -83,3 +82,4 @@ const SearchPage = () => {
   );
 };
 export default SearchPage;
+/*   */

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
@@ -8,17 +9,20 @@ import { Provider } from "react-redux";
 import store from "./utilities/store";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import VideoPage from "./components/VideoPage";
-import { Outlet } from "react-router-dom";
 import SearchPage from "./components/SearchPage";
 import GoToTop from "./utilities/gotoTop";
 import ResSearchPage from "./components/ResSearchPage";
 
 const AppLayout = () => {
+  const [theme, setTheme] = useState("lightTheme");
+  useEffect(() => {
+    document.body.className = theme;
+  });
   return (
     <>
       <Provider store={store}>
-        <Header />
-        <SideDrawer />
+        <Header theme={theme} setTheme={setTheme} />
+        <SideDrawer theme={theme} />
         <Outlet />
       </Provider>
       <GoToTop />

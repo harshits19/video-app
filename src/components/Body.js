@@ -51,8 +51,8 @@ const Body = () => {
 
   const isNavOpen = useSelector((store) => store.navState.isOpen);
   const mediaQuery = window.matchMedia("(min-width: 1200px)");
-  const mediaQueryTwo = window.matchMedia("(min-width: 769px)");
-  const mediaQueryThree = window.matchMedia("(max-width: 769px)");
+  const mediaQueryTwo = window.matchMedia("(min-width: 900px)");
+  const mediaQueryThree = window.matchMedia("(max-width: 899px)");
 
   useEffect(() => {
     if (mediaQueryThree.matches) {

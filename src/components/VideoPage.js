@@ -146,7 +146,7 @@ const VideoPage = () => {
             comments={videoData?.statistics?.commentCount}
           />
         </div>
-        <RecVideoSection videoID={videoID} />
+        <RecVideoSection videoID={videoID} data={videoData} />
       </div>
     </>
   );

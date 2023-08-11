@@ -50,7 +50,7 @@ const CommentCard = (data) => {
               onClick={() => {
                 setIsHiddenReply(!isHiddenReply);
               }}>
-              <svg height="24" width="24" viewBox="0 0 24 24" fill="#065fd4">
+              <svg height="24" width="24" viewBox="0 0 24 24">
                 {isHiddenReply ? (
                   <path d="M18.4 14.6 12 8.3l-6.4 6.3.8.8L12 9.7l5.6 5.7z"></path>
                 ) : (

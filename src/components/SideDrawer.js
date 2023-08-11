@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeNav } from "../utilities/navSlice";
-import logo from "../assets/youtubeLogo.png";
 import { toggleNavState } from "../utilities/navSlice";
+import { LogoLight, LogoDark } from "../utilities/SVG";
 
-const SideDrawer = () => {
+const SideDrawer = ({ theme }) => {
   const isNavOpen = useSelector((store) => store.navState.isOpen);
   const isVideoPage = useSelector((store) => store.navState.isVideoPage);
   let drawerClasses = "side-drawer";
@@ -43,7 +43,7 @@ const SideDrawer = () => {
             </div>
             <div className="logoSection">
               <Link to="/" className="textNone">
-                <img src={logo} className="logo" />
+                {theme == "lightTheme" ? <LogoLight /> : <LogoDark />}
               </Link>
             </div>
           </div>

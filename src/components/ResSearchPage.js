@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import useFetch from "../utilities/useFetch";
 import { Link } from "react-router-dom";
-import backBtn from "../assets/back-btn.png";
 import { SearchSVG } from "../utilities/SVG";
 
 const resSearchPage = () => {
@@ -30,7 +29,9 @@ const resSearchPage = () => {
     <>
       <div className="mobileSearchInput">
         <Link to="/" className="textNone">
-          <img src={backBtn} className="backBtn" />
+          <svg height="24" width="24" viewBox="0 0 24 24" className="backBtn">
+            <path d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"></path>
+          </svg>
         </Link>
         <input
           type="text"
