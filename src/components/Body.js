@@ -18,7 +18,7 @@ const FilterBtns = ({ data, setVideoData }) => {
         className="btnLabel"
         onClick={() => {
           useFetch(
-            `search?part=snippet&type=video&maxResults=30&q=${data?.snippet?.title}`
+            `search?part=snippet&type=video&maxResults=15&q=${data?.snippet?.title}`
           ).then((data) => {
             setVideoData(data?.items);
           });
@@ -43,7 +43,7 @@ const Body = () => {
     });
 
     useFetch(
-      `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=30&regionCode=IN`
+      `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=15&regionCode=IN`
     ).then((data) => {
       setVideoData(data?.items);
     });
@@ -94,7 +94,7 @@ const Body = () => {
             className="btnLabel"
             onClick={() => {
               useFetch(
-                `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=30&regionCode=IN`
+                `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=15&regionCode=IN`
               ).then((data) => {
                 setVideoData(data?.items);
               });

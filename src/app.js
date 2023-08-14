@@ -14,10 +14,12 @@ import GoToTop from "./utilities/gotoTop";
 import ResSearchPage from "./components/ResSearchPage";
 
 const AppLayout = () => {
-  const [theme, setTheme] = useState("lightTheme");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("themeMode") || "lightTheme"
+  );
   useEffect(() => {
-    document.body.className = theme;
-  });
+    document.body.className = localStorage.getItem("themeMode");
+  }, [theme]);
   return (
     <>
       <Provider store={store}>

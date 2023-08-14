@@ -7,13 +7,14 @@ import useFetch from "../utilities/useFetch";
 */
 const RecVideoSection = ({ videoID, data }) => {
   const [reccVideoData, setReccVideoData] = useState(null);
+  // console.log(data);
   useEffect(() => {
-    useFetch(
-      `search?part=snippet&type=video&maxResults=25&q=${data?.snippet?.title}`
-    ).then((data) => {
-      setReccVideoData(data?.items);
-      // console.log(data);
-    });
+    useFetch(`search?part=snippet&type=video&maxResults=10&q=${data}`).then(
+      (dataSet) => {
+        setReccVideoData(dataSet?.items);
+        // console.log(dataSet);
+      }
+    );
   }, [data]);
 
   return (

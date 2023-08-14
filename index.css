@@ -27,7 +27,7 @@
   --scrollBar-bg-hover: rgba(0, 0, 0, 0.4);
   --replies-btn-color: #065fd4;
   --replies-btn-hover-color: #def1ff;
-  --load-btn-bg: rgba(0, 0, 0, 0.6);
+  --load-btn-bg: rgba(0, 0, 0, 0.1);
   --subs-hover: #272727;
   --backdrop-bg: rgba(40, 44, 62, 0.6);
   --shimmer-bg: #f6f7f8;
@@ -146,7 +146,7 @@ body {
   width: calc(100% - 65px);
   border: 0;
   outline: 0;
-  padding: 0;
+  padding: 0 15px 0 0px;
   font-size: 16px;
   font-weight: 400;
   font-family: "Roboto";
@@ -697,6 +697,9 @@ input[type="radio"]:checked + .btnLabel {
   width: 100%;
   position: relative;
 }
+.sortBtn {
+  fill: var(--font-color);
+}
 .commentBox {
   display: flex;
   column-gap: 10px;
@@ -1015,10 +1018,9 @@ input[type="radio"]:checked + .btnLabel {
   width: 100%;
   background-color: var(--super-light-grey);
   border-radius: 25px;
-  padding: 5px 15px;
   border: 0;
   outline: 0;
-  padding: 0 20px;
+  padding: 0 35px 0 20px;
   font-size: 14px;
   font-weight: 400;
   font-family: "Roboto";
@@ -1040,6 +1042,20 @@ input[type="radio"]:checked + .btnLabel {
   height: 100vh;
   padding: 1rem;
   background: var(--searchRes-bg-color);
+}
+.resClearBtn {
+  cursor: pointer;
+  z-index: 98;
+  fill: var(--font-color);
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 18px;
+  right: 22px;
+}
+.resClearSvg {
+  height: 20px;
+  width: 20px;
 }
 /* -----------Responsive Section------------ */
 @media (max-width: 479.98px) {
@@ -1098,6 +1114,12 @@ input[type="radio"]:checked + .btnLabel {
   .videoCardContainer {
     padding: 20px 0px;
   }
+  .videoCardInnerContainer {
+    gap: 20px;
+  }
+  .videoDesc {
+    padding: 0 10px;
+  }
   .videoFrame {
     height: 35vmax;
     width: 100%;
@@ -1153,9 +1175,13 @@ input[type="radio"]:checked + .btnLabel {
   .videoBox {
     flex-direction: column;
   }
+  .videoBoxTitle,
+  .videoBoxTime {
+    padding: 0 10px;
+  }
   .videoThumb {
     width: 100%;
-    height: 40vmin;
+    height: 200px;
     border-radius: 0;
   }
   .videoBoxDesc {

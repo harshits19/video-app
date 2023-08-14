@@ -15,7 +15,7 @@ const CommentSection = ({ videoID, comments }) => {
 
   useEffect(() => {
     useFetch(
-      `commentThreads?part=snippet%2Creplies&maxResults=50&order=relevance&textFormat=plainText&videoId=${videoID}`
+      `commentThreads?part=snippet%2Creplies&maxResults=25&order=relevance&textFormat=plainText&videoId=${videoID}`
     ).then((data) => {
       setCommentData(data?.items);
       setNextPageToken(data?.nextPageToken);
@@ -24,7 +24,7 @@ const CommentSection = ({ videoID, comments }) => {
 
   const loadMoreComments = () => {
     useFetch(
-      `commentThreads?part=snippet%2Creplies&maxResults=50&order=relevance&textFormat=plainText&videoId=${videoID}&pageToken=${nextPageToken}`
+      `commentThreads?part=snippet%2Creplies&maxResults=25&order=relevance&textFormat=plainText&videoId=${videoID}&pageToken=${nextPageToken}`
     ).then((data) => {
       setCommentData((prev) => [...prev, ...data?.items]);
       setNextPageToken(data?.nextPageToken);
@@ -37,7 +37,7 @@ const CommentSection = ({ videoID, comments }) => {
         onClick={() => setCommentState(!commentState)}>
         comments
         <span>
-          <svg height="24" width="24" viewBox="0 0 24 24" fill="#000000">
+          <svg height="24" width="24" viewBox="0 0 24 24" className="sortBtn">
             {commentState ? (
               <path d="M18.4 14.6 12 8.3l-6.4 6.3.8.8L12 9.7l5.6 5.7z"></path>
             ) : (

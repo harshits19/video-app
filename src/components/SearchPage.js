@@ -9,7 +9,7 @@ const ChannelBox = ({ chId }) => {
   const [info, setInfo] = useState();
   useEffect(() => {
     useFetch(`channels?part=snippet%2Cstatistics&id=${chId}`).then((data) => {
-      console.log(data);
+      // console.log(data);
       setInfo(data?.items[0]);
     });
   }, [chId]);
@@ -40,9 +40,9 @@ const SearchPage = () => {
   const [searchData, setSearchData] = useState(null);
   const keyword = text.get("search_query");
   useEffect(() => {
-    useFetch(`search?type=video&type=channel&maxResults=25&q=${keyword}`).then(
+    useFetch(`search?type=video&type=channel&maxResults=15&q=${keyword}`).then(
       (data) => {
-        console.log(data?.items);
+        // console.log(data?.items);
         setSearchData(data?.items);
       }
     );

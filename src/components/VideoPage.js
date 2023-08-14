@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { calcTime, calcViews } from "../utilities/useMath";
 import RecVideoSection from "./RecVideoSection";
 import CommentSection from "./CommentSection";
+import useTitle from "../utilities/useTitle";
 import {
   DislikeSVG,
   DownloadSVG,
@@ -13,17 +14,13 @@ import {
   ShareSVG,
 } from "../utilities/SVG";
 
-const ReadMore = ({ children }) => {
+const ReadMore = ({ children, isReadMore, setIsReadMore }) => {
   const text = children;
-  const [isReadMore, setIsReadMore] = useState(true);
-  const toggleReadMore = () => {
-    setIsReadMore(!isReadMore);
-  };
   return (
-    <p>
+    <p onClick={() => setIsReadMore(false)}>
       {isReadMore ? text?.slice(0, 200) : text}
-      <span onClick={toggleReadMore} className="readHideBtn">
-        {isReadMore ? "...more" : " Show less"}
+      <span onClick={() => setIsReadMore(false)} className="readHideBtn">
+        {isReadMore ? "...more" : ""}
       </span>
     </p>
   );
@@ -32,6 +29,8 @@ const ReadMore = ({ children }) => {
 const VideoPage = () => {
   const [videoData, setVideoData] = useState(null);
   const [channelData, setChannelData] = useState(null);
+  const [isReadMore, setIsReadMore] = useState(true);
+
   const apiKey = process.env.REACT_APP_API_KEY;
 
   const dispatch = useDispatch();
@@ -43,10 +42,13 @@ const VideoPage = () => {
     sidebar.classList.add("csSidebarClose");
 
     const mediaQuery = window.matchMedia("(max-width: 769px)");
+    const mediaQueryTwo = window.matchMedia("(min-width: 900px)");
     if (mediaQuery.matches) {
       document.getElementById("bottomMenu").style.display = "none";
       document.getElementsByClassName("header")[0].style.position = "relative";
     }
+    if (mediaQueryTwo.matches)
+      document.querySelector(".side-drawer").style.display = "block";
   }, []);
 
   const [videoURL] = useSearchParams();
@@ -69,6 +71,7 @@ const VideoPage = () => {
     const channelData = await dataChannel.json();
     setChannelData(channelData?.items[0]);
   };
+  useTitle(videoData?.snippet?.title);
 
   return (
     <>
@@ -137,8 +140,20 @@ const VideoPage = () => {
             </div>
             <div>
               <pre className="videoFullDesc">
-                <ReadMore>{videoData?.snippet?.description}</ReadMore>
+                <ReadMore
+                  isReadMore={isReadMore}
+                  setIsReadMore={setIsReadMore}
+                  children={videoData?.snippet?.description}
+                />
               </pre>
+              {!isReadMore && (
+                <div
+                  onClick={() => setIsReadMore(true)}
+                  className="readHideBtn"
+                  style={{ paddingTop: "10px" }}>
+                  Show Less
+                </div>
+              )}
             </div>
           </div>
           <CommentSection
@@ -146,7 +161,7 @@ const VideoPage = () => {
             comments={videoData?.statistics?.commentCount}
           />
         </div>
-        <RecVideoSection videoID={videoID} data={videoData} />
+        <RecVideoSection videoID={videoID} data={videoData?.snippet?.title} />
       </div>
     </>
   );

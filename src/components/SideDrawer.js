@@ -14,7 +14,8 @@ const SideDrawer = ({ theme }) => {
   const toggleNavHandler = () => {
     dispatch(toggleNavState());
   };
-  if (isNavOpen) {
+  const mediaQuery = window.matchMedia("(min-width: 900px)");
+  if (isNavOpen && mediaQuery.matches) {
     drawerClasses = "side-drawer open";
     if (isVideoPage == true) {
       backdrop = (

@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import useFetch from "../utilities/useFetch";
 import { Link } from "react-router-dom";
 import { SearchSVG } from "../utilities/SVG";
+import { useNavigate } from "react-router-dom";
 
 const resSearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [searchState, setSearchState] = useState(false);
+  const nav = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,7 +29,13 @@ const resSearchPage = () => {
 
   return (
     <>
-      <div className="mobileSearchInput">
+      <form
+        className="mobileSearchInput"
+        onSubmit={(e) => {
+          e.preventDefault();
+          nav("/results?search_query=" + searchQuery);
+          setSearchState(false);
+        }}>
         <Link to="/" className="textNone">
           <svg height="24" width="24" viewBox="0 0 24 24" className="backBtn">
             <path d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"></path>
@@ -43,7 +51,19 @@ const resSearchPage = () => {
           }}
           onFocus={() => setSearchState(true)}
         />
-      </div>
+        {searchQuery && (
+          <div
+            className="resClearBtn"
+            onClick={() => {
+              setSearchQuery("");
+              setSearchState(false);
+            }}>
+            <svg viewBox="0 0 24 24" className="resClearSvg">
+              <path d="m12.71 12 8.15 8.15-.71.71L12 12.71l-8.15 8.15-.71-.71L11.29 12 3.15 3.85l.71-.71L12 11.29l8.15-8.15.71.71L12.71 12z"></path>
+            </svg>
+          </div>
+        )}
+      </form>
       <div className="resSearchContainer">
         {searchState && (
           <div className="mobileSearchResultContainer">
