@@ -2,8 +2,8 @@ import { calcTime, calcViews, convertDuration } from "../utilities/useMath";
 import useFetch from "../utilities/useFetch";
 import { useState, useEffect } from "react";
 const VideoCards = ({ info }) => {
-  const [channelIcon, setChannelIcon] = useState("");
-  const [vdoViews, setVdoViews] = useState("");
+  const [channelIcon, setChannelIcon] = useState();
+  const [vdoViews, setVdoViews] = useState();
   useEffect(() => {
     useFetch(`channels?part=snippet&id=${info?.snippet?.channelId}`).then(
       (data) => {
@@ -22,10 +22,12 @@ const VideoCards = ({ info }) => {
     <>
       <div className="videoCard">
         <div className="videoBanner">
-          <img
-            src={info?.snippet?.thumbnails?.medium?.url}
-            className="videoBannerImg"
-          />
+          <div className="videoBannerImg">
+            <img
+              src={info?.snippet?.thumbnails?.medium?.url}
+              className="videoBannerImg"
+            />
+          </div>
           <span className="videoCardDuration">
             {info?.contentDetails?.duration &&
               convertDuration(info?.contentDetails?.duration)}
@@ -33,7 +35,7 @@ const VideoCards = ({ info }) => {
         </div>
         <div className="videoDesc">
           <div className="channelIcon">
-            <img src={channelIcon} />
+            <img src={channelIcon} className="channelIconImg" alt="" />
           </div>
           <div>
             <div className="videoTitle">{info?.snippet?.title}</div>

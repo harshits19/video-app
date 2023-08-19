@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { closeNav, openPageState } from "../utilities/navSlice";
 import { useSearchParams } from "react-router-dom";
 import { calcTime, calcViews } from "../utilities/useMath";
@@ -161,7 +161,7 @@ const VideoPage = () => {
             comments={videoData?.statistics?.commentCount}
           />
         </div>
-        <RecVideoSection videoID={videoID} data={videoData?.snippet?.title} />
+        <RecVideoSection videoID={videoID} title={videoData?.snippet?.title} />
       </div>
     </>
   );

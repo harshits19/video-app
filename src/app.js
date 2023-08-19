@@ -18,7 +18,7 @@ const AppLayout = () => {
     localStorage.getItem("themeMode") || "lightTheme"
   );
   useEffect(() => {
-    document.body.className = localStorage.getItem("themeMode");
+    document.body.className = localStorage.getItem("themeMode") || "lightTheme";
   }, [theme]);
   return (
     <>

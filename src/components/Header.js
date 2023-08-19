@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleNavState } from "../utilities/navSlice";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -8,10 +8,12 @@ import lightBtn from "../assets/light.svg";
 import darkBtn from "../assets/dark.svg";
 import { LogoLight, LogoDark } from "../utilities/SVG";
 import { useNavigate } from "react-router-dom";
+import { addQuery } from "../utilities/searchSlice";
 
 const Header = ({ theme, setTheme }) => {
   const nav = useNavigate();
   const dispatch = useDispatch(); //for sideNav state change
+  const suggestionsCache = useSelector((store) => store.suggestionsCache);
 
   const toggleNavHandler = () => {
     dispatch(toggleNavState());
@@ -32,7 +34,11 @@ const Header = ({ theme, setTheme }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchResults();
+      if (suggestionsCache[searchQuery]) {
+        setSuggestions(suggestionsCache[searchQuery]);
+      } else {
+        fetchResults();
+      }
     }, 300);
     return () => {
       clearTimeout(timer);
@@ -43,6 +49,7 @@ const Header = ({ theme, setTheme }) => {
       `search?client=chrome&ds=yt&q=${searchQuery}`,
       `https://corsproxy.io/?http://suggestqueries.google.com/complete`
     ).then((data) => {
+      dispatch(addQuery({ [searchQuery]: data[1] }));
       setSuggestions(data[1]);
     });
   };

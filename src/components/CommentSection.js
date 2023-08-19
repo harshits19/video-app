@@ -3,10 +3,34 @@ import CommentCard from "./CommentCard";
 import { formatNumber } from "../utilities/useMath";
 import useFetch from "../utilities/useFetch";
 
+const Spinner = () => {
+  return (
+    <div className="spinnerContainer">
+      <div className="ytp-spinner">
+        <div>
+          <div className="ytp-spinner-container">
+            <div className="ytp-spinner-rotator">
+              <div className="ytp-spinner-left">
+                <div className="ytp-spinner-circle"></div>
+              </div>
+              <div className="ytp-spinner-right">
+                <div className="ytp-spinner-circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const CommentSection = ({ videoID, comments }) => {
   const [commentData, setCommentData] = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
   const [commentState, setCommentState] = useState(true);
+  const [isCommentLoading, setIsCommentLoading] = useState(false);
+  const [commentType, setCommentType] = useState("relevance");
+  const [commentBox, setCommentBox] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -14,20 +38,23 @@ const CommentSection = ({ videoID, comments }) => {
   }, []);
 
   useEffect(() => {
+    // setIsCommentLoading(true);
     useFetch(
-      `commentThreads?part=snippet%2Creplies&maxResults=25&order=relevance&textFormat=plainText&videoId=${videoID}`
+      `commentThreads?part=snippet%2Creplies&maxResults=25&order=${commentType}&textFormat=plainText&videoId=${videoID}`
     ).then((data) => {
       setCommentData(data?.items);
       setNextPageToken(data?.nextPageToken);
+      // setIsCommentLoading(false);
     });
-  }, [videoID]);
+  }, [videoID, commentType]);
 
   const loadMoreComments = () => {
     useFetch(
-      `commentThreads?part=snippet%2Creplies&maxResults=25&order=relevance&textFormat=plainText&videoId=${videoID}&pageToken=${nextPageToken}`
+      `commentThreads?part=snippet%2Creplies&maxResults=25&order=${commentType}&textFormat=plainText&videoId=${videoID}&pageToken=${nextPageToken}`
     ).then((data) => {
       setCommentData((prev) => [...prev, ...data?.items]);
       setNextPageToken(data?.nextPageToken);
+      setIsCommentLoading(false);
     });
   };
   return (
@@ -50,24 +77,66 @@ const CommentSection = ({ videoID, comments }) => {
         <div className="videoCmntSection">
           <div className="commentDetails">
             {formatNumber(comments)}
-            <span className="sortBtn">
+            <span
+              className="sortBtn"
+              onClick={() => setCommentBox(!commentBox)}>
               <svg height="24" width="24" viewBox="0 2 22 22">
                 <path d="M21,6H3V5h18V6z M15,11H3v1h12V11z M9,17H3v1h6V17z"></path>
               </svg>
               {" Sort by"}
+              {commentBox && (
+                <div className="commentSortBox">
+                  <div
+                    className={
+                      commentType == "relevance"
+                        ? "activeCommentItem commentSortBoxItems"
+                        : "commentSortBoxItems"
+                    }
+                    onClick={() => {
+                      // commentType == "time" ? setCommentData() : null;
+                      setCommentType("relevance");
+                      setCommentBox(false);
+                    }}>
+                    Top comments
+                  </div>
+                  <div
+                    className={
+                      commentType == "time"
+                        ? "activeCommentItem commentSortBoxItems"
+                        : "commentSortBoxItems"
+                    }
+                    onClick={() => {
+                      // commentType == "relevance" ? setCommentData() : null;
+                      setCommentType("time");
+                      setCommentBox(false);
+                    }}>
+                    Newest first
+                  </div>
+                </div>
+              )}
             </span>
           </div>
           <div className="commentsContainer">
-            {commentData?.map((commentData) => {
-              return <CommentCard {...commentData} key={commentData?.id} />;
-            })}
-            {nextPageToken ? (
-              <div onClick={() => loadMoreComments()} className="loadMoreBtn">
+            {commentData ? (
+              commentData?.map((commentData) => {
+                return <CommentCard {...commentData} key={commentData?.id} />;
+              })
+            ) : (
+              <Spinner />
+            )}
+            {commentData && nextPageToken && !isCommentLoading ? (
+              <div
+                onClick={() => {
+                  setIsCommentLoading(true);
+                  loadMoreComments();
+                }}
+                className="loadMoreBtn">
                 Load more comments
               </div>
             ) : (
               <></>
             )}
+            {isCommentLoading && <Spinner />}
           </div>
         </div>
       )}

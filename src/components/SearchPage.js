@@ -22,7 +22,7 @@ const ChannelBox = ({ chId }) => {
         />
       </div>
       <div>
-        <div className="videoBoxTitle">{info?.snippet?.title}</div>
+        <div className="chBoxTitle">{info?.snippet?.title}</div>
         <div className="channelSubs">
           {info?.snippet?.customUrl +
             " • " +

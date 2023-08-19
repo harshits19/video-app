@@ -3,27 +3,24 @@ import HomePage from "./HomePage";
 import { useSelector, useDispatch } from "react-redux";
 import { openNav, closePageState } from "../utilities/navSlice";
 import useFetch from "../utilities/useFetch";
+import { YT_FILTER_DATA } from "../utilities/config";
 
 const FilterBtns = ({ data, setVideoData }) => {
   return (
     <>
-      <input
-        type="radio"
-        id={data?.snippet?.title}
-        name="select"
-        value={data?.id}
-      />
+      <input type="radio" id={data?.title} name="select" value={data?.id} />
       <label
-        htmlFor={data?.snippet?.title}
+        htmlFor={data?.title}
         className="btnLabel"
         onClick={() => {
+          setVideoData();
           useFetch(
-            `search?part=snippet&type=video&maxResults=15&q=${data?.snippet?.title}`
+            `search?part=snippet&type=video&maxResults=15&q=${data?.title}`
           ).then((data) => {
             setVideoData(data?.items);
           });
         }}>
-        {data?.snippet?.title}
+        {data?.title}
       </label>
     </>
   );
@@ -32,15 +29,17 @@ const FilterBtns = ({ data, setVideoData }) => {
 const Body = () => {
   const [filterBtnData, setFilterBtnData] = useState(null);
   const [videoData, setVideoData] = useState(null);
-
+  const isNavOpen = useSelector((store) => store.navState.isOpen);
+  const mediaQuery = window.matchMedia("(min-width: 1200px)");
+  const mediaQueryTwo = window.matchMedia("(min-width: 900px)");
+  const mediaQueryThree = window.matchMedia("(max-width: 899px)");
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(openNav());
-    dispatch(closePageState());
 
-    useFetch(`videoCategories?hl=en&regionCode=IN`).then((data) => {
-      setFilterBtnData(data?.items);
-    });
+  useEffect(() => {
+    dispatch(closePageState());
+    if (mediaQuery.matches) dispatch(openNav());
+
+    setFilterBtnData(YT_FILTER_DATA);
 
     useFetch(
       `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=15&regionCode=IN`
@@ -48,11 +47,6 @@ const Body = () => {
       setVideoData(data?.items);
     });
   }, []);
-
-  const isNavOpen = useSelector((store) => store.navState.isOpen);
-  const mediaQuery = window.matchMedia("(min-width: 1200px)");
-  const mediaQueryTwo = window.matchMedia("(min-width: 900px)");
-  const mediaQueryThree = window.matchMedia("(max-width: 899px)");
 
   useEffect(() => {
     if (mediaQueryThree.matches) {

@@ -217,6 +217,7 @@ body {
 .themeSwitchBtns {
   height: 20px;
   width: 20px;
+  cursor: pointer;
 }
 .rightSection {
   display: flex;
@@ -491,6 +492,7 @@ input[type="radio"]:checked + .btnLabel {
   width: 100%;
   height: 200px;
   border-radius: 10px;
+  background-color: var(--light-grey);
 }
 .videoBanner {
   position: relative;
@@ -534,10 +536,11 @@ input[type="radio"]:checked + .btnLabel {
 .channelIcon {
   margin-right: 10px;
 }
-.channelIcon img {
+.channelIconImg {
   height: 36px;
   width: 36px;
   border-radius: 20px;
+  background-color: var(--light-grey);
 }
 .videoViews {
   color: var(--middle-grey);
@@ -674,13 +677,37 @@ input[type="radio"]:checked + .btnLabel {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  position: relative;
+}
+.commentSortBox {
+  background-color: var(--theme-box-bg);
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: max-content;
+  height: min-content;
+  border-radius: 5px;
+  z-index: 10;
+}
+.commentSortBoxItems {
+  padding: 15px 20px;
+}
+.activeCommentItem {
+  background-color: var(--light-grey);
+}
+.commentSortBoxItems:hover {
+  background-color: var(--super-light-grey);
 }
 /* ----------Video Comments--------------- */
 .commentToggle {
   display: none;
   border-radius: 10px;
   width: 100%;
-  background: var(--menu-sec-hover);
+  background: var(--super-light-grey);
   margin: 10px 0 0;
   padding: 5px 10px;
   align-items: center;
@@ -693,7 +720,7 @@ input[type="radio"]:checked + .btnLabel {
   fill: var(--font-color);
 }
 .commentsContainer {
-  margin: 20px 0;
+  margin: 20px 0 30px;
   width: 100%;
   position: relative;
 }
@@ -818,6 +845,32 @@ input[type="radio"]:checked + .btnLabel {
 .sidebarInfo {
   display: flex;
 }
+/* ------Side Bar Cards Shimmer------------ */
+.reccShimmerCard {
+  height: fit-content;
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+  gap: 0 10px;
+  padding: 5px 0;
+}
+.reccShimmerCardImg {
+  width: 80%;
+  height: 95px;
+  border-radius: 5px;
+}
+.reccShimmerCardDesc {
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.reccShimmerLines {
+  height: 10px;
+  width: 100%;
+  border-radius: 2px;
+  margin-top: 0;
+}
 
 /* -----------Search Results Page----------- */
 .searchContainer {
@@ -834,6 +887,9 @@ input[type="radio"]:checked + .btnLabel {
   margin: 20px 0;
   padding: 20px 0;
   display: flex;
+}
+.chBoxTitle {
+  padding-bottom: 10px;
 }
 .channelImg {
   display: flex;
@@ -976,6 +1032,194 @@ input[type="radio"]:checked + .btnLabel {
   background: var(--scrollBar-bg-hover);
 }
 
+/* -----------Loading Spinner-------------- */
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+.ytp-spinner {
+  position: relative;
+  width: 32px;
+  /* margin-left: -32px; */
+  z-index: 18;
+  pointer-events: none;
+}
+.ytp-spinner-container {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  padding-bottom: 100%;
+  top: 50%;
+  left: 50%;
+  margin-top: -50%;
+  margin-left: -50%;
+  animation: ytp-spinner-linspin 1568.23529647ms linear infinite;
+  -webkit-animation: ytp-spinner-linspin 1568.23529647ms linear infinite;
+}
+.ytp-spinner-rotator {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-animation: ytp-spinner-easespin 5332ms cubic-bezier(0.4, 0, 0.2, 1)
+    infinite both;
+  animation: ytp-spinner-easespin 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite
+    both;
+}
+.ytp-spinner-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.ytp-spinner-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.ytp-spinner-left {
+  right: 49%;
+}
+.ytp-spinner-right {
+  left: 49%;
+}
+.ytp-spinner-circle {
+  box-sizing: border-box;
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  border-style: solid;
+  border-color: #ddd #ddd transparent;
+  border-radius: 50%;
+  border-width: 4px;
+}
+.ytp-spinner-left .ytp-spinner-circle {
+  left: 0;
+  right: -100%;
+  border-right-color: transparent;
+  -webkit-animation: ytp-spinner-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1)
+    infinite both;
+  animation: ytp-spinner-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite
+    both;
+}
+.ytp-spinner-right .ytp-spinner-circle {
+  left: -100%;
+  right: 0;
+  border-left-color: transparent;
+  -webkit-animation: ytp-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite
+    both;
+  animation: ytp-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+@-webkit-keyframes ytp-spinner-linspin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes ytp-spinner-linspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes ytp-spinner-easespin {
+  12.5% {
+    -webkit-transform: rotate(135deg);
+  }
+  25% {
+    -webkit-transform: rotate(270deg);
+  }
+  37.5% {
+    -webkit-transform: rotate(405deg);
+  }
+  50% {
+    -webkit-transform: rotate(540deg);
+  }
+  62.5% {
+    -webkit-transform: rotate(675deg);
+  }
+  75% {
+    -webkit-transform: rotate(810deg);
+  }
+  87.5% {
+    -webkit-transform: rotate(945deg);
+  }
+  to {
+    -webkit-transform: rotate(1080deg);
+  }
+}
+@keyframes ytp-spinner-easespin {
+  12.5% {
+    transform: rotate(135deg);
+  }
+  25% {
+    transform: rotate(270deg);
+  }
+  37.5% {
+    transform: rotate(405deg);
+  }
+  50% {
+    transform: rotate(540deg);
+  }
+  62.5% {
+    transform: rotate(675deg);
+  }
+  75% {
+    transform: rotate(810deg);
+  }
+  87.5% {
+    transform: rotate(945deg);
+  }
+  to {
+    transform: rotate(1080deg);
+  }
+}
+@-webkit-keyframes ytp-spinner-left-spin {
+  0% {
+    -webkit-transform: rotate(130deg);
+  }
+  50% {
+    -webkit-transform: rotate(-5deg);
+  }
+  to {
+    -webkit-transform: rotate(130deg);
+  }
+}
+@keyframes ytp-spinner-left-spin {
+  0% {
+    transform: rotate(130deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  to {
+    transform: rotate(130deg);
+  }
+}
+@-webkit-keyframes ytp-right-spin {
+  0% {
+    -webkit-transform: rotate(-130deg);
+  }
+  50% {
+    -webkit-transform: rotate(5deg);
+  }
+  to {
+    -webkit-transform: rotate(-130deg);
+  }
+}
+@keyframes ytp-right-spin {
+  0% {
+    transform: rotate(-130deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  to {
+    transform: rotate(-130deg);
+  }
+}
 /* -----------Responsive Bottom Menu------- */
 .bottomMenu {
   position: fixed;
@@ -1101,7 +1345,7 @@ input[type="radio"]:checked + .btnLabel {
     position: inherit;
   }
   .channelImg {
-    width: 100%;
+    width: 50%;
   }
   .videoCard {
     width: 100%;
@@ -1119,6 +1363,10 @@ input[type="radio"]:checked + .btnLabel {
   }
   .videoDesc {
     padding: 0 10px;
+  }
+  .videoDescTitle {
+    overflow: visible;
+    white-space: pre-wrap;
   }
   .videoFrame {
     height: 35vmax;
@@ -1350,6 +1598,13 @@ input[type="radio"]:checked + .btnLabel {
   }
   .commentToggle {
     display: flex;
+  }
+  .reccShimmerCardImg {
+    width: 70%;
+    height: 140px;
+  }
+  .reccShimmerLines {
+    height: 13px;
   }
 }
 @media only screen and (min-width: 900px) and (max-width: 1199.98px) {
