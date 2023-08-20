@@ -2,27 +2,7 @@ import { useState, useEffect } from "react";
 import CommentCard from "./CommentCard";
 import { formatNumber } from "../utilities/useMath";
 import useFetch from "../utilities/useFetch";
-
-const Spinner = () => {
-  return (
-    <div className="spinnerContainer">
-      <div className="ytp-spinner">
-        <div>
-          <div className="ytp-spinner-container">
-            <div className="ytp-spinner-rotator">
-              <div className="ytp-spinner-left">
-                <div className="ytp-spinner-circle"></div>
-              </div>
-              <div className="ytp-spinner-right">
-                <div className="ytp-spinner-circle"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+import Spinner from "../utilities/Spinner";
 
 const CommentSection = ({ videoID, comments }) => {
   const [commentData, setCommentData] = useState([]);
@@ -125,13 +105,15 @@ const CommentSection = ({ videoID, comments }) => {
               <Spinner />
             )}
             {commentData && nextPageToken && !isCommentLoading ? (
-              <div
-                onClick={() => {
-                  setIsCommentLoading(true);
-                  loadMoreComments();
-                }}
-                className="loadMoreBtn">
-                Load more comments
+              <div className="loadBtnContainer">
+                <div
+                  onClick={() => {
+                    setIsCommentLoading(true);
+                    loadMoreComments();
+                  }}
+                  className="loadMoreBtn">
+                  Load more comments
+                </div>
               </div>
             ) : (
               <></>

@@ -474,7 +474,7 @@ input[type="radio"]:checked + .btnLabel {
 .videoCardContainer {
   width: 100%;
   margin: 0 auto;
-  display: flex;
+  display: block;
   padding-top: 20px;
 }
 .videoCardInnerContainer {
@@ -681,6 +681,7 @@ input[type="radio"]:checked + .btnLabel {
 }
 .commentSortBox {
   background-color: var(--theme-box-bg);
+  box-shadow: 0px 4px 32px 0px var(--theme-box-border);
   padding: 8px 0;
   font-size: 14px;
   font-weight: 600;
@@ -720,7 +721,7 @@ input[type="radio"]:checked + .btnLabel {
   fill: var(--font-color);
 }
 .commentsContainer {
-  margin: 20px 0 30px;
+  margin: 20px 0;
   width: 100%;
   position: relative;
 }
@@ -791,6 +792,12 @@ input[type="radio"]:checked + .btnLabel {
   background-color: var(--very-light-grey);
   border-color: transparent;
 }
+.loadBtnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
 .loadMoreBtn {
   cursor: pointer;
   font-size: 12px;
@@ -799,10 +806,6 @@ input[type="radio"]:checked + .btnLabel {
   width: fit-content;
   padding: 10px 20px;
   background-color: var(--load-btn-bg);
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 100%);
 }
 /* -----------Sidebar Cards----------------- */
 .recommendedSection {
@@ -878,6 +881,7 @@ input[type="radio"]:checked + .btnLabel {
   padding: 10px;
   margin: 0 auto;
   min-height: 100vh;
+  position: relative;
 }
 .channelBox {
   width: 100%;
@@ -913,8 +917,9 @@ input[type="radio"]:checked + .btnLabel {
 }
 .videoThumb {
   border-radius: 10px;
-  height: 100%;
+  height: 182px;
   width: 45vmin;
+  background-color: var(--light-grey);
 }
 .videoBoxTitle {
   font-size: 19px;
@@ -1356,7 +1361,7 @@ input[type="radio"]:checked + .btnLabel {
     border-radius: 0;
   }
   .videoCardContainer {
-    padding: 20px 0px;
+    padding: 20px 0px 60px;
   }
   .videoCardInnerContainer {
     gap: 20px;
@@ -1523,7 +1528,7 @@ input[type="radio"]:checked + .btnLabel {
     justify-content: flex-end;
   }
   .videoCardContainer {
-    padding: 20px 10px;
+    padding: 20px 10px 60px;
   }
   .videoFrame {
     height: 40vmax;
@@ -1589,12 +1594,16 @@ input[type="radio"]:checked + .btnLabel {
     width: 35vmax;
     height: 100%;
   }
-  .sidebarDesc,
+  .sidebarDesc {
+    width: 100%;
+  }
   .searchContainer {
     width: 100%;
+    padding-bottom: 60px;
   }
   .videoThumb {
     width: 40vmax;
+    height: 180px;
   }
   .commentToggle {
     display: flex;

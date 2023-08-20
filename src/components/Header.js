@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { toggleNavState } from "../utilities/navSlice";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import useFetch from "../utilities/useFetch";
 import { SearchSVG } from "../utilities/SVG";
 import lightBtn from "../assets/light.svg";
@@ -44,7 +44,7 @@ const Header = ({ theme, setTheme }) => {
       clearTimeout(timer);
     };
   }, [searchQuery]);
-  const fetchResults = () => {
+  const fetchResults = useCallback(() => {
     useFetch(
       `search?client=chrome&ds=yt&q=${searchQuery}`,
       `https://corsproxy.io/?http://suggestqueries.google.com/complete`
@@ -52,7 +52,7 @@ const Header = ({ theme, setTheme }) => {
       dispatch(addQuery({ [searchQuery]: data[1] }));
       setSuggestions(data[1]);
     });
-  };
+  }, [searchQuery]);
   return (
     <>
       <div className="header">

@@ -15,10 +15,12 @@ const SearchPageCards = ({ vdoId }) => {
   return (
     <div className="videoBox">
       <div style={{ position: "relative" }}>
-        <img
-          src={info?.snippet?.thumbnails?.medium?.url}
-          className="videoThumb"
-        />
+        <div className="videoThumb">
+          <img
+            src={info?.snippet?.thumbnails?.medium?.url}
+            className="videoThumb"
+          />
+        </div>
         <span className="videoCardDuration">
           {info?.contentDetails?.duration &&
             convertDuration(info?.contentDetails?.duration)}

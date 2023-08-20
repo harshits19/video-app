@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import SearchPageCards from "./SearchPageCards";
 import { calcViews } from "../utilities/useMath";
+import Spinner from "../utilities/Spinner";
 
 const ChannelBox = ({ chId }) => {
   const [info, setInfo] = useState();
@@ -38,15 +39,27 @@ const ChannelBox = ({ chId }) => {
 const SearchPage = () => {
   const [text] = useSearchParams();
   const [searchData, setSearchData] = useState(null);
+  const [pageToken, setPageToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const keyword = text.get("search_query");
   useEffect(() => {
     useFetch(`search?type=video&type=channel&maxResults=15&q=${keyword}`).then(
       (data) => {
         // console.log(data?.items);
         setSearchData(data?.items);
+        setPageToken(data?.nextPageToken);
       }
     );
   }, [text]);
+  const fetchNextResults = () => {
+    useFetch(
+      `search?type=video&type=channel&maxResults=15&q=${keyword}&pageToken=${pageToken}`
+    ).then((data) => {
+      setSearchData((prev) => [...prev, ...data?.items]);
+      setPageToken(data?.nextPageToken);
+      setIsLoading(false);
+    });
+  };
   const isNavOpen = useSelector((store) => store.navState.isOpen);
   const mediaQuery = window.matchMedia("(min-width: 1200px)");
   const mediaQueryTwo = window.matchMedia("(min-width: 769px)");
@@ -77,9 +90,21 @@ const SearchPage = () => {
             </Link>
           );
         })}
+        {!isLoading && pageToken && (
+          <div className="loadBtnContainer">
+            <div
+              onClick={() => {
+                setIsLoading(true);
+                fetchNextResults();
+              }}
+              className="loadMoreBtn">
+              Load more search results
+            </div>
+          </div>
+        )}
+        {isLoading && <Spinner />}
       </div>
     </div>
   );
 };
 export default SearchPage;
-/*   */
