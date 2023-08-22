@@ -12,6 +12,11 @@ import VideoPage from "./components/VideoPage";
 import SearchPage from "./components/SearchPage";
 import GoToTop from "./utilities/gotoTop";
 import ResSearchPage from "./components/ResSearchPage";
+import ChannelPage from "./components/ChannelPage";
+import ChannelPlaylist from "./components/ChannelPlaylist";
+import ChannelAbout from "./components/ChannelAbout";
+import ChannelHomePage from "./components/ChannelHomePage";
+import VideoPlaylist from "./components/VideoPlaylist";
 
 const AppLayout = () => {
   const [theme, setTheme] = useState(
@@ -53,6 +58,25 @@ const appRouter = createBrowserRouter([
       {
         path: "/resSearch",
         element: <ResSearchPage />,
+      },
+      {
+        path: "/channel/:channelId",
+        element: <ChannelPage />,
+        children: [
+          {
+            path: "/channel/:channelId/",
+            element: <ChannelHomePage />,
+          },
+          {
+            path: "/channel/:channelId/playlists",
+            element: <ChannelPlaylist />,
+          },
+          {
+            path: "/channel/:channelId/playlists/:playlistId",
+            element: <VideoPlaylist />,
+          },
+          { path: "/channel/:channelId/about", element: <ChannelAbout /> },
+        ],
       },
     ],
   },

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { closeNav, openPageState } from "../utilities/navSlice";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { calcTime, calcViews } from "../utilities/useMath";
 import RecVideoSection from "./RecVideoSection";
 import CommentSection from "./CommentSection";
@@ -88,20 +88,24 @@ const VideoPage = () => {
           <div className="videoDescTitle">{videoData?.snippet?.title}</div>
           <div className="videoDescSection">
             <div className="videoInnerDesc">
-              <div style={{ display: "flex" }}>
-                <div className="channelDefIcon">
-                  <img src={channelData?.snippet?.thumbnails?.default?.url} />
-                </div>
-                <div>
-                  <div className="videoChannelTitle">
-                    {videoData?.snippet?.channelTitle}
+              <Link
+                className="textNone"
+                to={"/channel/" + videoData?.snippet?.channelId}>
+                <div style={{ display: "flex" }}>
+                  <div className="channelDefIcon">
+                    <img src={channelData?.snippet?.thumbnails?.default?.url} />
                   </div>
-                  <div className="videoChannelSubs">
-                    {calcViews(channelData?.statistics?.subscriberCount)}
-                    {" subscribers"}
+                  <div>
+                    <div className="videoChannelTitle">
+                      {videoData?.snippet?.channelTitle}
+                    </div>
+                    <div className="videoChannelSubs">
+                      {calcViews(channelData?.statistics?.subscriberCount)}
+                      {" subscribers"}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
               <div className="btn subs">Subscribe</div>
             </div>
             <div className="videoDescBtns">
@@ -157,6 +161,7 @@ const VideoPage = () => {
             </div>
           </div>
           <CommentSection
+            videoTitle={videoData?.snippet?.channelTitle}
             videoID={videoID}
             comments={videoData?.statistics?.commentCount}
           />

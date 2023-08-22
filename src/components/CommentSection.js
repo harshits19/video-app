@@ -4,14 +4,13 @@ import { formatNumber } from "../utilities/useMath";
 import useFetch from "../utilities/useFetch";
 import Spinner from "../utilities/Spinner";
 
-const CommentSection = ({ videoID, comments }) => {
+const CommentSection = ({ videoTitle, videoID, comments }) => {
   const [commentData, setCommentData] = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
   const [commentState, setCommentState] = useState(true);
   const [isCommentLoading, setIsCommentLoading] = useState(false);
   const [commentType, setCommentType] = useState("relevance");
   const [commentBox, setCommentBox] = useState(false);
-
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     if (mediaQuery.matches) setCommentState(false);
@@ -99,7 +98,13 @@ const CommentSection = ({ videoID, comments }) => {
           <div className="commentsContainer">
             {commentData ? (
               commentData?.map((commentData) => {
-                return <CommentCard {...commentData} key={commentData?.id} />;
+                return (
+                  <CommentCard
+                    videoTitle={videoTitle}
+                    data={commentData}
+                    key={commentData?.id}
+                  />
+                );
               })
             ) : (
               <Spinner />

@@ -1,8 +1,6 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { closeNav } from "../utilities/navSlice";
-import { toggleNavState } from "../utilities/navSlice";
+import { closeNav, toggleNavState } from "../utilities/navSlice";
 import { LogoLight, LogoDark } from "../utilities/SVG";
 
 const SideDrawer = ({ theme }) => {
@@ -49,16 +47,16 @@ const SideDrawer = ({ theme }) => {
             </div>
           </div>
           <div className="categorySection">
-            <div className="navItems">
-              <span className="navItemIcon">
-                <svg height="24" width="24" viewBox="0 0 24 24">
-                  <path d="M12,4.33l7,6.12V20H15V14H9v6H5V10.45l7-6.12M12,3,4,10V21h6V15h4v6h6V10L12,3Z"></path>
-                </svg>
-              </span>
-              <Link to="/" className="textNone">
+            <Link to="/" className="textNone">
+              <div className="navItems">
+                <span className="navItemIcon">
+                  <svg height="24" width="24" viewBox="0 0 24 24">
+                    <path d="M12,4.33l7,6.12V20H15V14H9v6H5V10.45l7-6.12M12,3,4,10V21h6V15h4v6h6V10L12,3Z"></path>
+                  </svg>
+                </span>
                 <span className="navItemName">Home</span>
-              </Link>
-            </div>
+              </div>
+            </Link>
             <div className="navItems">
               <span className="navItemIcon">
                 <svg height="24" width="24" viewBox="0 0 24 24">

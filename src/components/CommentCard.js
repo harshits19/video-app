@@ -1,9 +1,8 @@
 import { calcViews, calcTime } from "../utilities/useMath";
 import { LikeSVG, DislikeSVG } from "../utilities/SVG";
 import { useState } from "react";
-const CommentCard = (data) => {
+const CommentCard = ({ videoTitle, data }) => {
   const [isHiddenReply, setIsHiddenReply] = useState(false);
-
   return (
     <>
       <div className="commentBox">
@@ -17,7 +16,14 @@ const CommentCard = (data) => {
         </div>
         <div>
           <div style={{ display: "flex" }}>
-            <span className="commentTitle">
+            <span
+              className={
+                videoTitle ==
+                (data?.snippet?.topLevelComment?.snippet?.authorDisplayName ||
+                  data?.snippet?.authorDisplayName)
+                  ? "commentAuthor commentTitle"
+                  : "commentTitle"
+              }>
               {"@"}
               {data?.snippet?.topLevelComment?.snippet?.authorDisplayName ||
                 data?.snippet?.authorDisplayName}
@@ -30,8 +36,10 @@ const CommentCard = (data) => {
             </span>
           </div>
           <div>
-            {data?.snippet?.topLevelComment?.snippet?.textDisplay ||
-              data?.snippet?.textDisplay}
+            <pre className="videoFullDesc">
+              {data?.snippet?.topLevelComment?.snippet?.textDisplay ||
+                data?.snippet?.textDisplay}
+            </pre>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div className="commentLikes">
@@ -63,7 +71,13 @@ const CommentCard = (data) => {
           {data?.replies &&
             isHiddenReply &&
             data?.replies?.comments.map((commentdata) => {
-              return <CommentCard {...commentdata} key={commentdata?.id} />;
+              return (
+                <CommentCard
+                  videoTitle={videoTitle}
+                  data={commentdata}
+                  key={commentdata?.id}
+                />
+              );
             })}
         </div>
       </div>

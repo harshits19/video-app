@@ -1,14 +1,12 @@
+import { useEffect, useState, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleNavState } from "../utilities/navSlice";
-import { Link } from "react-router-dom";
-import { useEffect, useState, useCallback } from "react";
+import { addQuery } from "../utilities/searchSlice";
 import useFetch from "../utilities/useFetch";
-import { SearchSVG } from "../utilities/SVG";
+import { SearchSVG, LogoLight, LogoDark } from "../utilities/SVG";
 import lightBtn from "../assets/light.svg";
 import darkBtn from "../assets/dark.svg";
-import { LogoLight, LogoDark } from "../utilities/SVG";
-import { useNavigate } from "react-router-dom";
-import { addQuery } from "../utilities/searchSlice";
 
 const Header = ({ theme, setTheme }) => {
   const nav = useNavigate();

@@ -30,7 +30,9 @@ const ChannelBox = ({ chId }) => {
             calcViews(info?.statistics?.subscriberCount) +
             " subscribers"}
         </div>
-        <div className="videoBoxDesc">{info?.snippet?.description}</div>
+        <div className="videoBoxDesc">
+          {(info?.snippet?.description).slice(0, 100) + "..."}
+        </div>
       </div>
     </div>
   );
@@ -43,7 +45,7 @@ const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const keyword = text.get("search_query");
   useEffect(() => {
-    useFetch(`search?type=video&type=channel&maxResults=15&q=${keyword}`).then(
+    useFetch(`search?type=channel&type=video&maxResults=15&q=${keyword}`).then(
       (data) => {
         // console.log(data?.items);
         setSearchData(data?.items);
@@ -62,23 +64,24 @@ const SearchPage = () => {
   };
   const isNavOpen = useSelector((store) => store.navState.isOpen);
   const mediaQuery = window.matchMedia("(min-width: 1200px)");
-  const mediaQueryTwo = window.matchMedia("(min-width: 769px)");
+  const mediaQueryTwo = window.matchMedia("(min-width: 900px)");
   useEffect(() => {
-    if (mediaQueryTwo.matches) {
-      const abc = document.getElementById("searchBody");
-      abc.style.marginLeft = "80px";
-    }
-    if (mediaQuery.matches) {
-      const abc = document.getElementById("searchBody");
-      abc.style.marginLeft = isNavOpen ? "240px" : "80px";
-    }
+    if (mediaQueryTwo.matches)
+      document.getElementById("searchBody").style.marginLeft = "80px";
+    if (mediaQuery.matches)
+      document.getElementById("searchBody").style.marginLeft = isNavOpen
+        ? "240px"
+        : "80px";
   });
   return (
     <div id="searchBody">
       <div className="searchContainer">
         {searchData?.map((data) => {
           return data?.id?.kind == "youtube#channel" ? (
-            <Link className="textNone" key={data?.id?.channelId}>
+            <Link
+              className="textNone"
+              key={data?.id?.channelId}
+              to={"/channel/" + data?.id?.channelId}>
               <ChannelBox chId={data?.id?.channelId} />
             </Link>
           ) : (

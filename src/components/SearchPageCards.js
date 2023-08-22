@@ -36,7 +36,7 @@ const SearchPageCards = ({ vdoId }) => {
         <div className="videoBoxTime boldText">
           {info?.snippet?.channelTitle}
         </div>
-        <div className="videoBoxDesc">{info?.snippet?.description}</div>
+        <div className="videoBoxDesc">{info?.snippet?.description + "..."}</div>
       </div>
     </div>
   );

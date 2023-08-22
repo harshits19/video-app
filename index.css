@@ -34,6 +34,7 @@
   --shimmer-bg-fade: #edeef1;
   --theme-box-bg: #ffffff;
   --theme-box-border: #0000001a;
+  --comment-author-color: rgba(0, 0, 0, 0.45);
 }
 .darkTheme {
   --background-color: #0f0f0f;
@@ -62,6 +63,7 @@
   --shimmer-bg-fade: #3f3f3f;
   --theme-box-bg: #3b3b3b;
   --theme-box-border: transparent;
+  --comment-author-color: #888888;
 }
 body {
   font-size: 14px;
@@ -597,6 +599,7 @@ input[type="radio"]:checked + .btnLabel {
   border: none;
   cursor: pointer;
   fill: var(--font-color);
+  text-align: center;
 }
 .subs {
   color: var(--background-color);
@@ -745,6 +748,12 @@ input[type="radio"]:checked + .btnLabel {
   white-space: nowrap;
   font-weight: 500;
   line-height: 16px;
+}
+.commentAuthor {
+  background-color: var(--comment-author-color);
+  border-radius: 10px;
+  padding: 2px 6px 1px;
+  color: #ffffff;
 }
 .commentTime {
   font-size: 12px;
@@ -1306,6 +1315,192 @@ input[type="radio"]:checked + .btnLabel {
   height: 20px;
   width: 20px;
 }
+/* -----------Channel Page ----------------- */
+.chPageContainer {
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  padding: 20px 0;
+}
+.channelDescSection {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+}
+.channelThumbIcon {
+  height: 136px;
+  width: 136px;
+  border-radius: 70px;
+  background-color: var(--light-grey);
+}
+.channelInfoContainer {
+  padding: 15px 20px;
+  flex: 1;
+}
+.channelDescTitle {
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+.channelDescInfo {
+  display: flex;
+  column-gap: 10px;
+  color: var(--light-font-color);
+  margin-bottom: 8px;
+}
+.channelDescInfo > span:nth-child(1) {
+  font-weight: 500;
+}
+.channelDescription {
+  color: var(--light-font-color);
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+.navToAbout {
+  height: 24px;
+  width: 24px;
+  fill: var(--font-color);
+  border-radius: 20px;
+}
+.navToAbout:hover {
+  background-color: var(--super-light-grey);
+}
+.channelSubsSection {
+  padding: 20px 0;
+}
+.channelSections {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: flex;
+  margin: 20px 0;
+  border-bottom: 1px solid var(--very-light-grey);
+}
+.channelSectionItems {
+  padding: 16px 30px;
+  cursor: pointer;
+}
+.channelSectionItems {
+  color: var(--light-font-color);
+  text-decoration: none;
+}
+.channelSectionItems.active {
+  color: var(--font-color);
+  border-bottom: 2px solid #aaaaaa;
+}
+.channelSectionItems:hover {
+  color: var(--font-color);
+}
+.chHomeContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 15px;
+}
+.chVideoCard {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  row-gap: 10px;
+}
+.chVideoCardThumb {
+  background-color: var(--light-grey);
+  border-radius: 10px;
+  height: 140px;
+  width: 100%;
+  position: relative;
+}
+.chVideoCardSVG {
+  fill: #f1f1f1;
+  height: 12px;
+  width: 16px;
+}
+.chVideoCardVideoCount {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #f1f1f1;
+  font-size: 12px;
+  padding: 4px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.chVideoCardDesc {
+  display: block;
+}
+.chVideoCardTitle {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  word-break: break-word;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
+  color: var(--font-color);
+}
+.chVideoCardInfo {
+  color: var(--light-font-color);
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.chVideoCardPlaylistBtn {
+  color: var(--light-font-color);
+  font-size: 12px;
+  font-weight: 500;
+}
+.chAboutContainer {
+  display: flex;
+  column-gap: 30px;
+  width: 100%;
+}
+.chDescSection {
+  width: 60%;
+  padding: 15px 20px;
+}
+.chDescTitle,
+.chViewsTitle {
+  font-size: 16px;
+  font-weight: 500;
+}
+.chDescInfo {
+  margin-top: 25px;
+  font-family: var(--primary-font);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.chViewsSection {
+  width: 30%;
+}
+.chViewsSection > div {
+  padding: 15px 20px 15px 0;
+  border-bottom: 1px solid var(--light-grey);
+}
+/* -----------Channel Page Shimmer---------- */
+.chShimmerCard {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+}
+.chShimmerCardImg {
+  height: 140px;
+  border-radius: 10px;
+}
+.chShimmerCardDesc {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  justify-content: space-evenly;
+}
+.chShimmerLines {
+  height: 7px;
+  border-radius: 2px;
+}
+
 /* -----------Responsive Section------------ */
 @media (max-width: 479.98px) {
   .header {
@@ -1333,10 +1528,12 @@ input[type="radio"]:checked + .btnLabel {
   .searchSection,
   .side-drawer,
   .footer,
-  .videoDescBtns::-webkit-scrollbar {
+  .videoDescBtns::-webkit-scrollbar,
+  .videoBoxDesc {
     display: none;
   }
-  .bottomMenu {
+  .bottomMenu,
+  .commentToggle {
     display: flex;
   }
   .navItemName {
@@ -1382,11 +1579,10 @@ input[type="radio"]:checked + .btnLabel {
     flex-direction: column;
     padding: 0 5px;
   }
-  .videoInnerContainer {
+  .videoInnerContainer,
+  .chPageContainer,
+  .sidebarDesc {
     width: 100%;
-  }
-  .videoDescSection {
-    flex-direction: column;
   }
   .videoInnerDesc {
     column-gap: 10px;
@@ -1415,9 +1611,7 @@ input[type="radio"]:checked + .btnLabel {
     width: 100%;
     height: 25vmax;
   }
-  .sidebarDesc {
-    width: 100%;
-  }
+
   .videoCardDuration {
     bottom: 8px;
   }
@@ -1425,7 +1619,9 @@ input[type="radio"]:checked + .btnLabel {
     width: 100%;
     padding: 10px 0;
   }
-  .videoBox {
+  .videoBox,
+  .videoDescSection,
+  .chAboutContainer {
     flex-direction: column;
   }
   .videoBoxTitle,
@@ -1436,9 +1632,6 @@ input[type="radio"]:checked + .btnLabel {
     width: 100%;
     height: 200px;
     border-radius: 0;
-  }
-  .videoBoxDesc {
-    display: none;
   }
   .shimmerCard {
     height: fit-content;
@@ -1463,8 +1656,73 @@ input[type="radio"]:checked + .btnLabel {
     border-radius: 0;
     margin-top: 5px;
   }
-  .commentToggle {
+  .channelDescSection {
+    flex-direction: column;
+    align-items: center;
+  }
+  .channelThumbIcon {
+    height: 100px;
+    width: 100px;
+  }
+  .channelInfoContainer {
+    flex: unset;
+    padding: 15px 0px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .channelDescInfo {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .channelSubsSection {
+    padding: 5px;
+    width: 100%;
+  }
+  .channelSectionItems {
+    padding: 14px 20px;
+  }
+  .channelContentSection {
+    padding-bottom: 50px;
+  }
+  .chHomeContainer {
+    justify-content: center;
+    gap: 20px 0;
+  }
+  .chVideoCard {
+    width: 100%;
+    flex-direction: row;
+  }
+  .chVideoCardThumb {
+    height: 140px;
+    width: 48vmin;
+  }
+  .chVideoCardDesc {
+    padding: 0 10px;
+    width: 48vmin;
+  }
+  .chDescSection,
+  .chViewsSection {
+    width: 100%;
+    padding: 10px;
+  }
+  .chShimmerCard {
+    flex-direction: row;
+    width: 100%;
+    padding: 0 10px;
+  }
+  .chShimmerCardImg {
+    width: 48vmin;
+  }
+  .chShimmerCardDesc {
+    width: 48vmin;
+    height: 100%;
+    padding: 0px 5px;
+  }
+  .chShimmerLines {
+    height: 20px;
+    border-radius: 4px;
   }
 }
 @media (min-width: 480px) and (max-width: 899.98px) {
@@ -1539,7 +1797,8 @@ input[type="radio"]:checked + .btnLabel {
     flex-direction: column;
     padding: 0 5px;
   }
-  .videoInnerContainer {
+  .videoInnerContainer,
+  .chPageContainer {
     width: 100%;
   }
   .videoDescSection {
@@ -1615,6 +1874,22 @@ input[type="radio"]:checked + .btnLabel {
   .reccShimmerLines {
     height: 13px;
   }
+  .channelContentSection {
+    padding-bottom: 60px;
+  }
+  .chHomeContainer {
+    justify-content: center;
+  }
+  .channelThumbIcon {
+    height: 110px;
+    width: 110px;
+  }
+  .channelInfoContainer {
+    padding: 0px 10px;
+  }
+  .channelDescInfo {
+    flex-wrap: wrap;
+  }
 }
 @media only screen and (min-width: 900px) and (max-width: 1199.98px) {
   #mainBody {
@@ -1637,7 +1912,8 @@ input[type="radio"]:checked + .btnLabel {
   .themeSwitch {
     display: none;
   }
-  .videoCardInnerContainer {
+  .videoCardInnerContainer,
+  .chHomeContainer {
     justify-content: center;
   }
   .videoPageContainer {
@@ -1652,7 +1928,8 @@ input[type="radio"]:checked + .btnLabel {
   }
   .sidebarDesc,
   .videoFrame,
-  .searchContainer {
+  .searchContainer,
+  .chPageContainer {
     width: 100%;
   }
   .sidebarImg {

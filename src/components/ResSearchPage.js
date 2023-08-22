@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import useFetch from "../utilities/useFetch";
-import { Link } from "react-router-dom";
 import { SearchSVG } from "../utilities/SVG";
-import { useNavigate } from "react-router-dom";
 
 const resSearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
