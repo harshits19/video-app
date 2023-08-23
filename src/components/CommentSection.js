@@ -107,7 +107,7 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
                 );
               })
             ) : (
-              <Spinner />
+              <></>
             )}
             {commentData && nextPageToken && !isCommentLoading ? (
               <div className="loadBtnContainer">

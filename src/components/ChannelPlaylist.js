@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { ChannelContext } from "../utilities/contexts";
 import { calcTime } from "../utilities/useMath";
 import useFetch from "../utilities/useFetch";
 import ChannelPageShimmer from "./ChannelPageShimmer";
-import { Link } from "react-router-dom";
+import Spinner from "../utilities/Spinner";
 
 const ChVideoCard = ({ data }) => {
   // console.log(data);
@@ -12,7 +13,7 @@ const ChVideoCard = ({ data }) => {
       <div className="chVideoCardThumb">
         <img
           src={data?.snippet?.thumbnails?.medium?.url}
-          className="chVideoCardThumb"
+          className="chVideoCardThumbImg"
         />
         <div className="chVideoCardVideoCount">
           <span>
@@ -40,33 +41,61 @@ const ChannelPlaylist = () => {
   const dataSet = useContext(ChannelContext);
   const channelId = dataSet?.channelId;
   const [playlistData, setPlaylistData] = useState();
+  const [nextPageToken, setNextPageToken] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     useFetch(
       `playlists?part=snippet%2CcontentDetails&maxResults=15&channelId=${channelId}`
     ).then((data) => {
       setPlaylistData(data?.items);
-      console.log(data);
+      setNextPageToken(data?.nextPageToken);
+      // console.log(data);
     });
   }, [channelId]);
+
+  const fetchMorePlaylists = () => {
+    useFetch(
+      `playlists?part=snippet%2CcontentDetails&maxResults=15&channelId=${channelId}&pageToken=${nextPageToken}`
+    ).then((data) => {
+      setNextPageToken(data?.nextPageToken);
+      setPlaylistData((prev) => [...prev, ...data?.items]);
+      setIsLoading(false);
+    });
+  };
   return (
-    <div className="chHomeContainer">
-      {playlistData ? (
-        playlistData?.length > 0 ? (
-          playlistData?.map((item) => {
-            return (
-              <Link key={item?.id} className="textNone" to={item?.id}>
-                <ChVideoCard data={item} />
-              </Link>
-            );
-          })
+    <>
+      <div className="chHomeContainer">
+        {playlistData ? (
+          playlistData?.length > 0 ? (
+            playlistData?.map((item) => {
+              return (
+                <Link key={item?.id} className="textNone" to={item?.id}>
+                  <ChVideoCard data={item} />
+                </Link>
+              );
+            })
+          ) : (
+            <div>This channel has no playlists.</div>
+          )
         ) : (
-          <div>This channel has no playlists.</div>
-        )
-      ) : (
-        <ChannelPageShimmer />
+          <ChannelPageShimmer />
+        )}
+      </div>
+      {!isLoading && nextPageToken && (
+        <div className="loadBtnContainer">
+          <div
+            onClick={() => {
+              setIsLoading(true);
+              fetchMorePlaylists();
+            }}
+            className="loadMoreBtn">
+            Load more playlists
+          </div>
+        </div>
       )}
-    </div>
+      {isLoading && <Spinner />}
+    </>
   );
 };
 export default ChannelPlaylist;

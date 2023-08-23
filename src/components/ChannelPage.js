@@ -1,8 +1,8 @@
 import { useParams, NavLink, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useFetch from "../utilities/useFetch";
-import { useSelector, useDispatch } from "react-redux";
-import { closePageState } from "../utilities/navSlice";
+import { useDispatch } from "react-redux";
+import { openPageState, closeNav } from "../utilities/navSlice";
 import { calcViews } from "../utilities/useMath";
 import { ChannelContext } from "../utilities/contexts";
 import useTitle from "../utilities/useTitle";
@@ -11,12 +11,11 @@ const ChannelPage = () => {
   const { channelId } = useParams();
   const [channelData, setChannelData] = useState([]);
   const [dataSet, setDataSet] = useState();
-  const mediaQuery = window.matchMedia("(min-width: 1200px)");
-  const mediaQueryTwo = window.matchMedia("(min-width: 900px)");
-  const isNavOpen = useSelector((store) => store.navState.isOpen);
+  const mediaQuery = window.matchMedia("(min-width: 900px)");
+  const mediaQueryTwo = window.matchMedia("(min-width: 1200px)");
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(closePageState());
+    dispatch(closeNav());
     useFetch(
       `channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}`
     ).then((data) => {
@@ -32,12 +31,9 @@ const ChannelPage = () => {
     });
   }, []);
   useEffect(() => {
-    if (mediaQueryTwo.matches)
-      document.getElementById("channelBody").style.marginLeft = "80px";
     if (mediaQuery.matches)
-      document.getElementById("channelBody").style.marginLeft = isNavOpen
-        ? "240px"
-        : "80px";
+      document.getElementById("channelBody").style.marginLeft = "80px";
+    if (mediaQueryTwo.matches) dispatch(openPageState());
   });
   useTitle(channelData?.snippet?.title);
   return (

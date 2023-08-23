@@ -35,6 +35,7 @@
   --theme-box-bg: #ffffff;
   --theme-box-border: #0000001a;
   --comment-author-color: rgba(0, 0, 0, 0.45);
+  --bottom-menu-border: rgba(0, 0, 0, 0.2);
 }
 .darkTheme {
   --background-color: #0f0f0f;
@@ -64,6 +65,7 @@
   --theme-box-bg: #3b3b3b;
   --theme-box-border: transparent;
   --comment-author-color: #888888;
+  --bottom-menu-border: rgb(252 252 252 / 48%);
 }
 body {
   font-size: 14px;
@@ -74,6 +76,9 @@ body {
   margin: auto;
   overflow-x: hidden;
   cursor: default;
+}
+img:not([src]) {
+  visibility: hidden;
 }
 .container {
   width: 90%;
@@ -826,6 +831,9 @@ input[type="radio"]:checked + .btnLabel {
   padding: 5px 0;
   display: flex;
 }
+.sidebarThumb {
+  position: relative;
+}
 .sidebarImg {
   margin-right: 8px;
   height: 94px;
@@ -929,6 +937,12 @@ input[type="radio"]:checked + .btnLabel {
   height: 182px;
   width: 45vmin;
   background-color: var(--light-grey);
+  position: relative;
+}
+.videoThumbImg {
+  border-radius: 10px;
+  height: 182px;
+  width: 45vmin;
 }
 .videoBoxTitle {
   font-size: 19px;
@@ -1248,6 +1262,7 @@ input[type="radio"]:checked + .btnLabel {
   color: var(--font-color);
   fill: var(--font-color);
   justify-content: space-evenly;
+  border-top: 1px solid var(--bottom-menu-border);
 }
 .bottomMenuItems {
   padding: 0;
@@ -1409,6 +1424,11 @@ input[type="radio"]:checked + .btnLabel {
   height: 140px;
   width: 100%;
   position: relative;
+}
+.chVideoCardThumbImg {
+  border-radius: 10px;
+  height: 140px;
+  width: 100%;
 }
 .chVideoCardSVG {
   fill: #f1f1f1;
@@ -1628,10 +1648,19 @@ input[type="radio"]:checked + .btnLabel {
   .videoBoxTime {
     padding: 0 10px;
   }
-  .videoThumb {
+  .mobSearchVideoBoxDesc {
+    display: flex;
+    flex-direction: row-reverse;
+    width: max-content;
+  }
+  .videoThumb,
+  .videoThumbImg {
     width: 100%;
     height: 200px;
     border-radius: 0;
+  }
+  .videoBoxDescCont {
+    padding: 5px 0;
   }
   .shimmerCard {
     height: fit-content;
@@ -1642,7 +1671,7 @@ input[type="radio"]:checked + .btnLabel {
   }
   .shimmerCardImg {
     width: 100%;
-    height: 50vmin;
+    height: 200px;
     border-radius: 0;
   }
   .shimmerCardDesc {
@@ -1687,20 +1716,27 @@ input[type="radio"]:checked + .btnLabel {
     padding-bottom: 50px;
   }
   .chHomeContainer {
-    justify-content: center;
-    gap: 20px 0;
+    gap: 10px 0;
+    width: 100%;
+    flex-direction: column;
   }
   .chVideoCard {
     width: 100%;
     flex-direction: row;
+    padding: 0 5px;
   }
   .chVideoCardThumb {
-    height: 140px;
-    width: 48vmin;
+    width: unset;
+    height: 115px;
+    min-width: 25%;
+  }
+  .chVideoCardThumbImg {
+    height: 115px;
+    width: 100%;
   }
   .chVideoCardDesc {
+    width: 75%;
     padding: 0 10px;
-    width: 48vmin;
   }
   .chDescSection,
   .chViewsSection {
@@ -1708,21 +1744,23 @@ input[type="radio"]:checked + .btnLabel {
     padding: 10px;
   }
   .chShimmerCard {
-    flex-direction: row;
     width: 100%;
+    flex-direction: row;
     padding: 0 10px;
   }
   .chShimmerCardImg {
-    width: 48vmin;
+    width: unset;
+    min-width: 35%;
+    height: 115px;
   }
   .chShimmerCardDesc {
-    width: 48vmin;
-    height: 100%;
-    padding: 0px 5px;
+    height: 115px;
+    padding: 0 5px;
+    width: 75%;
   }
   .chShimmerLines {
-    height: 20px;
-    border-radius: 4px;
+    height: 15px;
+    border-radius: 2px;
   }
 }
 @media (min-width: 480px) and (max-width: 899.98px) {
@@ -1746,6 +1784,7 @@ input[type="radio"]:checked + .btnLabel {
   .searchSection,
   .footer,
   .side-drawer,
+  .backdrop,
   .videoDescBtns::-webkit-scrollbar,
   .userSection > span,
   .menuSection,
@@ -1775,8 +1814,15 @@ input[type="radio"]:checked + .btnLabel {
     width: 95vw;
     display: flex;
   }
+  .videoBanner {
+    min-width: 25%;
+  }
+  .videoBannerImg {
+    width: 100%;
+    height: 115px;
+  }
   .videoBanner img {
-    width: 45vmax;
+    width: 100%;
     height: 100%;
   }
   .videoDesc {
@@ -1784,6 +1830,16 @@ input[type="radio"]:checked + .btnLabel {
     flex-direction: column-reverse;
     margin-left: 10px;
     justify-content: flex-end;
+    width: 70%;
+  }
+  .channelIconImg {
+    height: 30px;
+    width: 30px;
+  }
+  .channelName,
+  .videoViews {
+    display: inline-block;
+    margin-right: 5px;
   }
   .videoCardContainer {
     padding: 20px 10px 60px;
@@ -1818,17 +1874,18 @@ input[type="radio"]:checked + .btnLabel {
     gap: 0 10px;
   }
   .shimmerCardImg {
-    width: 100vmin;
-    height: 30vmin;
+    width: unset;
+    min-width: 30%;
+    height: 115px;
   }
   .shimmerCardDesc {
     flex-direction: column;
     display: flex;
-    width: 100%;
+    width: 75%;
     justify-content: space-evenly;
   }
   .shimmerLines {
-    height: 18px;
+    height: 15px;
     width: 100%;
     border-radius: 3px;
     margin-top: 0;
@@ -1849,20 +1906,31 @@ input[type="radio"]:checked + .btnLabel {
   .sideBarCards {
     column-gap: 10px;
   }
+  .sidebarThumb {
+    width: 25%;
+  }
   .sidebarImg {
-    width: 35vmax;
-    height: 100%;
+    width: 100%;
+    height: 115px;
   }
   .sidebarDesc {
-    width: 100%;
+    width: 75%;
   }
   .searchContainer {
     width: 100%;
     padding-bottom: 60px;
   }
   .videoThumb {
-    width: 40vmax;
-    height: 180px;
+    width: unset;
+    min-width: 25%;
+    height: 115px;
+  }
+  .videoThumbImg {
+    width: 100%;
+    height: 115px;
+  }
+  .videoBoxDescCont {
+    width: 75%;
   }
   .commentToggle {
     display: flex;
@@ -1874,11 +1942,32 @@ input[type="radio"]:checked + .btnLabel {
   .reccShimmerLines {
     height: 13px;
   }
-  .channelContentSection {
-    padding-bottom: 60px;
-  }
   .chHomeContainer {
-    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px 0;
+    padding: 0 10px;
+  }
+  .channelImg {
+    width: unset;
+    min-width: 35%;
+  }
+  .chVideoCard {
+    width: 100%;
+    flex-direction: row;
+    gap: 0 10px;
+  }
+  .chVideoCardThumb {
+    width: unset;
+    min-width: 25%;
+    height: 115px;
+  }
+  .chVideoCardThumbImg {
+    width: 100%;
+    height: 100%;
+  }
+  .chVideoCardDesc {
+    width: 75%;
   }
   .channelThumbIcon {
     height: 110px;
@@ -1889,6 +1978,23 @@ input[type="radio"]:checked + .btnLabel {
   }
   .channelDescInfo {
     flex-wrap: wrap;
+  }
+  .chShimmerCard {
+    flex-direction: row;
+    width: 100%;
+  }
+  .chShimmerCardImg {
+    min-width: 25%;
+    height: 115px;
+  }
+  .chShimmerCardDesc {
+    width: 75%;
+    height: 115px;
+  }
+  .chShimmerLines {
+    height: 10px;
+    margin-left: 7px;
+    width: 95%;
   }
 }
 @media only screen and (min-width: 900px) and (max-width: 1199.98px) {

@@ -13,7 +13,7 @@ const SideBarCards = (data) => {
   return (
     <>
       <div className="sideBarCards">
-        <div style={{ position: "relative" }}>
+        <div className="sidebarThumb">
           <img
             src={data?.snippet?.thumbnails?.medium?.url}
             className="sidebarImg"

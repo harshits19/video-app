@@ -14,27 +14,27 @@ const SearchPageCards = ({ vdoId }) => {
   }, [vdoId]);
   return (
     <div className="videoBox">
-      <div style={{ position: "relative" }}>
-        <div className="videoThumb">
-          <img
-            src={info?.snippet?.thumbnails?.medium?.url}
-            className="videoThumb"
-          />
-        </div>
+      <div className="videoThumb">
+        <img
+          src={info?.snippet?.thumbnails?.medium?.url}
+          className="videoThumbImg"
+        />
         <span className="videoCardDuration">
           {info?.contentDetails?.duration &&
             convertDuration(info?.contentDetails?.duration)}
         </span>
       </div>
-      <div>
+      <div className="videoBoxDescCont">
         <div className="videoBoxTitle">{info?.snippet?.title}</div>
-        <div className="videoBoxTime">
-          {calcViews(info?.statistics?.viewCount) +
-            " views • " +
-            calcTime(info?.snippet?.publishedAt)}
-        </div>
-        <div className="videoBoxTime boldText">
-          {info?.snippet?.channelTitle}
+        <div className="mobSearchVideoBoxDesc">
+          <div className="videoBoxTime">
+            {calcViews(info?.statistics?.viewCount) +
+              " views • " +
+              calcTime(info?.snippet?.publishedAt)}
+          </div>
+          <div className="videoBoxTime boldText">
+            {info?.snippet?.channelTitle}
+          </div>
         </div>
         <div className="videoBoxDesc">{info?.snippet?.description + "..."}</div>
       </div>

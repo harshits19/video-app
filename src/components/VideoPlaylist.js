@@ -12,7 +12,7 @@ const ChVideoCard = ({ data }) => {
       <div className="chVideoCardThumb">
         <img
           src={data?.snippet?.thumbnails?.medium?.url}
-          className="chVideoCardThumb"
+          className="chVideoCardThumbImg"
         />
       </div>
       <div className="chVideoCardDesc">

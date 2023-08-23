@@ -23,7 +23,7 @@ const FilterBtns = ({
           setVideoData();
           setCurrentFilter(data?.title);
           useFetch(
-            `search?part=snippet&type=video&maxResults=15&q=${data?.title}`
+            `search?part=snippet&type=video&maxResults=15&q=${data?.title}&videoDuration=medium&regionCode=IN`
           ).then((data) => {
             setVideoData(data?.items);
             setPageToken(data?.nextPageToken);
@@ -98,7 +98,7 @@ const Body = () => {
   };
   const fetchFilteredVideos = () => {
     useFetch(
-      `search?part=snippet&type=video&maxResults=15&q=${currentFilter}&pageToken=${pageToken}`
+      `search?part=snippet&type=video&maxResults=15&q=${currentFilter}&pageToken=${pageToken}&videoDuration=medium`
     ).then((data) => {
       setVideoData((prev) => [...prev, ...data?.items]);
       setPageToken(data?.nextPageToken);
@@ -153,7 +153,7 @@ const Body = () => {
                   isFilterActive ? fetchFilteredVideos() : fetchPopularVideos();
                 }}
                 className="loadMoreBtn">
-                Load more
+                Load more videos
               </div>
             </div>
           )}

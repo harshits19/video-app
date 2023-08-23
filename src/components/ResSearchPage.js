@@ -35,11 +35,11 @@ const resSearchPage = () => {
           nav("/results?search_query=" + searchQuery);
           setSearchState(false);
         }}>
-        <Link to="/" className="textNone">
+        <span onClick={() => nav(-1)} className="textNone">
           <svg height="24" width="24" viewBox="0 0 24 24" className="backBtn">
             <path d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"></path>
           </svg>
-        </Link>
+        </span>
         <input
           type="text"
           placeholder="Search"

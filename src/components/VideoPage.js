@@ -41,7 +41,7 @@ const VideoPage = () => {
     const sidebar = document.querySelector(".compactSidebar");
     sidebar.classList.add("csSidebarClose");
 
-    const mediaQuery = window.matchMedia("(max-width: 769px)");
+    const mediaQuery = window.matchMedia("(max-width: 899px)");
     const mediaQueryTwo = window.matchMedia("(min-width: 900px)");
     if (mediaQuery.matches) {
       document.getElementById("bottomMenu").style.display = "none";
