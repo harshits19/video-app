@@ -12,11 +12,14 @@ const RecVideoSection = ({ videoID, title }) => {
   const [reccVideoData, setReccVideoData] = useState(null);
   useEffect(() => {
     if (title)
-      useFetch(`search?part=snippet&type=video&maxResults=10&q=${title}`).then(
-        (dataSet) => {
-          setReccVideoData(dataSet?.items);
-        }
-      );
+      useFetch(
+        `search?part=snippet&type=video&maxResults=10&videoDuration=medium&q=${title.slice(
+          0,
+          40
+        )}`
+      ).then((dataSet) => {
+        setReccVideoData(dataSet?.items);
+      });
   }, [title]);
 
   return (

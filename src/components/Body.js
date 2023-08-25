@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HomePage from "./HomePage";
 import { useSelector, useDispatch } from "react-redux";
-import { openNav, closePageState } from "../utilities/navSlice";
+import { openNav, closePageState, closeNav } from "../utilities/navSlice";
 import useFetch from "../utilities/useFetch";
 import { YT_FILTER_DATA } from "../utilities/config";
 import Spinner from "../utilities/Spinner";
@@ -52,6 +52,7 @@ const Body = () => {
 
   useEffect(() => {
     dispatch(closePageState());
+    if (mediaQueryTwo.matches) dispatch(closeNav());
     if (mediaQuery.matches) dispatch(openNav());
     setFilterBtnData(YT_FILTER_DATA);
     useFetch(

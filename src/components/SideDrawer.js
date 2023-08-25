@@ -30,13 +30,12 @@ const SideDrawer = ({ theme }) => {
       <div className={drawerClasses}>
         <div className="sideNavbar">
           <div className="menuLogoSection">
-            <div className="menuSection">
+            <div className="menuSection" onClick={() => toggleNavHandler()}>
               <svg
                 height="24"
                 width="24"
                 viewBox="0 0 24 24"
-                className="hamIcon"
-                onClick={() => toggleNavHandler()}>
+                className="hamIcon">
                 <path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path>
               </svg>
             </div>

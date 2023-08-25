@@ -1,30 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { ChannelContext } from "../utilities/contexts";
 import useFetch from "../utilities/useFetch";
-import { calcTime } from "../utilities/useMath";
 import { Link } from "react-router-dom";
 import Spinner from "../utilities/Spinner";
 import ChannelPageShimmer from "./ChannelPageShimmer";
-
-const ChVideoCard = ({ data }) => {
-  //   console.log(data);
-  return (
-    <div className="chVideoCard">
-      <div className="chVideoCardThumb">
-        <img
-          src={data?.snippet?.thumbnails?.medium?.url}
-          className="chVideoCardThumbImg"
-        />
-      </div>
-      <div className="chVideoCardDesc">
-        <div className="chVideoCardTitle">{data?.snippet?.title}</div>
-        <div className="chVideoCardInfo">
-          {calcTime(data?.snippet?.publishedAt)}
-        </div>
-      </div>
-    </div>
-  );
-};
+import ChannelVideoCard from "./ChannelVideoCard";
 
 const ChannelHomePage = () => {
   const dataSet = useContext(ChannelContext);
@@ -60,7 +40,7 @@ const ChannelHomePage = () => {
                 to={"/watch?v=" + item?.snippet?.resourceId?.videoId}
                 key={item?.id}
                 className="textNone">
-                <ChVideoCard data={item} />
+                <ChannelVideoCard data={item} />
               </Link>
             );
           })

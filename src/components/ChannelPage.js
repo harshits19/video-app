@@ -13,6 +13,8 @@ const ChannelPage = () => {
   const [dataSet, setDataSet] = useState();
   const mediaQuery = window.matchMedia("(min-width: 900px)");
   const mediaQueryTwo = window.matchMedia("(min-width: 1200px)");
+  const mediaQueryThree = window.matchMedia("(max-width: 899px)");
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeNav());
@@ -34,6 +36,8 @@ const ChannelPage = () => {
     if (mediaQuery.matches)
       document.getElementById("channelBody").style.marginLeft = "80px";
     if (mediaQueryTwo.matches) dispatch(openPageState());
+    if (mediaQueryThree.matches)
+      document.getElementById("bottomMenu").style.display = "none";
   });
   useTitle(channelData?.snippet?.title);
   return (

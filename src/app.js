@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
@@ -12,11 +12,12 @@ import VideoPage from "./components/VideoPage";
 import SearchPage from "./components/SearchPage";
 import GoToTop from "./utilities/gotoTop";
 import ResSearchPage from "./components/ResSearchPage";
-import ChannelPage from "./components/ChannelPage";
+// import ChannelPage from "./components/ChannelPage";
 import ChannelPlaylist from "./components/ChannelPlaylist";
 import ChannelAbout from "./components/ChannelAbout";
 import ChannelHomePage from "./components/ChannelHomePage";
 import VideoPlaylist from "./components/VideoPlaylist";
+const ChannelPage = lazy(() => import("./components/ChannelPage"));
 
 const AppLayout = () => {
   const [theme, setTheme] = useState(
@@ -61,7 +62,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/channel/:channelId",
-        element: <ChannelPage />,
+        element: (
+          <Suspense>
+            <ChannelPage />
+          </Suspense>
+        ),
         children: [
           {
             path: "/channel/:channelId/",

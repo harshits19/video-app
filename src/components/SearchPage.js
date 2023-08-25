@@ -1,10 +1,11 @@
 import { Link, useSearchParams } from "react-router-dom";
 import useFetch from "../utilities/useFetch";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SearchPageCards from "./SearchPageCards";
 import { calcViews } from "../utilities/useMath";
 import Spinner from "../utilities/Spinner";
+import { closeNav, closePageState } from "../utilities/navSlice";
 
 const ChannelBox = ({ chId }) => {
   const [info, setInfo] = useState();
@@ -65,9 +66,12 @@ const SearchPage = () => {
   const isNavOpen = useSelector((store) => store.navState.isOpen);
   const mediaQuery = window.matchMedia("(min-width: 1200px)");
   const mediaQueryTwo = window.matchMedia("(min-width: 900px)");
+  const dispatch = useDispatch();
+  dispatch(closePageState());
   useEffect(() => {
-    if (mediaQueryTwo.matches)
+    if (mediaQueryTwo.matches) {
       document.getElementById("searchBody").style.marginLeft = "80px";
+    }
     if (mediaQuery.matches)
       document.getElementById("searchBody").style.marginLeft = isNavOpen
         ? "240px"

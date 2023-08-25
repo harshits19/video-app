@@ -18,7 +18,7 @@ const SideBarCards = (data) => {
             src={data?.snippet?.thumbnails?.medium?.url}
             className="sidebarImg"
           />
-          <span className="videoCardDuration" style={{ margin: "6px 12px" }}>
+          <span className="videoCardDuration">
             {vdoData?.contentDetails?.duration &&
               convertDuration(vdoData?.contentDetails?.duration)}
           </span>

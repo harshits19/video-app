@@ -1,29 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import useFetch from "../utilities/useFetch";
-import { calcTime } from "../utilities/useMath";
 import ChannelPageShimmer from "./ChannelPageShimmer";
 import Spinner from "../utilities/Spinner";
-
-const ChVideoCard = ({ data }) => {
-  //   console.log(data);
-  return (
-    <div className="chVideoCard">
-      <div className="chVideoCardThumb">
-        <img
-          src={data?.snippet?.thumbnails?.medium?.url}
-          className="chVideoCardThumbImg"
-        />
-      </div>
-      <div className="chVideoCardDesc">
-        <div className="chVideoCardTitle">{data?.snippet?.title}</div>
-        <div className="chVideoCardInfo">
-          {calcTime(data?.snippet?.publishedAt)}
-        </div>
-      </div>
-    </div>
-  );
-};
+import ChannelVideoCard from "./ChannelVideoCard";
 
 const VideoPlaylist = () => {
   const { playlistId } = useParams();
@@ -60,7 +40,7 @@ const VideoPlaylist = () => {
                 to={"/watch?v=" + item?.snippet?.resourceId?.videoId}
                 key={item?.id}
                 className="textNone">
-                <ChVideoCard data={item} />
+                <ChannelVideoCard data={item} />
               </Link>
             );
           })
