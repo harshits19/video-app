@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import CommentCard from "./CommentCard";
 import { formatNumber } from "../utilities/useMath";
+import { SortSVG } from "../utilities/SVG";
+import CommentCard from "./CommentCard";
 import useFetch from "../utilities/useFetch";
 import Spinner from "../utilities/Spinner";
 
@@ -11,13 +12,13 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
   const [isCommentLoading, setIsCommentLoading] = useState(false);
   const [commentType, setCommentType] = useState("relevance");
   const [commentBox, setCommentBox] = useState(false);
+
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const mediaQuery = window.matchMedia("(max-width: 899px)");
     if (mediaQuery.matches) setCommentState(false);
   }, []);
 
   useEffect(() => {
-    // setIsCommentLoading(true);
     useFetch(
       `commentThreads?part=snippet%2Creplies&maxResults=25&order=${commentType}&textFormat=plainText&videoId=${videoID}`
     ).then((data) => {
@@ -36,6 +37,7 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
       setIsCommentLoading(false);
     });
   };
+
   return (
     <>
       <div
@@ -59,9 +61,7 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
             <span
               className="sortBtn"
               onClick={() => setCommentBox(!commentBox)}>
-              <svg height="24" width="24" viewBox="0 2 22 22">
-                <path d="M21,6H3V5h18V6z M15,11H3v1h12V11z M9,17H3v1h6V17z"></path>
-              </svg>
+              <SortSVG />
               {" Sort by"}
               {commentBox && (
                 <div className="commentSortBox">
@@ -72,7 +72,6 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
                         : "commentSortBoxItems"
                     }
                     onClick={() => {
-                      // commentType == "time" ? setCommentData() : null;
                       setCommentType("relevance");
                       setCommentBox(false);
                     }}>
@@ -85,7 +84,6 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
                         : "commentSortBoxItems"
                     }
                     onClick={() => {
-                      // commentType == "relevance" ? setCommentData() : null;
                       setCommentType("time");
                       setCommentBox(false);
                     }}>
@@ -96,7 +94,7 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
             </span>
           </div>
           <div className="commentsContainer">
-            {commentData ? (
+            {commentData.length > 0 ? (
               commentData?.map((commentData) => {
                 return (
                   <CommentCard
@@ -107,7 +105,7 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
                 );
               })
             ) : (
-              <></>
+              <div className="centerDiv">No comment on this video</div>
             )}
             {commentData && nextPageToken && !isCommentLoading ? (
               <div className="loadBtnContainer">

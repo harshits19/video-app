@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetch from "../utilities/useFetch";
 import ChannelPageShimmer from "./ChannelPageShimmer";
 import Spinner from "../utilities/Spinner";
@@ -20,6 +20,7 @@ const VideoPlaylist = () => {
       setNextPageToken(data?.nextPageToken);
     });
   }, [playlistId]);
+
   const fetchNextVideos = () => {
     useFetch(
       `playlistItems?part=snippet&maxResults=15&playlistId=${playlistId}&pageToken=${nextPageToken}`
@@ -35,14 +36,7 @@ const VideoPlaylist = () => {
       <div className="chHomeContainer">
         {data ? (
           data?.map((item) => {
-            return (
-              <Link
-                to={"/watch?v=" + item?.snippet?.resourceId?.videoId}
-                key={item?.id}
-                className="textNone">
-                <ChannelVideoCard data={item} />
-              </Link>
-            );
+            return <ChannelVideoCard data={item} key={item?.id} />;
           })
         ) : (
           <ChannelPageShimmer />

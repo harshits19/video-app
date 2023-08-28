@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { useState, useEffect, lazy, Suspense } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
-import Footer from "./components/Footer";
 import SideDrawer from "./components/SideDrawer";
 import { Provider } from "react-redux";
 import store from "./utilities/store";
@@ -12,11 +11,11 @@ import VideoPage from "./components/VideoPage";
 import SearchPage from "./components/SearchPage";
 import GoToTop from "./utilities/gotoTop";
 import ResSearchPage from "./components/ResSearchPage";
-// import ChannelPage from "./components/ChannelPage";
 import ChannelPlaylist from "./components/ChannelPlaylist";
 import ChannelAbout from "./components/ChannelAbout";
 import ChannelHomePage from "./components/ChannelHomePage";
 import VideoPlaylist from "./components/VideoPlaylist";
+import WatchLaterPage from "./components/WatchLaterPage";
 const ChannelPage = lazy(() => import("./components/ChannelPage"));
 
 const AppLayout = () => {
@@ -34,7 +33,6 @@ const AppLayout = () => {
         <Outlet />
       </Provider>
       <GoToTop />
-      <Footer />
     </>
   );
 };
@@ -59,6 +57,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/resSearch",
         element: <ResSearchPage />,
+      },
+      {
+        path: "/watchLater",
+        element: <WatchLaterPage />,
       },
       {
         path: "/channel/:channelId",

@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addQuery } from "../utilities/searchSlice";
 import useFetch from "../utilities/useFetch";
-import { SearchSVG } from "../utilities/SVG";
+import { BackSVG, SearchSVG } from "../utilities/SVG";
 
 const resSearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [searchState, setSearchState] = useState(false);
+  const dispatch = useDispatch();
+  const suggestionsCache = useSelector((store) => store.suggestionsCache);
   const nav = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchResults();
+      suggestionsCache[searchQuery]
+        ? setSuggestions(suggestionsCache[searchQuery])
+        : fetchResults();
     }, 300);
     return () => {
       clearTimeout(timer);
@@ -22,6 +28,7 @@ const resSearchPage = () => {
       `search?client=chrome&ds=yt&q=${searchQuery}`,
       `https://corsproxy.io/?http://suggestqueries.google.com/complete`
     ).then((data) => {
+      dispatch(addQuery({ [searchQuery]: data[1] }));
       setSuggestions(data[1]);
     });
   };
@@ -36,9 +43,7 @@ const resSearchPage = () => {
           setSearchState(false);
         }}>
         <span onClick={() => nav(-1)} className="textNone">
-          <svg height="24" width="24" viewBox="0 0 24 24" className="backBtn">
-            <path d="M21,11v1H5.64l6.72,6.72l-0.71,0.71L3.72,11.5l7.92-7.92l0.71,0.71L5.64,11H21z"></path>
-          </svg>
+          <BackSVG />
         </span>
         <input
           type="text"
@@ -64,7 +69,7 @@ const resSearchPage = () => {
         )}
       </form>
       <div className="resSearchContainer">
-        {searchState && (
+        {suggestions.length > 0 && searchState && (
           <div className="mobileSearchResultContainer">
             {suggestions.map((suggestion) => (
               <Link

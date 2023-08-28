@@ -30,6 +30,7 @@ const calcViews = (input) => {
 
   return input?.toString();
 };
+
 const calcTime = (text) => {
   const currentTime = new Date();
 
@@ -72,10 +73,11 @@ const calcTime = (text) => {
   }
   return `${timeValue} ${timeUnit}${timeValue !== 1 ? "s" : ""} ago`;
 };
+
 const formatNumber = (x) => {
   return x > 1
-    ? x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " comments"
-    : x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " comment";
+    ? x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " Comments"
+    : x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " Comment";
 };
 
 const convertDuration = (t) => {

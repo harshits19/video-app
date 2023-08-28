@@ -63,6 +63,7 @@ const ChannelPlaylist = () => {
       setIsLoading(false);
     });
   };
+
   return (
     <>
       <div className="chHomeContainer">
@@ -76,7 +77,7 @@ const ChannelPlaylist = () => {
               );
             })
           ) : (
-            <div>This channel has no playlists.</div>
+            <div className="centerDiv">This channel has no playlists</div>
           )
         ) : (
           <ChannelPageShimmer />

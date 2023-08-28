@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import SideBarCards from "./SideBarCards";
 import useFetch from "../utilities/useFetch";
+import SideBarCards from "./SideBarCards";
 import ReccSectionShimmer from "./ReccSectionShimmer";
 /* 
       `search?part=snippet&type=video&maxResults=25&relatedToVideoId=${videoID}`
       `search?part=snippet&type=video&maxResults=10&q=${data}`
 */
-
 const RecVideoSection = ({ videoID, title }) => {
   const [reccVideoData, setReccVideoData] = useState(null);
   useEffect(() => {
@@ -27,12 +25,7 @@ const RecVideoSection = ({ videoID, title }) => {
       {reccVideoData ? (
         reccVideoData?.map((reccVideoData) => {
           return (
-            <Link
-              to={"?v=" + reccVideoData?.id?.videoId}
-              key={reccVideoData?.id?.videoId}
-              className="textNone">
-              <SideBarCards {...reccVideoData} />
-            </Link>
+            <SideBarCards {...reccVideoData} key={reccVideoData?.id?.videoId} />
           );
         })
       ) : (

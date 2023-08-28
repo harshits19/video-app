@@ -1,23 +1,44 @@
-import { useParams, NavLink, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useParams, NavLink, Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeBackdrop, closeNav } from "../utilities/navSlice";
 import useFetch from "../utilities/useFetch";
-import { useDispatch } from "react-redux";
-import { openPageState, closeNav } from "../utilities/navSlice";
+import useTitle from "../utilities/useTitle";
 import { calcViews } from "../utilities/useMath";
 import { ChannelContext } from "../utilities/contexts";
-import useTitle from "../utilities/useTitle";
 
 const ChannelPage = () => {
   const { channelId } = useParams();
   const [channelData, setChannelData] = useState([]);
   const [dataSet, setDataSet] = useState();
-  const mediaQuery = window.matchMedia("(min-width: 900px)");
-  const mediaQueryTwo = window.matchMedia("(min-width: 1200px)");
-  const mediaQueryThree = window.matchMedia("(max-width: 899px)");
 
+  const fullScreen = window.matchMedia("(min-width: 1200px)");
+  const medScreen = window.matchMedia(
+    "(min-width: 900px)and (max-width: 1199px)"
+  );
+  const smScreen = window.matchMedia("(max-width: 899px)");
+
+  const navState = useSelector((store) => store.sidebar.navState);
+  const backdropState = useSelector((store) => store.sidebar.backdropState);
   const dispatch = useDispatch();
+  if (fullScreen.matches && backdropState) dispatch(removeBackdrop());
+
   useEffect(() => {
-    dispatch(closeNav());
+    if (fullScreen.matches)
+      document.getElementById("channelBody").style.marginLeft = navState
+        ? "240px"
+        : "80px";
+  });
+
+  useEffect(() => {
+    if (medScreen.matches) {
+      dispatch(closeNav());
+      document.getElementById("channelBody").style.marginLeft = "80px";
+    }
+    if (smScreen.matches) {
+      document.getElementsByClassName("header")[0].style.position = "sticky";
+      document.getElementById("bottomMenu").style.display = "none";
+    }
     useFetch(
       `channels?part=snippet%2CcontentDetails%2Cstatistics&id=${channelId}`
     ).then((data) => {
@@ -32,14 +53,9 @@ const ChannelPage = () => {
       });
     });
   }, []);
-  useEffect(() => {
-    if (mediaQuery.matches)
-      document.getElementById("channelBody").style.marginLeft = "80px";
-    if (mediaQueryTwo.matches) dispatch(openPageState());
-    if (mediaQueryThree.matches)
-      document.getElementById("bottomMenu").style.display = "none";
-  });
+
   useTitle(channelData?.snippet?.title);
+
   return (
     <div id="channelBody">
       <div className="chPageContainer">
@@ -103,11 +119,9 @@ const ChannelPage = () => {
             About
           </NavLink>
         </div>
-        <div className="channelContentSection">
-          <ChannelContext.Provider value={dataSet}>
-            <Outlet />
-          </ChannelContext.Provider>
-        </div>
+        <ChannelContext.Provider value={dataSet}>
+          <Outlet />
+        </ChannelContext.Provider>
       </div>
     </div>
   );

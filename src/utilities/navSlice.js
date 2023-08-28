@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const navSlice = createSlice({
-  name: "navState",
+  name: "sidebar",
   initialState: {
-    isOpen: "true",
-    isVideoPage: "false",
+    navState: "true",
+    backdropState: "false",
   },
   reducers: {
     toggleNavState: (state) => {
-      state.isOpen = !state.isOpen;
+      state.navState = !state.navState;
     },
     closeNav: (state) => {
-      state.isOpen = false;
+      state.navState = false;
     },
     openNav: (state) => {
-      state.isOpen = true;
+      state.navState = true;
     },
-    openPageState: (state) => {
-      state.isVideoPage = true;
+    addBackdrop: (state) => {
+      state.backdropState = true;
     },
-    closePageState: (state) => {
-      state.isVideoPage = false;
+    removeBackdrop: (state) => {
+      state.backdropState = false;
     },
   },
 });
@@ -29,7 +29,7 @@ export const {
   toggleNavState,
   closeNav,
   openNav,
-  openPageState,
-  closePageState,
+  addBackdrop,
+  removeBackdrop,
 } = navSlice.actions;
 export default navSlice.reducer;

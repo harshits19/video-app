@@ -50,7 +50,7 @@
   --super-light-grey: #272727;
   --middle-grey: #909090;
   --searchbar-bg-color: #121212;
-  --searchRes-container-border: #0f0f0f;
+  --searchRes-container-border: #000000;
   --searchRes-bg-color: #212121;
   --sideDrawer-border: #fffbfb2e;
   --scrollBar-bg: hsl(0, 0%, 67%);
@@ -88,6 +88,12 @@ img:not([src]) {
   text-decoration: none;
   color: var(--font-color);
   fill: var(--font-color);
+}
+.centerDiv {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 /* ------------Header Section---------------- */
@@ -325,16 +331,15 @@ img:not([src]) {
   display: block;
   height: 100%;
   background: var(--background-color);
-  width: 0px;
+  width: 240px;
   position: fixed;
-  top: 0px;
+  top: 0;
   left: 0;
   overflow-x: hidden;
   z-index: 100;
 }
-.side-drawer.open {
-  width: 240px;
-  /* transition: width 0s; */
+.side-drawer.close {
+  width: 0px;
 }
 .drawerOpen {
   overflow: hidden;
@@ -399,6 +404,9 @@ img:not([src]) {
   overflow-x: hidden;
   z-index: 95;
   padding: 0 4px;
+}
+.compactSidebar::-webkit-scrollbar {
+  display: none;
 }
 .csSidebarClose {
   display: none;
@@ -497,7 +505,7 @@ input[type="radio"]:checked + .btnLabel {
 }
 .videoBannerImg {
   width: 100%;
-  height: 200px;
+  height: 225px;
   border-radius: 10px;
   background-color: var(--light-grey);
 }
@@ -521,6 +529,44 @@ input[type="radio"]:checked + .btnLabel {
   color: var(--font-color);
   display: flex;
   margin-top: 8px;
+  position: relative;
+}
+.vdOptionBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+  cursor: pointer;
+  fill: var(--font-color);
+}
+.videoCard:hover .vdOptionBtn {
+  visibility: visible;
+}
+.homeMenuBox {
+  width: max-content;
+  height: min-content;
+  background-color: var(--theme-box-bg);
+  box-shadow: 0px 4px 32px 0px var(--theme-box-border);
+  -webkit-backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  flex-direction: column;
+  padding: 8px 0;
+  display: flex;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 10;
+}
+.btnBackdrop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 9;
+  top: 0;
+  right: 0;
 }
 .videoTitle {
   font-size: 16px;
@@ -534,6 +580,7 @@ input[type="radio"]:checked + .btnLabel {
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   white-space: normal;
+  width: 95%;
 }
 .channelName {
   margin-top: 2px;
@@ -623,6 +670,9 @@ input[type="radio"]:checked + .btnLabel {
 }
 .videoBtn:hover {
   background-color: var(--very-light-grey);
+}
+#menuBtn {
+  padding: 0 6px;
 }
 .videoChannelTitle {
   font-size: 1rem;
@@ -834,9 +884,22 @@ input[type="radio"]:checked + .btnLabel {
 .sideBarCards {
   padding: 5px 0;
   display: flex;
+  position: relative;
+}
+.sbOptionBtn {
+  visibility: hidden;
+  cursor: pointer;
+  fill: var(--font-color);
+  height: min-content;
+}
+.sideBarCards:hover .sbOptionBtn {
+  visibility: visible;
 }
 .sidebarThumb {
   position: relative;
+}
+.sideBarCards > .homeMenuBox {
+  top: 35px;
 }
 .sidebarImg {
   margin-right: 8px;
@@ -901,7 +964,7 @@ input[type="radio"]:checked + .btnLabel {
   width: 1100px;
   padding: 10px;
   margin: 0 auto;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   position: relative;
 }
 .channelBox {
@@ -909,7 +972,7 @@ input[type="radio"]:checked + .btnLabel {
   border-bottom: 1px solid var(--light-grey);
   border-top: 1px solid var(--light-grey);
   column-gap: 15px;
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 20px 0;
   display: flex;
 }
@@ -935,18 +998,23 @@ input[type="radio"]:checked + .btnLabel {
   display: flex;
   margin: 15px 0;
   column-gap: 15px;
+  position: relative;
 }
 .videoThumb {
   border-radius: 10px;
-  height: 182px;
-  width: 45vmin;
+  height: 170px;
+  min-width: 35%;
+  width: 100%;
   background-color: var(--light-grey);
   position: relative;
 }
 .videoThumbImg {
   border-radius: 10px;
-  height: 182px;
-  width: 45vmin;
+  height: 170px;
+  width: 100%;
+}
+.videoBoxDescCont {
+  width: 65%;
 }
 .videoBoxTitle {
   font-size: 19px;
@@ -959,6 +1027,7 @@ input[type="radio"]:checked + .btnLabel {
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+  width: 95%;
 }
 .videoBoxTime {
   font-size: 13px;
@@ -979,18 +1048,49 @@ input[type="radio"]:checked + .btnLabel {
 .boldText {
   font-weight: 500;
 }
-/* -----------Footer------------------------ */
-.footer {
-  height: 100%;
-  border-top: 1px solid var(--very-light-grey);
-  width: 100%;
+.boldText:hover {
+  color: var(--font-color);
+}
+.wlContainer {
+  padding: 15px 50px 0 0;
   display: flex;
+  flex-direction: column-reverse;
+  row-gap: 15px;
+}
+.wlContainer > .videoBox {
+  margin: 0;
+}
+.wlHeading {
+  color: var(--font-color);
+  border-bottom: 1px solid var(--bottom-menu-border);
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.wlHeadTitle {
+  font-size: 24px;
+  font-weight: 500;
+}
+.wlHeadClear {
+  background-color: var(--load-btn-bg);
+  cursor: pointer;
+  border-radius: 20px;
   align-items: center;
-  justify-content: center;
+  padding: 3px 12px;
   font-size: 14px;
   font-weight: 500;
-  padding: 10px 0;
-  margin-top: 30px;
+  display: flex;
+}
+.wlOptionBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+  cursor: pointer;
+  fill: var(--font-color);
+}
+.videoBox:hover .wlOptionBtn {
+  visibility: visible;
 }
 /* -----------Homepage Shimmer-------------- */
 .shimmerCard {
@@ -1421,6 +1521,17 @@ input[type="radio"]:checked + .btnLabel {
   flex-direction: column;
   width: 250px;
   row-gap: 10px;
+  position: relative;
+}
+.chVideoCard:hover .vdOptionBtn {
+  visibility: visible;
+}
+.chVideoCard > .vdOptionBtn {
+  height: min-content;
+  top: 150px;
+}
+.chVideoCard > .homeMenuBox {
+  top: 180px;
 }
 .chVideoCardThumb {
   background-color: var(--light-grey);
@@ -1450,9 +1561,11 @@ input[type="radio"]:checked + .btnLabel {
   padding: 4px 10px;
   display: flex;
   justify-content: space-between;
+  border-radius: 0 0 10px 10px;
 }
 .chVideoCardDesc {
   display: block;
+  width: 93%;
 }
 .chVideoCardTitle {
   font-size: 14px;
@@ -1531,6 +1644,7 @@ input[type="radio"]:checked + .btnLabel {
     padding: 10px;
     display: flex;
     justify-content: start;
+    position: sticky;
   }
   .mobileSearch {
     display: block;
@@ -1551,12 +1665,34 @@ input[type="radio"]:checked + .btnLabel {
   .userSection > span,
   .searchSection,
   .side-drawer,
-  .footer,
   .videoDescBtns::-webkit-scrollbar,
-  .videoBoxDesc {
+  .videoBoxDesc,
+  .bottomMenu,
+  .backdrop {
     display: none;
   }
-  .bottomMenu,
+  .vdOptionBtn {
+    visibility: visible;
+  }
+  .sbOptionBtn {
+    position: absolute;
+    visibility: visible;
+    top: 200px;
+    right: 0px;
+  }
+  .wlOptionBtn {
+    top: 205px;
+    visibility: visible;
+  }
+  .wlContainer {
+    padding: 0;
+  }
+  .wlHeading {
+    padding: 0 10px 10px;
+  }
+  .videoBox > .homeMenuBox {
+    top: 232px;
+  }
   .commentToggle {
     display: flex;
   }
@@ -1591,7 +1727,7 @@ input[type="radio"]:checked + .btnLabel {
     padding: 0 10px;
   }
   .videoDescTitle {
-    overflow: visible;
+    overflow: hidden;
     white-space: pre-wrap;
   }
   .videoFrame {
@@ -1603,9 +1739,14 @@ input[type="radio"]:checked + .btnLabel {
     flex-direction: column;
     padding: 0 5px;
   }
-  .videoInnerContainer,
-  .chPageContainer,
   .sidebarDesc {
+    width: 95%;
+  }
+  .sideBarCards > .homeMenuBox {
+    top: 230px;
+  }
+  .videoInnerContainer,
+  .chPageContainer {
     width: 100%;
   }
   .videoInnerDesc {
@@ -1619,6 +1760,9 @@ input[type="radio"]:checked + .btnLabel {
     padding: 0px 12px;
     font-size: 12px;
     line-height: 30px;
+  }
+  #menuBtn {
+    padding: 0 3px;
   }
   .videoFullDesc {
     font-size: 13px;
@@ -1759,6 +1903,12 @@ input[type="radio"]:checked + .btnLabel {
     height: 15px;
     border-radius: 2px;
   }
+  .chVideoCard > .vdOptionBtn {
+    position: unset;
+  }
+  .chVideoCard > .homeMenuBox {
+    top: 35px;
+  }
 }
 @media (min-width: 480px) and (max-width: 899.98px) {
   .header {
@@ -1779,7 +1929,6 @@ input[type="radio"]:checked + .btnLabel {
     display: flex;
   }
   .searchSection,
-  .footer,
   .side-drawer,
   .backdrop,
   .videoDescBtns::-webkit-scrollbar,
@@ -1788,17 +1937,20 @@ input[type="radio"]:checked + .btnLabel {
   .compactSidebar,
   .videoBoxDesc,
   .rightSection,
-  #downBtn {
-    display: none;
-  }
-
   .bottomMenu {
-    display: flex;
+    display: none;
   }
   .navItemName {
     font-size: 10px;
   }
-
+  .vdOptionBtn,
+  .sbOptionBtn,
+  .wlOptionBtn {
+    visibility: visible;
+  }
+  .wlContainer {
+    padding: 15px 0;
+  }
   #mainBody {
     margin-left: 0;
   }
@@ -1808,7 +1960,7 @@ input[type="radio"]:checked + .btnLabel {
   }
   .videoCard {
     height: 100%;
-    width: 95vw;
+    width: 100vw;
     display: flex;
   }
   .videoBanner {
@@ -1827,7 +1979,7 @@ input[type="radio"]:checked + .btnLabel {
     flex-direction: column-reverse;
     margin-left: 10px;
     justify-content: flex-end;
-    width: 70%;
+    width: 75%;
   }
   .channelIconImg {
     height: 30px;
@@ -1862,6 +2014,9 @@ input[type="radio"]:checked + .btnLabel {
   }
   .videoDescBtns {
     overflow-y: auto;
+  }
+  #menuBtn {
+    padding: 0 3px;
   }
   .shimmerCard {
     height: fit-content;
@@ -1904,7 +2059,8 @@ input[type="radio"]:checked + .btnLabel {
     column-gap: 10px;
   }
   .sidebarThumb {
-    width: 25%;
+    width: unset;
+    min-width: 25%;
   }
   .sidebarImg {
     width: 100%;
@@ -1915,7 +2071,6 @@ input[type="radio"]:checked + .btnLabel {
   }
   .searchContainer {
     width: 100%;
-    padding-bottom: 60px;
   }
   .videoThumb {
     width: unset;
@@ -1993,6 +2148,12 @@ input[type="radio"]:checked + .btnLabel {
     margin-left: 7px;
     width: 95%;
   }
+  .chVideoCard > .vdOptionBtn {
+    position: unset;
+  }
+  .chVideoCard > .homeMenuBox {
+    top: 35px;
+  }
 }
 @media only screen and (min-width: 900px) and (max-width: 1199.98px) {
   #mainBody {
@@ -2002,20 +2163,33 @@ input[type="radio"]:checked + .btnLabel {
     width: 30rem;
   }
   .shimmerCard {
-    width: 300px;
+    width: 280px;
   }
   .videoCard {
-    width: 300px;
+    width: 280px;
+    height: 100%;
+  }
+  .videoTitle {
+    width: 90%;
+  }
+  .videoBannerImg {
+    height: 180px;
   }
   .commentToggle,
   .videoDescBtns::-webkit-scrollbar,
-  #menuBtn,
-  #downBtn,
+  #shareBtn,
   .themeSwitch {
     display: none;
   }
-  .videoCardInnerContainer,
-  .chHomeContainer {
+  .vdOptionBtn,
+  .wlOptionBtn,
+  .sbOptionBtn {
+    visibility: visible;
+  }
+  .wlContainer {
+    padding: 15px 10px;
+  }
+  .videoCardInnerContainer {
     justify-content: center;
   }
   .videoPageContainer {
@@ -2044,6 +2218,12 @@ input[type="radio"]:checked + .btnLabel {
   .videoCmntSection {
     padding: 0 10px;
   }
+  .videoThumb,
+  .videoThumbImg {
+    height: 160px;
+    width: 100%;
+    min-width: 35%;
+  }
 }
 @media only screen and (min-width: 1200px) and (max-width: 1319.98px) {
   .videoPageContainer {
@@ -2053,7 +2233,8 @@ input[type="radio"]:checked + .btnLabel {
   .videoInnerContainer,
   .recommendedSection,
   .sidebarDesc,
-  .searchContainer {
+  .searchContainer,
+  .chPageContainer {
     width: 100%;
   }
   .sidebarImg {
