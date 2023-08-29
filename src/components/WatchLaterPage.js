@@ -102,7 +102,7 @@ const WatchLaterPage = () => {
     }
     if (smScreen.matches) {
       document.getElementsByClassName("header")[0].style.position = "sticky";
-      document.getElementById("bottomMenu").style.display = "none";
+      document.getElementById("bottomMenu").style.display = "flex";
     }
   }, []);
   useEffect(() => {

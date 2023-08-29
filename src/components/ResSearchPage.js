@@ -9,10 +9,16 @@ const resSearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [searchState, setSearchState] = useState(false);
-  const dispatch = useDispatch();
   const suggestionsCache = useSelector((store) => store.suggestionsCache);
+  const smScreen = window.matchMedia("(max-width: 899px)");
+  const dispatch = useDispatch();
   const nav = useNavigate();
-
+  useEffect(() => {
+    if (smScreen.matches) {
+      document.getElementsByClassName("header")[0].style.position = "sticky";
+      document.getElementById("bottomMenu").style.display = "none";
+    }
+  }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
       suggestionsCache[searchQuery]

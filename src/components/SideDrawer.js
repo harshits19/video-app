@@ -103,7 +103,7 @@ const SideDrawer = ({ theme }) => {
               </span>
               <span className="navItemName">Your Videos</span>
             </div>
-            <Link to="watchLater" className="textNone">
+            <Link to="/watchLater" className="textNone">
               <div className="navItems">
                 <span className="navItemIcon">
                   <ClockSVG />
@@ -204,9 +204,11 @@ const SideDrawer = ({ theme }) => {
         <Link to="/watchLater" className="textNone">
           <div className="bottomMenuItems">
             <span>
-              <LibrarySVG />
+              <ClockSVG />
+              {/* <LibrarySVG /> */}
             </span>
-            <span className="navItemName">Library</span>
+            {/* <span className="navItemName">Library</span> */}
+            <span className="navItemName">Watch Later</span>
           </div>
         </Link>
       </div>
@@ -241,9 +243,11 @@ const SideDrawer = ({ theme }) => {
         <Link to="/watchLater" className="textNone">
           <div className="csItems">
             <span className="csItemIcon">
-              <LibrarySVG />
+              <ClockSVG />
+              {/* <LibrarySVG /> */}
             </span>
-            <span className="csItemName">Library</span>
+            {/* <span className="csItemName">Library</span> */}
+            <span className="csItemName">Watch Later</span>
           </div>
         </Link>
         <div className="csItems">

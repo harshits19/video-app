@@ -58,7 +58,7 @@ const VideoCards = ({ info }) => {
             <img src={channelIcon} className="channelIconImg" alt="" />
           </div>
         </Link>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", width: "100%" }}>
           <Link
             className="textNone"
             to={

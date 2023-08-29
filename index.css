@@ -1781,7 +1781,11 @@ input[type="radio"]:checked + .btnLabel {
   }
   .searchContainer {
     width: 100%;
+    padding: 10px 0 50px;
+  }
+  .resSearchContainer {
     padding: 10px 0;
+    height: calc(100vh - 56px);
   }
   .videoBox,
   .videoDescSection,
@@ -1805,6 +1809,7 @@ input[type="radio"]:checked + .btnLabel {
   }
   .videoBoxDescCont {
     padding: 5px 0;
+    width: 95%;
   }
   .shimmerCard {
     height: fit-content;
@@ -2071,6 +2076,7 @@ input[type="radio"]:checked + .btnLabel {
   }
   .searchContainer {
     width: 100%;
+    padding-bottom: 50px;
   }
   .videoThumb {
     width: unset;
