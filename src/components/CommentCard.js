@@ -6,7 +6,7 @@ const CommentCard = ({ videoTitle, data }) => {
   const [isHiddenReply, setIsHiddenReply] = useState(false);
   return (
     <div className="commentBox">
-      <div className="channelDefIcon">
+      <div className="commentDefIcon">
         {
           <img
             src={

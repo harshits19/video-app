@@ -38,8 +38,9 @@ const VideoBox = ({ info, watchLater, dispatch }) => {
           <Link
             to={"/channel/" + info?.snippet?.channelId}
             className="textNone">
-            <div className="videoBoxTime boldText">
+            <div className="videoBoxChannelTitle boldText">
               {info?.snippet?.channelTitle}
+              <div className="titleTimeSeperator">{" • "}</div>
             </div>
           </Link>
         </div>

@@ -140,7 +140,6 @@ img:not([src]) {
   column-gap: 10px;
   display: flex;
   height: 40px;
-  /* background-color: var(--searchbar-bg-color); */
 }
 .searchBar {
   display: flex;
@@ -327,7 +326,6 @@ img:not([src]) {
 }
 /* -----------SideNav Section--------------- */
 .side-drawer {
-  /* transition: width 0s; */
   display: block;
   height: 100%;
   background: var(--background-color);
@@ -436,7 +434,6 @@ img:not([src]) {
 }
 /* --------------------------------- */
 #mainBody {
-  /* transition: margin-left 0.5s; */
   margin-left: 210px;
 }
 
@@ -447,7 +444,6 @@ img:not([src]) {
   display: flex;
   align-items: center;
   column-gap: 10px;
-  /* padding: 0 50px; */
   overflow-x: auto;
   position: sticky;
   top: 56px;
@@ -490,22 +486,20 @@ input[type="radio"]:checked + .btnLabel {
   width: 100%;
   margin: 0 auto;
   display: block;
-  padding-top: 20px;
+  padding: 20px 10px 20px 0;
 }
 .videoCardInnerContainer {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
   gap: 15px 20px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
 }
 .videoCard {
-  width: 400px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
 }
 .videoBannerImg {
   width: 100%;
-  height: 225px;
+  height: 100%;
   border-radius: 10px;
   background-color: var(--light-grey);
 }
@@ -730,6 +724,7 @@ input[type="radio"]:checked + .btnLabel {
   font-weight: 400;
   display: flex;
   align-items: center;
+  padding: 0 5px;
 }
 .sortBtn {
   display: flex;
@@ -786,6 +781,7 @@ input[type="radio"]:checked + .btnLabel {
   margin: 20px 0;
   width: 100%;
   position: relative;
+  padding: 0 5px;
 }
 .sortBtn {
   fill: var(--font-color);
@@ -807,6 +803,12 @@ input[type="radio"]:checked + .btnLabel {
   white-space: nowrap;
   font-weight: 500;
   line-height: 16px;
+}
+.commentDefIcon img {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  margin-right: 15px;
 }
 .commentAuthor {
   background-color: var(--comment-author-color);
@@ -927,7 +929,6 @@ input[type="radio"]:checked + .btnLabel {
   font-size: 12px;
   color: var(--light-font-color);
   margin-bottom: 3px;
-  /* font-weight: 500; */
 }
 .sidebarInfo {
   display: flex;
@@ -964,7 +965,6 @@ input[type="radio"]:checked + .btnLabel {
   width: 1100px;
   padding: 10px;
   margin: 0 auto;
-  /* min-height: 100vh; */
   position: relative;
 }
 .channelBox {
@@ -1034,6 +1034,14 @@ input[type="radio"]:checked + .btnLabel {
   color: var(--light-font-color);
   margin-bottom: 8px;
 }
+.titleTimeSeperator {
+  display: none;
+}
+.videoBoxChannelTitle {
+  font-size: 13px;
+  color: var(--light-font-color);
+  margin-bottom: 8px;
+}
 .videoBoxDesc {
   font-size: 12px;
   color: var(--light-font-color);
@@ -1094,24 +1102,27 @@ input[type="radio"]:checked + .btnLabel {
 }
 /* -----------Homepage Shimmer-------------- */
 .shimmerCard {
-  height: 300px;
-  width: 400px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 .shimmerCardImg {
   width: 100%;
-  height: 200px;
   border-radius: 10px;
+  height: 200px;
 }
 .shimmerCardDesc {
   display: flex;
   flex-direction: column;
 }
+.shimmerLines:first-child {
+  display: none;
+}
 .shimmerLines {
-  height: 10px;
-  width: 100%;
-  border-radius: 3px;
+  height: 20px;
+  width: 80%;
+  border-radius: 5px;
   margin-top: 8px;
 }
 .shine {
@@ -1174,7 +1185,6 @@ input[type="radio"]:checked + .btnLabel {
 .ytp-spinner {
   position: relative;
   width: 32px;
-  /* margin-left: -32px; */
   z-index: 18;
   pointer-events: none;
 }
@@ -1640,6 +1650,9 @@ input[type="radio"]:checked + .btnLabel {
 
 /* -----------Responsive Section------------ */
 @media (max-width: 479.98px) {
+  body {
+    font-size: 12px;
+  }
   .header {
     padding: 10px;
     display: flex;
@@ -1659,6 +1672,15 @@ input[type="radio"]:checked + .btnLabel {
     display: flex;
     width: 8%;
   }
+  .commentBox {
+    margin: 10px 0;
+  }
+  .commentDefIcon img {
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    margin-right: 0px;
+  }
   .menuSection,
   .rightSection,
   .compactSidebar,
@@ -1673,16 +1695,18 @@ input[type="radio"]:checked + .btnLabel {
   }
   .vdOptionBtn {
     visibility: visible;
+    width: 7%;
   }
   .sbOptionBtn {
     position: absolute;
     visibility: visible;
-    top: 200px;
+    top: 215px;
     right: 0px;
   }
   .wlOptionBtn {
     top: 205px;
     visibility: visible;
+    width: 7%;
   }
   .wlContainer {
     padding: 0;
@@ -1713,6 +1737,21 @@ input[type="radio"]:checked + .btnLabel {
     width: 100%;
     height: 100%;
   }
+  .videoTitle,
+  .sidebarTitle,
+  .chVideoCardTitle {
+    font-size: 14px;
+  }
+  .channelName,
+  .videoViews,
+  .chVideoCardInfo,
+  .sidebarChannel {
+    font-size: 12px;
+    display: inline;
+  }
+  .chTitle {
+    display: none;
+  }
   .videoBanner img {
     width: 100vw;
     border-radius: 0;
@@ -1722,6 +1761,11 @@ input[type="radio"]:checked + .btnLabel {
   }
   .videoCardInnerContainer {
     gap: 20px;
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
   .videoDesc {
     padding: 0 10px;
@@ -1772,8 +1816,8 @@ input[type="radio"]:checked + .btnLabel {
     padding: 10px 5px;
   }
   .sideBarCards {
-    column-gap: 10px;
     flex-direction: column;
+    padding: 10px 0;
   }
   .sidebarImg {
     width: 100%;
@@ -1792,14 +1836,21 @@ input[type="radio"]:checked + .btnLabel {
   .chAboutContainer {
     flex-direction: column;
   }
-  .videoBoxTitle,
-  .videoBoxTime {
+  .videoBoxTitle {
     padding: 0 10px;
+    font-size: 14px;
+  }
+  .titleTimeSeperator {
+    display: inline-block;
+    padding: 0 5px;
   }
   .mobSearchVideoBoxDesc {
-    display: flex;
+    width: 100%;
     flex-direction: row-reverse;
-    width: max-content;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap-reverse;
+    padding: 0 10px;
   }
   .videoThumb,
   .videoThumbImg {
@@ -1827,12 +1878,19 @@ input[type="radio"]:checked + .btnLabel {
     width: 100%;
     flex-direction: column;
     display: flex;
+    margin-left: 20px;
+  }
+  .shimmerLines:first-child {
+    display: block;
+  }
+  .shimmerLines:nth-child(3) {
+    width: 60%;
   }
   .shimmerLines {
-    height: 10px;
-    width: 100%;
+    height: 14px;
+    width: 90%;
     border-radius: 0;
-    margin-top: 5px;
+    margin-top: 12px;
   }
   .channelDescSection {
     flex-direction: column;
@@ -1872,12 +1930,13 @@ input[type="radio"]:checked + .btnLabel {
     padding: 0 5px;
   }
   .chVideoCardThumb {
-    width: unset;
-    height: 100px;
-    min-width: 30%;
+    width: 50%;
+    height: 90px;
+    min-width: 130px;
+    max-width: 160px;
   }
   .chVideoCardThumbImg {
-    height: 100px;
+    height: 100%;
     width: 100%;
   }
   .chVideoCardDesc {
@@ -1895,18 +1954,19 @@ input[type="radio"]:checked + .btnLabel {
     padding: 0 10px;
   }
   .chShimmerCardImg {
-    width: unset;
-    min-width: 40%;
-    height: 100px;
+    height: 90px;
+    width: 50%;
+    min-width: 130px;
+    max-width: 160px;
   }
   .chShimmerCardDesc {
-    height: 100px;
+    height: 90px;
     padding: 0 5px;
-    width: 60%;
+    width: 100%;
   }
   .chShimmerLines {
-    height: 15px;
-    border-radius: 2px;
+    height: 13px;
+    border-radius: 3px;
   }
   .chVideoCard > .vdOptionBtn {
     position: unset;
@@ -1963,6 +2023,12 @@ input[type="radio"]:checked + .btnLabel {
     padding: 0 10px;
     position: inherit;
   }
+  .videoCardInnerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
   .videoCard {
     height: 100%;
     width: 100vw;
@@ -1990,10 +2056,15 @@ input[type="radio"]:checked + .btnLabel {
     height: 30px;
     width: 30px;
   }
+  .channelIcon {
+    margin-top: 3px;
+  }
   .channelName,
-  .videoViews {
-    display: inline-block;
-    margin-right: 5px;
+  .videoViews,
+  .titleTimeSeperator,
+  .sidebarChannel,
+  .sidebarInfo {
+    display: inline;
   }
   .videoCardContainer {
     padding: 20px 10px 60px;
@@ -2031,9 +2102,10 @@ input[type="radio"]:checked + .btnLabel {
     gap: 0 10px;
   }
   .shimmerCardImg {
-    width: unset;
-    min-width: 30%;
-    height: 115px;
+    min-width: 220px;
+    width: 45%;
+    height: 130px;
+    max-width: 280px;
   }
   .shimmerCardDesc {
     flex-direction: column;
@@ -2041,10 +2113,13 @@ input[type="radio"]:checked + .btnLabel {
     width: 75%;
     justify-content: space-evenly;
   }
+  .shimmerLines:first-child {
+    display: block;
+  }
   .shimmerLines {
-    height: 15px;
-    width: 100%;
-    border-radius: 3px;
+    height: 18px;
+    width: 95%;
+    border-radius: 4px;
     margin-top: 0;
   }
   .btn {
@@ -2078,6 +2153,12 @@ input[type="radio"]:checked + .btnLabel {
     width: 100%;
     padding-bottom: 50px;
   }
+  .mobSearchVideoBoxDesc {
+    width: 100%;
+    flex-flow: row-reverse wrap-reverse;
+    justify-content: flex-end;
+    display: flex;
+  }
   .videoThumb {
     width: unset;
     min-width: 25%;
@@ -2090,12 +2171,17 @@ input[type="radio"]:checked + .btnLabel {
   .videoBoxDescCont {
     width: 75%;
   }
+  .videoBoxChannelTitle {
+    margin-right: 3px;
+  }
   .commentToggle {
     display: flex;
   }
   .reccShimmerCardImg {
-    width: 70%;
-    height: 140px;
+    min-width: 160px;
+    width: 50%;
+    max-width: 210px;
+    height: 120px;
   }
   .reccShimmerLines {
     height: 13px;
@@ -2116,8 +2202,9 @@ input[type="radio"]:checked + .btnLabel {
     gap: 0 10px;
   }
   .chVideoCardThumb {
-    width: unset;
-    min-width: 25%;
+    width: 35%;
+    min-width: 180px;
+    max-width: 220px;
     height: 115px;
   }
   .chVideoCardThumbImg {
@@ -2125,7 +2212,7 @@ input[type="radio"]:checked + .btnLabel {
     height: 100%;
   }
   .chVideoCardDesc {
-    width: 75%;
+    width: 100%;
   }
   .channelThumbIcon {
     height: 110px;
@@ -2140,19 +2227,25 @@ input[type="radio"]:checked + .btnLabel {
   .chShimmerCard {
     flex-direction: row;
     width: 100%;
+    column-gap: 10px;
   }
   .chShimmerCardImg {
-    min-width: 25%;
+    min-width: 180px;
+    width: 35%;
+    max-width: 220px;
     height: 115px;
   }
   .chShimmerCardDesc {
-    width: 75%;
+    width: 100%;
     height: 115px;
+    justify-content: flex-start;
+    padding-top: 10px;
   }
   .chShimmerLines {
-    height: 10px;
-    margin-left: 7px;
+    height: 14px;
     width: 95%;
+    border-radius: 5px;
+    margin-bottom: 15px;
   }
   .chVideoCard > .vdOptionBtn {
     position: unset;
@@ -2169,17 +2262,10 @@ input[type="radio"]:checked + .btnLabel {
     width: 30rem;
   }
   .shimmerCard {
-    width: 280px;
-  }
-  .videoCard {
-    width: 280px;
-    height: 100%;
+    width: 100%;
   }
   .videoTitle {
     width: 90%;
-  }
-  .videoBannerImg {
-    height: 180px;
   }
   .commentToggle,
   .videoDescBtns::-webkit-scrollbar,
@@ -2205,6 +2291,10 @@ input[type="radio"]:checked + .btnLabel {
   .recommendedSection {
     width: 35%;
   }
+  .reccShimmerCardImg {
+    min-width: 140px;
+  }
+
   .videoInnerContainer {
     width: 65%;
   }

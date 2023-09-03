@@ -37,7 +37,10 @@ const SideBarCards = (data) => {
       <div className="sidebarDesc">
         <Link to={"/watch?v=" + data?.id?.videoId} className="textNone">
           <div className="sidebarTitle">{data?.snippet?.title}</div>
-          <div className="sidebarChannel">{data?.snippet?.channelTitle}</div>
+          <div className="sidebarChannel">
+            {data?.snippet?.channelTitle}
+            <div className="titleTimeSeperator">{" • "}</div>
+          </div>
           <div className="sidebarInfo sidebarChannel">
             {vdoData?.statistics?.viewCount &&
               calcViews(vdoData?.statistics?.viewCount) + " views  •  "}

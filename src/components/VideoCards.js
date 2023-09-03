@@ -39,12 +39,10 @@ const VideoCards = ({ info }) => {
             : "/watch?v=" + info?.id
         }>
         <div className="videoBanner">
-          <div className="videoBannerImg">
-            <img
-              src={info?.snippet?.thumbnails?.medium?.url}
-              className="videoBannerImg"
-            />
-          </div>
+          <img
+            src={info?.snippet?.thumbnails?.medium?.url}
+            className="videoBannerImg"
+          />
           <span className="videoCardDuration">
             {(vdoDuration && convertDuration(vdoDuration)) ||
               (info?.contentDetails?.duration &&
@@ -58,7 +56,7 @@ const VideoCards = ({ info }) => {
             <img src={channelIcon} className="channelIconImg" alt="" />
           </div>
         </Link>
-        <div style={{ position: "relative", width: "100%" }}>
+        <div style={{ position: "relative", width: "95%" }}>
           <Link
             className="textNone"
             to={
@@ -71,7 +69,10 @@ const VideoCards = ({ info }) => {
           <Link
             className="textNone"
             to={"/channel/" + info?.snippet?.channelId}>
-            <div className="channelName">{info?.snippet?.channelTitle}</div>
+            <div className="channelName">
+              {info?.snippet?.channelTitle}
+              <div className="titleTimeSeperator">{" • "}</div>
+            </div>
           </Link>
           <Link
             className="textNone"

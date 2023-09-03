@@ -19,7 +19,7 @@ const SearchPageCards = ({
     useFetch(
       `videos?part=snippet%2CcontentDetails%2Cstatistics&id=${vdoId}`
     ).then((data) => {
-      console.log(data?.items[0]);
+      // console.log(data?.items[0]);
       setInfo(data?.items[0]);
     });
   }, [vdoId]);
@@ -53,8 +53,9 @@ const SearchPageCards = ({
           <Link
             to={"/channel/" + info?.snippet?.channelId}
             className="textNone">
-            <div className="videoBoxTime boldText">
+            <div className="videoBoxChannelTitle boldText">
               {info?.snippet?.channelTitle}
+              <div className="titleTimeSeperator">{" • "}</div>
             </div>
           </Link>
         </div>

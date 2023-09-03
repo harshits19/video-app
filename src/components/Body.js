@@ -57,22 +57,10 @@ const Body = () => {
   if (fullScreen.matches && backdropState) dispatch(removeBackdrop());
 
   useEffect(() => {
-    if (fullScreen.matches) {
+    if (fullScreen.matches)
       document.getElementById("mainBody").style.marginLeft = navState
         ? "240px"
         : "80px";
-      document.querySelectorAll(".videoBannerImg").forEach((element) => {
-        element.style.width = navState ? "400px" : "337px";
-        element.style.height = navState ? "225px" : "200px";
-      });
-      document.querySelectorAll(".videoCard").forEach((element) => {
-        element.style.width = navState ? "400px" : "337px";
-        element.style.height = navState ? "330px" : "300px";
-      });
-    }
-  });
-
-  useEffect(() => {
     if (medScreen.matches) {
       dispatch(closeNav());
       dispatch(addBackdrop());
@@ -82,6 +70,9 @@ const Body = () => {
       document.getElementsByClassName("header")[0].style.position = "sticky";
       document.getElementById("bottomMenu").style.display = "flex";
     }
+  });
+
+  useEffect(() => {
     const sidebar = document.querySelector(".compactSidebar");
     if (sidebar.classList.contains("csSidebarClose"))
       sidebar.classList.remove("csSidebarClose");

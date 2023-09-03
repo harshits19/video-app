@@ -36,9 +36,13 @@ const ChannelHomePage = () => {
     <div>
       <div className="chHomeContainer">
         {data ? (
-          data?.map((item) => {
-            return <ChannelVideoCard data={item} key={item?.id} />;
-          })
+          data?.length > 0 ? (
+            data?.map((item) => {
+              return <ChannelVideoCard data={item} key={item?.id} />;
+            })
+          ) : (
+            <div className="centerDiv">This channel has no videos</div>
+          )
         ) : (
           <ChannelPageShimmer />
         )}

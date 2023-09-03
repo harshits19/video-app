@@ -30,10 +30,11 @@ const ChannelVideoCard = ({ data }) => {
             src={data?.snippet?.thumbnails?.medium?.url}
             className="chVideoCardThumbImg"
           />
-          <span className="videoCardDuration">
-            {vdoData?.contentDetails?.duration &&
-              convertDuration(vdoData?.contentDetails?.duration)}
-          </span>
+          {vdoData?.contentDetails?.duration && (
+            <span className="videoCardDuration">
+              {convertDuration(vdoData?.contentDetails?.duration)}
+            </span>
+          )}
         </Link>
       </div>
       <div className="chVideoCardDesc">
@@ -41,7 +42,9 @@ const ChannelVideoCard = ({ data }) => {
           to={"/watch?v=" + data?.snippet?.resourceId?.videoId}
           className="textNone">
           <div className="chVideoCardTitle">{data?.snippet?.title}</div>
-          <div className="sidebarChannel">{data?.snippet?.channelTitle}</div>
+          <div className="sidebarChannel chTitle">
+            {data?.snippet?.channelTitle}
+          </div>
           <div className="chVideoCardInfo">
             {vdoData?.statistics?.viewCount &&
               calcViews(vdoData?.statistics?.viewCount) + " views  •  "}

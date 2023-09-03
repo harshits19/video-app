@@ -23,11 +23,18 @@ const RecVideoSection = ({ videoID, title }) => {
   return (
     <div className="recommendedSection">
       {reccVideoData ? (
-        reccVideoData?.map((reccVideoData) => {
-          return (
-            <SideBarCards {...reccVideoData} key={reccVideoData?.id?.videoId} />
-          );
-        })
+        reccVideoData?.length > 0 ? (
+          reccVideoData?.map((reccVideoData) => {
+            return (
+              <SideBarCards
+                {...reccVideoData}
+                key={reccVideoData?.id?.videoId}
+              />
+            );
+          })
+        ) : (
+          <div className="centerDiv">No related video found</div>
+        )
       ) : (
         <ReccSectionShimmer />
       )}
