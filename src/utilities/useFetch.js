@@ -9,29 +9,3 @@ const useFetch = async (
 };
 
 export default useFetch;
-
-/* import axios from "axios";
-
-const BASE_URL = "https://youtube-v31.p.rapidapi.com";
-
-const options = {
-  params: {
-    maxResults: "50",
-  },
-  headers: {
-    "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
-  },
-};
-
-try {
-  const response = await axios.request(options);
-  console.log(response.data);
-} catch (error) {
-  console.error(error);
-}
-
-export const fetchAPI = async (url) => {
-  const { data } = await axios.get(`${BASE_URL}/${url}`, options);
-  return data;
-};
- */

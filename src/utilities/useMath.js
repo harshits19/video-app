@@ -75,6 +75,7 @@ const calcTime = (text) => {
 };
 
 const formatNumber = (x) => {
+  if (x === undefined) return "No comments";
   return x > 1
     ? x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " Comments"
     : x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " Comment";
@@ -144,48 +145,3 @@ const convertDuration = (t) => {
 
 export { calcTime, calcViews, formatNumber, convertDuration };
 
-/* 
-const calcTime = (text) => {
-  const date2 = new Date();
-  const date1 = new Date(text);
-
-  var DiffInTime = date2.getTime() - date1.getTime();
-  var DiffInDays = DiffInTime / (1000 * 3600 * 24);
-
-  var days = DiffInDays;
-  if (days < 1) {
-    var DiffInHours = Math.abs(DiffInTime) / 1000;
-    const time1 =
-      Math.round(DiffInHours / 60) > 60
-        ? Math.round(DiffInHours / 60 / 60) > 1
-          ? Math.round(DiffInHours / 60 / 60) + " hours ago"
-          : Math.round(DiffInHours / 60 / 60) + " hour ago"
-        : Math.round(DiffInHours / 60) + " minutes ago";
-    return time1;
-  }
-  days = Math.round(DiffInDays);
-  const time =
-    days > 365
-      ? Math.round(days / 365) + " year ago"
-      : days > 30
-      ? Math.round(days / 30) + " month ago"
-      : Math.round(days > 7)
-      ? Math.round(days / 7) + " week ago"
-      : days > 1
-      ? days + " days ago"
-      : days + " day ago";
-  return time;
-}
-   */
-
-/* 
-const calcViews = (a) => {
-  const totalViews =
-    a > 1000000
-      ? parseFloat((a / 1000000).toFixed(1)) + "M"
-      : a > 1000
-      ? parseFloat((a / 1000).toFixed(1)) + "K"
-      : a;
-  return totalViews; 
-}
-  */

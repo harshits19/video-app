@@ -489,7 +489,7 @@ input[type="radio"]:checked + .btnLabel {
   padding: 20px 10px 20px 0;
 }
 .videoCardInnerContainer {
-  gap: 15px 20px;
+  gap: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
 }
@@ -502,6 +502,7 @@ input[type="radio"]:checked + .btnLabel {
   height: 100%;
   border-radius: 10px;
   background-color: var(--light-grey);
+  max-height: 220px;
 }
 .videoBanner {
   position: relative;
@@ -719,6 +720,16 @@ input[type="radio"]:checked + .btnLabel {
 }
 .videoCmntSection {
   margin-top: 20px;
+}
+.commentHideBtn {
+  display: flex;
+  color: var(--middle-grey);
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.commentHideBtn:hover {
+  text-decoration: underline;
 }
 .commentDetails {
   font-size: 1rem;
@@ -2029,6 +2040,7 @@ input[type="radio"]:checked + .btnLabel {
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
+    gap: 10px 0;
   }
   .videoCard {
     height: 100%;
@@ -2268,6 +2280,13 @@ input[type="radio"]:checked + .btnLabel {
   .shimmerCard {
     width: 100%;
   }
+  .videoBanner,
+  .videoBannerImg {
+    max-height: 235px;
+  }
+  .videoBannerImg {
+    min-height: 200px;
+  }
   .videoTitle {
     width: 90%;
   }
@@ -2286,7 +2305,7 @@ input[type="radio"]:checked + .btnLabel {
     padding: 15px 10px;
   }
   .videoCardInnerContainer {
-    justify-content: center;
+    justify-items: center;
   }
   .videoPageContainer {
     width: 98%;

@@ -58,54 +58,60 @@ const CommentSection = ({ videoTitle, videoID, comments }) => {
         <div className="videoCmntSection">
           <div className="commentDetails">
             {formatNumber(comments)}
-            <span
-              className="sortBtn"
-              onClick={() => setCommentBox(!commentBox)}>
-              <SortSVG />
-              {" Sort by"}
-              {commentBox && (
-                <div className="commentSortBox">
-                  <div
-                    className={
-                      commentType == "relevance"
-                        ? "activeCommentItem commentSortBoxItems"
-                        : "commentSortBoxItems"
-                    }
-                    onClick={() => {
-                      setCommentType("relevance");
-                      setCommentBox(false);
-                    }}>
-                    Top comments
+            {commentData && (
+              <span
+                className="sortBtn"
+                onClick={() => setCommentBox(!commentBox)}>
+                <SortSVG />
+                {" Sort by"}
+                {commentBox && (
+                  <div className="commentSortBox">
+                    <div
+                      className={
+                        commentType == "relevance"
+                          ? "activeCommentItem commentSortBoxItems"
+                          : "commentSortBoxItems"
+                      }
+                      onClick={() => {
+                        setCommentType("relevance");
+                        setCommentBox(false);
+                      }}>
+                      Top comments
+                    </div>
+                    <div
+                      className={
+                        commentType == "time"
+                          ? "activeCommentItem commentSortBoxItems"
+                          : "commentSortBoxItems"
+                      }
+                      onClick={() => {
+                        setCommentType("time");
+                        setCommentBox(false);
+                      }}>
+                      Newest first
+                    </div>
                   </div>
-                  <div
-                    className={
-                      commentType == "time"
-                        ? "activeCommentItem commentSortBoxItems"
-                        : "commentSortBoxItems"
-                    }
-                    onClick={() => {
-                      setCommentType("time");
-                      setCommentBox(false);
-                    }}>
-                    Newest first
-                  </div>
-                </div>
-              )}
-            </span>
+                )}
+              </span>
+            )}
           </div>
           <div className="commentsContainer">
-            {commentData.length > 0 ? (
-              commentData?.map((commentData) => {
-                return (
-                  <CommentCard
-                    videoTitle={videoTitle}
-                    data={commentData}
-                    key={commentData?.id}
-                  />
-                );
-              })
+            {commentData ? (
+              commentData.length > 0 ? (
+                commentData?.map((commentData) => {
+                  return (
+                    <CommentCard
+                      videoTitle={videoTitle}
+                      data={commentData}
+                      key={commentData?.id}
+                    />
+                  );
+                })
+              ) : (
+                <div className="centerDiv">No comment on this video</div>
+              )
             ) : (
-              <div className="centerDiv">No comment on this video</div>
+              <div className="centerDiv">Comments are turned off</div>
             )}
             {commentData && nextPageToken && !isCommentLoading ? (
               <div className="loadBtnContainer">

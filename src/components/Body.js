@@ -55,18 +55,17 @@ const Body = () => {
   const backdropState = useSelector((store) => store.sidebar.backdropState);
   const dispatch = useDispatch();
   if (fullScreen.matches && backdropState) dispatch(removeBackdrop());
-
   useEffect(() => {
     if (fullScreen.matches)
       document.getElementById("mainBody").style.marginLeft = navState
         ? "240px"
         : "80px";
     if (medScreen.matches) {
-      dispatch(closeNav());
-      dispatch(addBackdrop());
+      // dispatch(addBackdrop());
       document.getElementById("mainBody").style.marginLeft = "80px";
     }
     if (smScreen.matches) {
+      dispatch(closeNav());
       document.getElementsByClassName("header")[0].style.position = "sticky";
       document.getElementById("bottomMenu").style.display = "flex";
     }
@@ -76,7 +75,6 @@ const Body = () => {
     const sidebar = document.querySelector(".compactSidebar");
     if (sidebar.classList.contains("csSidebarClose"))
       sidebar.classList.remove("csSidebarClose");
-
     setFilterBtnData(YT_FILTER_DATA);
     useFetch(
       `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=15&regionCode=IN`
@@ -84,6 +82,10 @@ const Body = () => {
       setVideoData(data?.items);
       setPageToken(data?.nextPageToken);
     });
+    if (medScreen.matches && navState) {
+      dispatch(closeNav());
+      dispatch(addBackdrop());
+    }
   }, []);
 
   const fetchPopularVideos = () => {

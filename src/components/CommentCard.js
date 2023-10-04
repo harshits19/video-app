@@ -2,8 +2,26 @@ import { useState } from "react";
 import { calcViews, calcTime } from "../utilities/useMath";
 import { LikeSVG, DislikeSVG } from "../utilities/SVG";
 
+const ReadMore = ({ children, isReadMore, setIsReadMore }) => {
+  const text = children;
+  return (
+    <pre className="videoFullDesc">
+      {isReadMore ? text?.slice(0, 200) + "..." : text}
+      {text?.length > 200 && (
+        <div
+          onClick={() => setIsReadMore(!isReadMore)}
+          className="commentHideBtn">
+          {isReadMore ? "Read more" : "Show less"}
+        </div>
+      )}
+    </pre>
+  );
+};
+
 const CommentCard = ({ videoTitle, data }) => {
   const [isHiddenReply, setIsHiddenReply] = useState(false);
+  const [isReadMore, setIsReadMore] = useState(true);
+
   return (
     <div className="commentBox">
       <div className="commentDefIcon">
@@ -38,11 +56,15 @@ const CommentCard = ({ videoTitle, data }) => {
             )}
           </span>
         </div>
-        <div>
-          <pre className="videoFullDesc">
-            {data?.snippet?.topLevelComment?.snippet?.textDisplay ||
-              data?.snippet?.textDisplay}
-          </pre>
+        <div style={{ marginTop: "5px" }}>
+          <ReadMore
+            isReadMore={isReadMore}
+            setIsReadMore={setIsReadMore}
+            children={
+              data?.snippet?.topLevelComment?.snippet?.textDisplay ||
+              data?.snippet?.textDisplay
+            }
+          />
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
           <div className="commentLikes">

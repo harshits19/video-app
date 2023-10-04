@@ -37,6 +37,7 @@ const VideoPage = () => {
   const [isReadMore, setIsReadMore] = useState(true);
 
   const smScreen = window.matchMedia("(max-width: 899px)");
+  const fullScreen = window.matchMedia("(min-width: 1200px)");
   const navState = useSelector((store) => store.sidebar.navState);
   const watchLater = useSelector((store) => store.library.watchLater);
   const dispatch = useDispatch();
@@ -45,16 +46,16 @@ const VideoPage = () => {
     if (navState) dispatch(closeNav());
     dispatch(addBackdrop());
     const sidebar = document.querySelector(".compactSidebar");
-    sidebar.classList.add("csSidebarClose");
+    sidebar?.classList?.add("csSidebarClose");
     if (smScreen.matches) {
       document.getElementsByClassName("header")[0].style.position = "relative";
       document.getElementById("bottomMenu").style.display = "none";
     }
     return () => {
-      dispatch(openNav());
+      if (fullScreen.matches) dispatch(openNav());
       document
         .querySelector(".compactSidebar")
-        .classList.remove("csSidebarClose");
+        ?.classList.remove("csSidebarClose");
     };
   }, []);
 

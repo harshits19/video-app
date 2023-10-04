@@ -7,9 +7,8 @@ import useFetch from "../utilities/useFetch";
 import { ShareSVG, DotsSVG, ClockSVG } from "../utilities/SVG";
 
 const VideoCards = ({ info }) => {
-  const watchLater = useSelector((store) => store.library.watchLater);
+  const watchLater = useSelector((store) => store?.library?.watchLater);
   const dispatch = useDispatch();
-  console.log(info);
 
   const [channelIcon, setChannelIcon] = useState();
   const [vdoViews, setVdoViews] = useState();
